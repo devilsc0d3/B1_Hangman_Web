@@ -18,22 +18,24 @@ type game struct {
 }
 
 func main() {
+
 	t, _ := template.ParseFiles("./Web/" + "Hangmanweb.page" + ".tmpl")
+	Word := "lavabo"
+	data := game{
+		Title:      "Hangman by Léo & Nathan",
+		Word:       Word,
+		WordUser:   HiddenWord(Word),
+		Attempts:   0,
+		ToFind:     "",
+		LengthWord: len(Word),
+	}
+	te.
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		Word := "lavabo"
-		data := game{
-			Title:      "Hangman by Léo & Nathan",
-			Word:       Word,
-			WordUser:   HiddenWord(Word),
-			Attempts:   0,
-			ToFind:     "",
-			LengthWord: len(Word),
-		}
-
+	handler := func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(r.FormValue("wordletter"))
 		t.Execute(w, data)
-	})
+	}
+	http.HandleFunc("/", handler)
 
 	fmt.Println("http://localhost" + port)
 	http.ListenAndServe(port, nil)
