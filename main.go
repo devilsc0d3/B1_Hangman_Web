@@ -17,10 +17,9 @@ type game struct {
 }
 
 func main() {
-	server := http.NewServeMux()
-	t, _ := template.ParseFiles("./templates/" + "hangman" + ".tmpl")
+	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".tmpl")
 
-	server.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		data := game{
 			Title:    "Hangman by Léo & Nathan",
 			MotBase:  "lavabo",
@@ -28,6 +27,7 @@ func main() {
 			Attempts: 0,
 			ToFind:   "",
 		}
+		fmt.Println(r.FormValue("wordletter"))
 		t.Execute(w, data)
 	})
 
