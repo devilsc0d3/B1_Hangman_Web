@@ -17,6 +17,8 @@ type game struct {
 }
 
 func main() {
+	Loser()
+	Win()
 	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".tmpl")
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -36,4 +38,20 @@ func main() {
 
 	fmt.Println("http://localhost" + port)
 	http.ListenAndServe(port, nil)
+}
+
+func Loser() {
+	start, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
+	http.HandleFunc("/loser", func(w http.ResponseWriter, r *http.Request) {
+		start.ExecuteTemplate(w, "loser.html", nil)
+	})
+
+}
+
+func Win() {
+	start, _ := template.ParseFiles("./Source/Web/" + "win" + ".html")
+	http.HandleFunc("/win", func(w http.ResponseWriter, r *http.Request) {
+		start.ExecuteTemplate(w, "win.html", nil)
+	})
+
 }
