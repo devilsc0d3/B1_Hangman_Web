@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>menu</title>
+</head>
+
+<style>
+    body {
+        margin: 0;
+        background: #c04a5c;
+    }
+
+    h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 8vw;
+        display: flex;
+        justify-content: center;
+
+    }
+    .content {
+        margin-top: 3vh;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    p {
+        font-size: 5vw;
+    }
+
+    input[type=submit] {
+        margin-top: 50px;
+        border-radius: 30px;
+        font-size: 3vw;
+    }
+
+    input[type=radio] {
+        width: 100%;
+        height: 2vw;
+    }
+
+    input[type=text] {
+        width: 30vw;
+        height: 5vh;
+        border-radius: 30px;
+    }
+
+    .txt {
+        margin-top: 50px;
+    }
+
+    input[type=submit]:hover {
+        transition-duration: 500ms;
+        transform: scale(1.2);
+    }
+
+</style>
+
+<body>
+    <h1 >Menu</h1>
+
+    <div class="content">
+        <p>Facile</p>
+        <p>Moyen</p>
+        <p>Difficile</p>
+    </div>
+
+    <form method="POST">
+        <div class="content">
+            <input type="radio" name="dif" value="fa">
+            <input type="radio" name="dif" value="mo">
+            <input type="radio" name="dif" value="di">
+        </div>
+
+        <div class="content txt">
+            <input type="text" name="name" placeholder="Entrez un nom">
+        </div>
+
+        <div class="content">
+            <input type="submit" value="commencer"/>
+        </div>
+
+    </form>
+
+</body>
+</html>
