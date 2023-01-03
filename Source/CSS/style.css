@@ -1,0 +1,7 @@
+body {background: #7922ad; padding: 0; margin: 0}
+h1   {color: blue;font-size:105px; text-align:center}
+p    {color: red;font-size:100px; text-align:center}
+
+form {color: rgba(0, 255, 104, 0.58);font-size:50px; text-align:center}
+input {color: rgba(0, 0, 0, 0.58);font-size:50px; text-align:center}
+button {color: rgba(0, 0, 0, 0.58);font-size:50px; text-align:center}

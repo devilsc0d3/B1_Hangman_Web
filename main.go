@@ -31,6 +31,9 @@ func main() {
 		t.Execute(w, data)
 	})
 
+	fs := http.FileServer(http.Dir("Source"))
+	http.Handle("/static/", http.StripPrefix("/static", fs))
+
 	fmt.Println("http://localhost" + port)
 	http.ListenAndServe(port, nil)
 }
