@@ -16,130 +16,140 @@ type game struct {
 	LengthWord int
 	Attempts   int
 	ToFind     []string
-	X          string
+	Position   string
+	File       string
 }
 
-type menu struct {
-	Title string
-	Word  string
+type character struct {
+	Name       string
+	clue       int
+	difficulty int
+	score      int
+}
+
+type Settings struct {
+	Language  []string
+	Scorboard []string
+	Pictures  []string
+	Sound     []string
+}
+
+type base struct {
+	Hangman game
+	Player  character
+	Set     Settings
+}
+
+var bd = base{}
+var gg = game{Title: "testeeeeeee"}
+
+var Word = classic.RandomWord("words.txt")
+var data = game{
+	Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
+	LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	men := menu{Title: "testeu", Word: ""}
 	start, _ := template.ParseFiles("./Source/Web/" + "menu" + ".html")
-	if r.FormValue("dif") == "fa" {
-		print("facile")
-		men.Word = "words.txt"
 
-	} else if r.FormValue("dif") == "mo" {
-		print("moyen")
-		men.Word = "words2.txt"
+	if r.FormValue("send") == "submit" {
+		if r.FormValue("dif") == "fa" {
+			bd.Hangman.File = "words.txt"
+		} else if r.FormValue("dif") == "mo" {
+			bd.Hangman.File = "words2.txt"
+		} else if r.FormValue("dif") == "di" {
+			bd.Hangman.File = "words3.txt"
+		}
 
-	} else if r.FormValue("dif") == "di" {
-		print("difficile")
-		men.Word = "words3.txt"
-
-	}
-	if r.FormValue("dif") != "" {
-		Hangman(&men)
+		bd.Player = character{Name: r.FormValue("name")}
+		bd.Hangman = game{Title: "goodluck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5, Position: "https://clipground.com/images/html5-logo-2.png"}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
-
 	}
 
-	start.ExecuteTemplate(w, "menu.html", men)
+	start.ExecuteTemplate(w, "menu.html", nil)
 }
 
-func Hangman(men *menu) {
+func Hangman(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("./Source/Web/" + "Hangmanweb.page" + ".tmpl")
-
-	Word := classic.RandomWord(men.Word)
-
-	data := game{
-		Title:      "Hangman de :",
-		Word:       classic.Upper(Word),
-		WordUser:   classic.WordChoice(Word),
-		Attempts:   10,
-		ToFind:     classic.StringToList(""),
-		LengthWord: len(Word),
-		X:          "./static/pictures/imgte.png",
+	if r.FormValue("loser") == "submit" {
+		http.Redirect(w, r, "/loser", http.StatusSeeOther)
+	}
+	if r.FormValue("reset") == "submit" {
+		Word = classic.RandomWord("words.txt")
+		data = game{
+			Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
+			LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
+		}
 	}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		println(*&men.Word)
+	choice := classic.Upper(r.FormValue("wordletter"))
+	fmt.Println(choice)
 
-		if r.FormValue("reset") == "submit" {
-			Word = classic.RandomWord("Words.txt")
-			data = game{
-				Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
-				LengthWord: len(Word), X: "https://clipground.com/images/html5-logo-2.png",
-			}
+	if len(choice) == 1 {
+
+		index := classic.Verif(data.Word, choice)
+
+		for i := 0; i < len(index); i++ {
+			data.WordUser[index[i]] = choice
 		}
 
-		choice := classic.Upper(r.FormValue("wordletter"))
-		fmt.Println(choice)
-
-		if len(choice) == 1 {
-
-			index := classic.Verif(data.Word, choice)
-
-			for i := 0; i < len(index); i++ {
-				data.WordUser[index[i]] = choice
-			}
-
-			if len(index) == 0 {
-				data.Attempts -= 1
-			} else {
-				data.Attempts += doublons(data.ToFind, choice)
-			}
-
+		if len(index) == 0 {
+			data.Attempts -= 1
 		} else {
-			if choice == data.Word {
-				data.WordUser = classic.StringToList("Congrats !")
-				http.Redirect(w, r, "/win", http.StatusSeeOther)
-
-			} else if choice != data.Word && len(choice) > 1 {
-				data.Attempts -= 2
-			}
+			data.Attempts += doublons(data.ToFind, choice)
 		}
 
-		if choice != "" {
-			data.ToFind = append(data.ToFind, choice)
-		}
-
-		if len(classic.Verif(classic.ListToString(data.WordUser), "_")) == 0 {
-			println("\n\nCongrats !")
+	} else {
+		if choice == data.Word {
 			data.WordUser = classic.StringToList("Congrats !")
-		}
+			http.Redirect(w, r, "/win", http.StatusSeeOther)
 
-		if data.Attempts <= 0 {
-			http.Redirect(w, r, "/loser", http.StatusSeeOther)
+		} else if choice != data.Word && len(choice) > 1 {
+			data.Attempts -= 2
 		}
-		t.ExecuteTemplate(w, "Hangmanweb.page.tmpl", data)
-	})
+	}
+
+	if choice != "" {
+		data.ToFind = append(data.ToFind, choice)
+	}
+
+	if len(classic.Verif(classic.ListToString(data.WordUser), "_")) == 0 {
+		println("\n\nCongrats !")
+		http.Redirect(w, r, "/win", http.StatusSeeOther)
+		data.WordUser = classic.StringToList("Congrats !")
+	}
+
+	if data.Attempts <= 0 {
+		http.Redirect(w, r, "/loser", http.StatusSeeOther)
+	}
+	t.ExecuteTemplate(w, "Hangmanweb.page.tmpl", data)
 }
 
-func Loser() {
-	start, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
-	me := menu{Title: "testeu"}
-	http.HandleFunc("/loser", func(w http.ResponseWriter, r *http.Request) {
-		start.ExecuteTemplate(w, "loser.html", me)
-	})
+func Loser(w http.ResponseWriter, r *http.Request) {
+	ho, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
+	if r.FormValue("restart") == "submit" {
+		print("teste")
 
+		Word := "word"
+		bd.Hangman = game{
+			Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
+			LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
+		}
+		http.Redirect(w, r, "http://localhost:8080/", http.StatusSeeOther)
+	}
+	ho.ExecuteTemplate(w, "loser.html", bd)
 }
 
-func Win() {
+func Win(w http.ResponseWriter, r *http.Request) {
 	start, _ := template.ParseFiles("./Source/Web/" + "win" + ".html")
-	ma := menu{Title: "testeu"}
-	http.HandleFunc("/win", func(w http.ResponseWriter, r *http.Request) {
-		start.ExecuteTemplate(w, "win.html", ma)
-	})
+
+	start.ExecuteTemplate(w, "win.html", nil)
 
 }
 
 func doublons(liste []string, choice string) int {
 	for i := 0; i < len(liste); i++ {
 		if liste[i] == choice {
-			fmt.Println("conno")
 			return -1
 		}
 
@@ -149,8 +159,9 @@ func doublons(liste []string, choice string) int {
 
 func main() {
 	http.HandleFunc("/home", Home)
-	Loser()
-	Win()
+	http.HandleFunc("/loser", Loser)
+	http.HandleFunc("/win", Win)
+	http.HandleFunc("/", Hangman)
 
 	fmt.Println("http://localhost" + port + "/home")
 
