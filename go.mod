@@ -1,11 +1,8 @@
-module Hangman-Web
+module web
 
 go 1.19
 
-require (
-	Hangman-Classic v0.0.1
-)
+replace classic => ../classic
 
-replace (
-	Hangman-Classic => "../hangman-classic"
-)
+require classic v0.0.0-00010101000000-000000000000
+

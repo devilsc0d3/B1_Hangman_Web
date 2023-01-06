@@ -1,32 +1,30 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="/static/CSS/style.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HANGMAN</title>
+    <title>Hangman</title>
 </head>
 
-<style>
-    body {background-color: #283838; padding: 0; margin: 0}
-    h1   {color: blue;font-size:105px; text-align:center}
-    p    {color: red;font-size:100px; text-align:center}
-    form {color: rgba(0, 255, 104, 0.58);font-size:50px; text-align:center}
-    input {color: rgba(0, 0, 0, 0.58);font-size:50px; text-align:center}
-    button {color: rgba(0, 0, 0, 0.58);font-size:50px; text-align:center}
-</style>
 <body>
-<h1>{{.Title}}</h1>
-<p> {{.Word}}</p>
-<p> {{.WordUser}}</p>
+<div class="header">
+    <p>J'existe</p>
+    <p>{{.Word}}</p>
+</div>
+<div><h1>{{.Title}} </h1></div>
+<div><h2> {{.WordUser}}</h2></div>
+<div><p>You have <span style="margin-inline: 5px"> {{.Attempts}} </span> attempts left</p></div>
 <form>
-    <input type="text" id="letter" name="wordletter"
+    <input class="mot_rentré" type="text" id="letter" name="wordletter" autocomplete="off"
            placeholder="Entrez une lettre ou un mot" required
            minlength="1" maxlength={{.LengthWord}}>
     <br>
     <br>
-    <button value="submit"> Envoyer </button>
+    <div class="Buttons"> <button class="submit" value="submit"> Envoyer </button>
+    <button class="reset" value="reset"> Reset ? </button></div>
 </form>
 </body>
 </html>
