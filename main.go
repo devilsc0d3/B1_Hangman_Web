@@ -27,43 +27,58 @@ type UserInfo struct {
 }
 
 type Board struct {
-	Easy struct {
-		Pseudo1 string
-		Score1  int
-		Pseudo2 string
-		Score2  int
-		Pseudo3 string
-		Score3  int
-	}
-	Medium struct {
-		Pseudo1 string
-		Score1  int
-		Pseudo2 string
-		Score2  int
-		Pseudo3 string
-		Score3  int
-	}
-	Hard struct {
-		Pseudo1 string
-		Score1  int
-		Pseudo2 string
-		Score2  int
-		Pseudo3 string
-		Score3  int
-	}
+	Easy Facile
+
+	Medium Moyen
+
+	Hard Difficile
 }
 
-func initialisation_Board(Scoreboard Board) {
-	Scoreboard.Hard.Pseudo1 = "N/A"
-	Scoreboard.Hard.Score1 = 0
-	Scoreboard.Hard.Pseudo2 = "N/A"
-	Scoreboard.Hard.Score2 = 0
-	Scoreboard.Hard.Pseudo3 = "N/A"
-	Scoreboard.Hard.Score3 = 0
+type Facile struct {
+	Pseudo1 string
+	Score1  int
+	Pseudo2 string
+	Score2  int
+	Pseudo3 string
+	Score3  int
+}
+type Moyen struct {
+	Pseudo1 string
+	Score1  int
+	Pseudo2 string
+	Score2  int
+	Pseudo3 string
+	Score3  int
+}
+type Difficile struct {
+	Pseudo1 string
+	Score1  int
+	Pseudo2 string
+	Score2  int
+	Pseudo3 string
+	Score3  int
+}
 
+func init_board() {
+	Sb.Easy = Facile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
+	Sb.Medium = Moyen{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
+	Sb.Hard = Difficile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
+}
+
+var Sb = Board{}
+
+func Scoreb(w http.ResponseWriter, r *http.Request) {
+	start, _ := template.ParseFiles("./Web/" + "ScoreBoard.page.tmpl" + ".html")
+	start.ExecuteTemplate(w, "ScoreBoard.page.tmpl.html", Sb)
 }
 
 func main() {
+	Sb.Easy = Facile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
+	Sb.Medium = Moyen{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
+	Sb.Hard = Difficile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
+	init_board()
+	var Joueur = UserInfo{Score: 3, Difficulty: "Hard", Pseudo: "mwa gem bi1"}
+	scoreboard(Joueur, Sb)
 	fis := http.FileServer(http.Dir("Source"))
 	http.Handle("/static/", http.StripPrefix("/static/", fis))
 	Word := classic.RandomWord(os.Args[1])
@@ -76,7 +91,7 @@ func main() {
 		ToFind:     "",
 		LengthWord: len(Word),
 	}
-
+	http.HandleFunc("/scoreboard", Scoreb)
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		Input := (r.FormValue("wordletter"))
 		var Nbr []int
@@ -131,10 +146,7 @@ func main() {
 	http.ListenAndServe(port, nil)
 }
 
-func scoreboard(Userglobalinfo [3]string, User UserInfo, Scoreboard Board) {
-	User.Difficulty = "Hard"
-	User.Pseudo = "Moi"
-	User.Score = 21
+func scoreboard(User UserInfo, Scoreboard Board) {
 	switch User.Difficulty {
 	//les impairs sont la colonnes des scores
 	case "Hard":
