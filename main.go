@@ -27,8 +27,15 @@ type character struct {
 	score      int
 }
 
+type Language struct {
+	fr []string
+	en []string
+	es []string
+	ge []string
+}
+
 type Settings struct {
-	Language  []string
+	Langue    Language
 	Scorboard []string
 	Pictures  []string
 	Sound     []string
@@ -38,9 +45,9 @@ type base struct {
 	Hangman game
 	Player  character
 	Set     Settings
+	Test    string
 }
 
-var bd = base{}
 var gg = game{Title: "testeeeeeee"}
 
 var Word = classic.RandomWord("words.txt")
@@ -48,6 +55,7 @@ var data = game{
 	Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
 	LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
 }
+var bd = base{Test: "testeuuuuuu", Hangman: data}
 
 func Home(w http.ResponseWriter, r *http.Request) {
 	start, _ := template.ParseFiles("./Source/Web/" + "menu" + ".html")
@@ -70,7 +78,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func Hangman(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("./Source/Web/" + "Hangmanweb.page" + ".tmpl")
+	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".tmpl")
 	if r.FormValue("loser") == "submit" {
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
@@ -122,7 +130,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	if data.Attempts <= 0 {
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
-	t.ExecuteTemplate(w, "Hangmanweb.page.tmpl", data)
+	t.ExecuteTemplate(w, "hangman.tmpl", data)
 }
 
 func Loser(w http.ResponseWriter, r *http.Request) {
@@ -130,7 +138,7 @@ func Loser(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("restart") == "submit" {
 		print("teste")
 
-		Word := "word"
+		Word = "word"
 		bd.Hangman = game{
 			Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
 			LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
@@ -143,7 +151,7 @@ func Loser(w http.ResponseWriter, r *http.Request) {
 func Win(w http.ResponseWriter, r *http.Request) {
 	start, _ := template.ParseFiles("./Source/Web/" + "win" + ".html")
 
-	start.ExecuteTemplate(w, "win.html", nil)
+	start.ExecuteTemplate(w, "win.html", bd)
 
 }
 
