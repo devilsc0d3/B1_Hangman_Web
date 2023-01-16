@@ -45,17 +45,23 @@ type base struct {
 	Hangman game
 	Player  character
 	Set     Settings
-	Test    string
 }
 
-var gg = game{Title: "testeeeeeee"}
+var bd = base{}
 
-var Word = classic.RandomWord("words.txt")
-var data = game{
-	Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
-	LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
+func variable() {
+	bd.Set.Langue.fr = []string{"menu", "facile", "moyen", "difficile", "entre un nom", "Démarrer",
+		"Bonne chance ", "Vous avez", "essaie", "entrez une lettre ou un mot", "envoyé", "lettre déja essayer", "rejouer",
+	}
+
+	var Word = classic.RandomWord("words.txt")
+	var data = game{
+		Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
+		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
+	}
+	bd.Hangman = data
+
 }
-var bd = base{Test: "testeuuuuuu", Hangman: data}
 
 func Home(w http.ResponseWriter, r *http.Request) {
 	start, _ := template.ParseFiles("./Source/Web/" + "menu" + ".html")
@@ -68,8 +74,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		} else if r.FormValue("dif") == "di" {
 			bd.Hangman.File = "words3.txt"
 		}
-
 		bd.Player = character{Name: r.FormValue("name")}
+		var Word = classic.RandomWord(bd.Hangman.File)
 		bd.Hangman = game{Title: "goodluck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5, Position: "https://clipground.com/images/html5-logo-2.png"}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
@@ -83,8 +89,8 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
 	if r.FormValue("reset") == "submit" {
-		Word = classic.RandomWord("words.txt")
-		data = game{
+		Word := classic.RandomWord("words.txt")
+		bd.Hangman = game{
 			Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
 			LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
 		}
@@ -95,42 +101,42 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 
 	if len(choice) == 1 {
 
-		index := classic.Verif(data.Word, choice)
+		index := classic.Verif(bd.Hangman.Word, choice)
 
 		for i := 0; i < len(index); i++ {
-			data.WordUser[index[i]] = choice
+			bd.Hangman.WordUser[index[i]] = choice
 		}
 
 		if len(index) == 0 {
-			data.Attempts -= 1
+			bd.Hangman.Attempts -= 1
 		} else {
-			data.Attempts += doublons(data.ToFind, choice)
+			bd.Hangman.Attempts += doublons(bd.Hangman.ToFind, choice)
 		}
 
 	} else {
-		if choice == data.Word {
-			data.WordUser = classic.StringToList("Congrats !")
+		if choice == bd.Hangman.Word {
+			bd.Hangman.WordUser = classic.StringToList("Congrats !")
 			http.Redirect(w, r, "/win", http.StatusSeeOther)
 
-		} else if choice != data.Word && len(choice) > 1 {
-			data.Attempts -= 2
+		} else if choice != bd.Hangman.Word && len(choice) > 1 {
+			bd.Hangman.Attempts -= 2
 		}
 	}
 
 	if choice != "" {
-		data.ToFind = append(data.ToFind, choice)
+		bd.Hangman.ToFind = append(bd.Hangman.ToFind, choice)
 	}
 
-	if len(classic.Verif(classic.ListToString(data.WordUser), "_")) == 0 {
+	if len(classic.Verif(classic.ListToString(bd.Hangman.WordUser), "_")) == 0 {
 		println("\n\nCongrats !")
 		http.Redirect(w, r, "/win", http.StatusSeeOther)
-		data.WordUser = classic.StringToList("Congrats !")
+		bd.Hangman.WordUser = classic.StringToList("Congrats !")
 	}
 
-	if data.Attempts <= 0 {
+	if bd.Hangman.Attempts <= 0 {
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
-	t.ExecuteTemplate(w, "hangman.tmpl", data)
+	t.ExecuteTemplate(w, "hangman.tmpl", bd.Hangman)
 }
 
 func Loser(w http.ResponseWriter, r *http.Request) {
@@ -138,11 +144,6 @@ func Loser(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("restart") == "submit" {
 		print("teste")
 
-		Word = "word"
-		bd.Hangman = game{
-			Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
-			LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
-		}
 		http.Redirect(w, r, "http://localhost:8080/", http.StatusSeeOther)
 	}
 	ho.ExecuteTemplate(w, "loser.html", bd)
@@ -166,6 +167,8 @@ func doublons(liste []string, choice string) int {
 }
 
 func main() {
+	variable()
+	println(bd.Set.Langue.fr[0])
 	http.HandleFunc("/home", Home)
 	http.HandleFunc("/loser", Loser)
 	http.HandleFunc("/win", Win)
