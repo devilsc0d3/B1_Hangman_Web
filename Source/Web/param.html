@@ -6,23 +6,32 @@
 </head>
 
 <style>
+    body {
+        background-color: black;
+    }
+
 h1 {
   text-align: center;
   font-family: "Super Mario 256";
-  font-size: 8vw;
-  margin-bottom: 80px;
+  font-size: 4vw;
+  margin-bottom: 8vh;
+    color: #0c4e57;
 }
 label {
+    margin-bottom: 10vh;
   font-family: "Super Mario 256";
-  font-size: 4vw;
+  font-size: 2vw;
+    color: #ffffff;
+
 }
 
 .content {
   text-align: center;
+    margin-bottom: 2vh;
 }
 
 .abs {
-    position: absolute;
+    position: relative;
     bottom: 0;
     margin-bottom: 50px;
     width: 99%;
@@ -31,8 +40,8 @@ label {
 button {
     font-family: "Super Mario 256";
     width: 15vw;
-    height: 8vh;
-    font-size: 3vw;
+    height: 5vh;
+    font-size: 2vw;
 }
 
 input[type=radio] {
@@ -49,7 +58,7 @@ input[type=checkbox] {
 <body>
 <h1>Language :</h1>
 
-<form>
+<form method="post">
   <div class="content">
       <input type="radio" name="lg" value="en" id="1">
       <label for="1">English</label>
