@@ -152,10 +152,8 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 
 func Loser(w http.ResponseWriter, r *http.Request) {
 	ho, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
-	if r.FormValue("restart") == "submit" {
-		print("teste")
-
-		http.Redirect(w, r, "http://localhost:8080/", http.StatusSeeOther)
+	if r.FormValue("send") == "submit" {
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
 	ho.ExecuteTemplate(w, "loser.html", bd)
 }
