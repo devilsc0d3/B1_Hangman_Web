@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>settings</title>
+</head>
+
+<style>
+h1 {
+  text-align: center;
+  font-family: "Super Mario 256";
+  font-size: 8vw;
+  margin-bottom: 80px;
+}
+label {
+  font-family: "Super Mario 256";
+  font-size: 4vw;
+}
+
+.content {
+  text-align: center;
+}
+
+.abs {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 50px;
+    width: 99%;
+}
+
+button {
+    font-family: "Super Mario 256";
+    width: 15vw;
+    height: 8vh;
+    font-size: 3vw;
+}
+
+input[type=radio] {
+    width: 5%;
+    height: 2vw;
+}
+input[type=checkbox] {
+    width: 5%;
+    height: 2vw;
+}
+
+</style>
+
+<body>
+<h1>Language :</h1>
+
+<form>
+  <div class="content">
+      <input type="radio" name="lg" value="en" id="1">
+      <label for="1">English</label>
+  </div>
+
+  <div class="content">
+      <input type="radio" name="lg" value="fr" id="2">
+      <label for="2">Francais</label>
+  </div>
+
+  <div class="content">
+      <input type="radio" name="lg" value="es" id="3">
+      <label for="3">Espanol</label>
+  </div>
+
+  <div class="content">
+      <input type="radio" name="lg" value="ge" id="4">
+      <label for="4">German</label>
+  </div>
+
+    <h1 >Sound :</h1>
+    <div class="content">
+        <input type="checkbox">
+        <label>sound effect</label>
+    </div>
+
+    <div class="content">
+    <input type="checkbox">
+        <label>Music</label>
+
+    </div>
+    <div class="abs">
+      .<div class="content">
+        <button value="submit" name="send" class="content"> START </button>
+    </div>
+  </div>
+</form>
+
+</body>
+</html>

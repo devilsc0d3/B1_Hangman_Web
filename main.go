@@ -28,14 +28,15 @@ type character struct {
 }
 
 type Language struct {
-	fr []string
-	en []string
-	es []string
-	ge []string
+	Fr []string
+	En []string
+	Es []string
+	Ge []string
 }
 
 type Settings struct {
-	Langue    Language
+	Language  Language
+	Langue    []string
 	Scorboard []string
 	Pictures  []string
 	Sound     []string
@@ -50,9 +51,16 @@ type base struct {
 var bd = base{}
 
 func variable() {
-	bd.Set.Langue.fr = []string{"menu", "facile", "moyen", "difficile", "entre un nom", "Démarrer",
+	bd.Set.Language.Fr = []string{"menu", "facile", "moyen", "difficile", "entre un nom", "lancer",
 		"Bonne chance ", "Vous avez", "essaie", "entrez une lettre ou un mot", "envoyé", "lettre déja essayer", "rejouer",
+		"tu as perdu", "rejoué",
 	}
+	bd.Set.Language.En = []string{"menu", "easy", "medium", "hard", "enter a nickname", "start",
+		"...",
+	}
+	bd.Set.Language.Es = []string{"menú", "fácil", "medio", "difícil", "Introduce un apodo", "iniciar"}
+
+	bd.Set.Langue = bd.Set.Language.En
 
 	var Word = classic.RandomWord("words.txt")
 	var data = game{
@@ -80,7 +88,10 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 
-	start.ExecuteTemplate(w, "menu.html", nil)
+	if r.FormValue("param") == "submit" {
+		http.Redirect(w, r, "/setting", http.StatusSeeOther)
+	}
+	start.ExecuteTemplate(w, "menu.html", bd)
 }
 
 func Hangman(w http.ResponseWriter, r *http.Request) {
@@ -156,20 +167,40 @@ func Win(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func Parameter(w http.ResponseWriter, r *http.Request) {
+	page, _ := template.ParseFiles("./Source/Web/" + "param" + ".html")
+	if r.FormValue("lg") == "en" {
+		bd.Set.Langue = bd.Set.Language.En
+	}
+	if r.FormValue("lg") == "fr" {
+		bd.Set.Langue = bd.Set.Language.Fr
+	}
+	if r.FormValue("lg") == "es" {
+		bd.Set.Langue = bd.Set.Language.Es
+	}
+	if r.FormValue("lg") == "ge" {
+		bd.Set.Langue = bd.Set.Language.Ge
+	}
+
+	if r.FormValue("send") == "submit" {
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
+	}
+	page.ExecuteTemplate(w, "param.html", bd)
+}
+
 func doublons(liste []string, choice string) int {
 	for i := 0; i < len(liste); i++ {
 		if liste[i] == choice {
 			return -1
 		}
-
 	}
 	return 0
 }
 
 func main() {
 	variable()
-	println(bd.Set.Langue.fr[0])
 	http.HandleFunc("/home", Home)
+	http.HandleFunc("/setting", Parameter)
 	http.HandleFunc("/loser", Loser)
 	http.HandleFunc("/win", Win)
 	http.HandleFunc("/", Hangman)

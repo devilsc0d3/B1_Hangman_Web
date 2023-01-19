@@ -42,13 +42,13 @@
     }
 
 
-    button {
+    .send {
         margin-top: 50px;
         border-radius: 0px;
         font-size: 3vw;
     }
 
-    button:hover {
+    .send:hover {
         transition-duration: 500ms;
         transform: scale(1.2);
     }
@@ -57,16 +57,32 @@
         margin-top: 50px;
     }
 
+    .buttoon {
+        margin-left: 20px;
+        background-color: rgba(255, 255, 255, 0);
+        border-color: rgba(255,255,255,0);
+    }
+
+    .buttoon:hover {
+        transition-duration: 2s;
+        transform: rotate(180deg);
+    }
+    img {
+        width: 10vw;
+    }
+    .bottom {
+        position: absolute;
+        bottom: 50px;
+    }
 
 </style>
 
 <body>
-<h1 >Menu</h1>
-
+<h1 >{{index .Set.Langue 0}}</h1>
 <div class="content">
-    <p>Facile</p>
-    <p>Moyen</p>
-    <p>Difficile</p>
+    <p>{{index .Set.Langue 1}}</p>
+    <p>{{index .Set.Langue 2}}</p>
+    <p>{{index .Set.Langue 3}}</p>
 </div>
 
 <form method="POST">
@@ -77,11 +93,16 @@
     </div>
 
     <div class="content txt">
-        <input type="text" name="name" placeholder="Entrez un nom">
+        <input type="text" name="name" placeholder="{{index .Set.Langue 4}}">
     </div>
 
     <div class="content">
-        <button value="submit" name="send"> START </button>
+        <button value="submit" name="send" class="send"> {{index .Set.Langue 5}} </button>
+    </div>
+
+
+    <div class="bottom">
+        <button value="submit" name="param" class="buttoon"><img src="./static/Pictures/gear.png"></button>
     </div>
 </form>
 
