@@ -8,6 +8,7 @@
     body {
         margin: 0px;
         padding: 0px;
+        background-color: #ff8800;
     }
     h1 {
         margin: 0px;
@@ -23,14 +24,28 @@
     }
     .content {
         text-align: center;
+        margin-top: 14vh;
+    }
+    img {
+        animation: but 1.5s infinite;
+    }
+
+    @keyframes but {
+        0%,100% {
+            transform: translateY(50px);
+        }
+        20% {
+            transform: translateY(-50px);
+        }
     }
 </style>
 
 <body>
 
 <h1>You win</h1>
-
-<img src="#">
+<div class="content">
+    <img src="http://localhost:8080/static/Pictures/mario1.png">
+</div>
 
 <form>
     <div class="content">

@@ -53,7 +53,9 @@ var bd = base{}
 func variable() {
 	bd.Set.Language.Fr = []string{"menu", "facile", "moyen", "difficile", "entre un nom", "lancer",
 		"Bonne chance ", "Vous avez", "essaie", "entrez une lettre ou un mot", "envoyé", "lettre déja essayer", "rejouer",
+
 		"tu as perdu", "rejoué",
+		"tu as Gagne", "tableaux des scores", "rejoué",
 	}
 	bd.Set.Language.En = []string{"menu", "easy", "medium", "hard", "enter a nickname", "start",
 		"...",
@@ -64,7 +66,7 @@ func variable() {
 
 	var Word = classic.RandomWord("words.txt")
 	var data = game{
-		Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
+		Title: "...", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
 		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
 	}
 	bd.Hangman = data
@@ -81,6 +83,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			bd.Hangman.File = "words2.txt"
 		} else if r.FormValue("dif") == "di" {
 			bd.Hangman.File = "words3.txt"
+		} else {
+			bd.Hangman.File = "words.txt"
 		}
 		bd.Player = character{Name: r.FormValue("name")}
 		var Word = classic.RandomWord(bd.Hangman.File)
