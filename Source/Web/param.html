@@ -1,137 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>settings</title>
-</head>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>settings</title>
+        <link rel="stylesheet" type="text/css" href="./static/CSS/style_param.css">
+    </head>
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        background-color: black;
-    }
+    <body>
+        <div class="im"></div>
+        <section>
+            <h1>Language :</h1>
+            <form method="post">
+                <div class="content">
+                  <input type="radio" name="lg" value="en" id="1">
+                  <label for="1">English</label>
+                </div>
 
-h1 {
-  text-align: center;
-  font-family: "Super Mario 256";
-  font-size: 3vw;
-  margin-bottom: 6vh;
-    color: #0c4e57;
-}
-label {
-    margin-bottom: 10vh;
-  font-family: "Super Mario 256";
-  font-size: 2vw;
-    color: #ffffff;
+                <div class="content">
+                  <input type="radio" name="lg" value="fr" id="2">
+                  <label for="2">Francais</label>
+                </div>
 
-}
+                <div class="content">
+                  <input type="radio" name="lg" value="es" id="3">
+                  <label for="3">Espanol</label>
+                </div>
 
-.content {
-  text-align: center;
-    margin-bottom: 2vh;
-}
+                <div class="content">
+                  <input type="radio" name="lg" value="ge" id="4">
+                  <label for="4">German</label>
+                </div>
 
-.abs {
-    position: relative;
-    bottom: 0;
-    margin-bottom: 50px;
-    width: 99%;
-}
+                <h1 >Sound :</h1>
+                <div class="content">
+                    <input type="checkbox">
+                    <label>sound effect</label>
+                </div>
 
-button {
-    font-family: "Super Mario 256";
-    border-radius: 20px;
-    width: 15vw;
-    height: 7vh;
-    font-size: 2vw;
-    color: #ffffff;
-    background-color: #0c4e57;
+                <div class="content">
+                <input type="checkbox">
+                    <label>Music</label>
+                </div>
 
-}
+                <div class="abs">
+                    <div class="content">
+                        <button value="submit" name="send" class="content"> START </button>
+                    </div>
+                </div>
 
-input[type=radio] {
-    width: 5%;
-    height: 2vw;
-}
-input[type=checkbox] {
-    width: 5%;
-    height: 2vw;
-}
-
-.im {
-    z-index: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 5vw;
-    background-image: url("http://localhost:8080/static/Pictures/brick.jpg");
-    background-repeat: repeat-x;
-    background-size: 4vw;
-    filter: hue-rotate(170deg);
-}
-
-    .imfin {
-        /*position: absolute;*/
-        /*bottom: 0px;*/
-    margin: 0;
-    padding: 0;
-    width: 100%;
-        height: 5vw;
-    background-image: url("http://localhost:8080/static/Pictures/brick.jpg");
-        transform: rotate(180deg);
-    background-repeat: repeat-x;
-    background-size: 4vw;
-    filter: hue-rotate(170deg);
-}
-
-</style>
-
-<body>
-<div class="im"></div>
-<section>
-<h1>Language :</h1>
-
-<form method="post">
-  <div class="content">
-      <input type="radio" name="lg" value="en" id="1">
-      <label for="1">English</label>
-  </div>
-
-  <div class="content">
-      <input type="radio" name="lg" value="fr" id="2">
-      <label for="2">Francais</label>
-  </div>
-
-  <div class="content">
-      <input type="radio" name="lg" value="es" id="3">
-      <label for="3">Espanol</label>
-  </div>
-
-  <div class="content">
-      <input type="radio" name="lg" value="ge" id="4">
-      <label for="4">German</label>
-  </div>
-
-    <h1 >Sound :</h1>
-    <div class="content">
-        <input type="checkbox">
-        <label>sound effect</label>
-    </div>
-
-    <div class="content">
-    <input type="checkbox">
-        <label>Music</label>
-
-    </div>
-    <div class="abs">
-      .<div class="content">
-        <button value="submit" name="send" class="content"> START </button>
-    </div>
-  </div>
-    <div class="imfin"></div>
-
-</form>
-</section>
-</body>
+                <div class="imfin"></div>
+            </form>
+        </section>
+    </body>
 </html>

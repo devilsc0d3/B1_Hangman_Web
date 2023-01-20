@@ -1,0 +1,39 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #ff8800;
+}
+h1 {
+    margin: 0px;
+    font-size: 10vw;
+    font-family: "Super Mario 256";
+    text-align: center;
+}
+button {
+    font-family: "Super Mario 256";
+    font-size: 3vw;
+    width: 20vw;
+    height: 10vh;
+}
+.content {
+    text-align: center;
+    margin-top: 14vh;
+}
+.mario {
+    animation: but 1.5s infinite;
+}
+
+img {
+    width: 15vw;
+    margin-right: 8vw;
+    margin-left: 8vw;
+}
+
+@keyframes but {
+    0%,50%,100% {
+        transform: translateY(50px);
+    }
+    20%,80% {
+        transform: translateY(-50px);
+    }
+}

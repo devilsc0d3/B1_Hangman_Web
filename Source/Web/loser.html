@@ -1,95 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>perdu</title>
-</head>
-<style>
-    body {
-        background-color: black;
-        text-align: center;
-        font-family: 'Super Mario 256';
-    }
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>perdu</title>
+        <link rel="stylesheet" type="text/css" href="./static/CSS/style_loser.css">
+    </head>
 
-    img{
-        width: 20vw;
-        transform: scale(0.5);
-        animation: but 1.5s infinite;
-    }
+    <body>
+        <div class="go">
+            <span style="--i:1">G</span>
+            <span style="--i:2">A</span>
+            <span style="--i:3">M</span>
+            <span style="--i:4">E</span>
+            <span style="--i:5">    </span>
+            <span style="--i:6">O</span>
+            <span style="--i:7">V</span>
+            <span style="--i:8">E</span>
+            <span style="--i:9">R</span>
+        </div>
 
-    button {
-        margin-top: 20px;
-        font-size: 2vw;
-        font-family: 'Super Mario 256';
-        width: 20vw;
-        height: 10vh;
-        border-radius: 30px;
-        color: #ffffff;
-        background-color: #8503ab;
-        transition: all 300ms;
-    }
+        <div>
+            <img src="./static/pictures/bowser.png">
+        </div>
 
-    button:hover {
-        transform: scale(0.8);
-    }
-
-    .go {
-        font-size: 8vw;
-    }
-
-    .go span {
-        font-family: 'Super Mario 256';
-        position: relative;
-        display: inline-block;
-        color: #8503ab;
-        text-transform: uppercase;
-        animation: go 1s infinite;
-        animation-delay: calc(.1s * var(--i));
-
-    }
-
-    @keyframes go {
-        0%,40%,100% {
-            transform: translateY(0)
-        }
-        20% {
-            transform: translateY(-20px)
-        }
-    }
-    @keyframes but {
-        0%,40%,100% {
-            transform: scale(1)
-            rotate(-20grad)
-        }
-        20% {
-            transform: scale(0.7)
-            rotate(20grad)
-        }
-        80% {
-        transform: rotate(20grad)
-        }
-    }
-</style>
-
-<body>
-    <div class="go">
-        <span style="--i:1">G</span>
-        <span style="--i:2">A</span>
-        <span style="--i:3">M</span>
-        <span style="--i:4">E</span>
-        <span style="--i:5">    </span>
-        <span style="--i:6">O</span>
-        <span style="--i:7">V</span>
-        <span style="--i:8">E</span>
-        <span style="--i:9">R</span>
-    </div>
-
-    <div>
-        <img src="./static/pictures/bowser.png">
-    </div>
-
-    <form>
-        <button value="submit" name="restart"> START </button>
-    </form>
-</body>
+        <form>
+            <button value="submit" name="restart"> START </button>
+        </form>
+    </body>
 </html>
