@@ -21,10 +21,8 @@ type game struct {
 }
 
 type character struct {
-	Name       string
-	clue       int
-	difficulty int
-	score      int
+	Name string
+	clue int
 }
 
 type Language struct {
@@ -74,8 +72,7 @@ func variable() {
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	start, _ := template.ParseFiles("./Source/Web/" + "menu" + ".html")
-
+	page, _ := template.ParseFiles("./Source/Web/" + "menu" + ".html")
 	if r.FormValue("send") == "submit" {
 		if r.FormValue("dif") == "fa" {
 			bd.Hangman.File = "words.txt"
@@ -91,11 +88,10 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		bd.Hangman = game{Title: "goodluck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5, Position: "https://clipground.com/images/html5-logo-2.png"}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
-
 	if r.FormValue("param") == "submit" {
 		http.Redirect(w, r, "/setting", http.StatusSeeOther)
 	}
-	start.ExecuteTemplate(w, "menu.html", bd)
+	page.ExecuteTemplate(w, "menu.html", bd)
 }
 
 func Hangman(w http.ResponseWriter, r *http.Request) {
@@ -142,10 +138,9 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		bd.Hangman.ToFind = append(bd.Hangman.ToFind, choice)
 	}
 
-	if len(classic.Verif(classic.ListToString(bd.Hangman.WordUser), "_")) == 0 {
-		println("\n\nCongrats !")
+	if (len(classic.Verif(classic.ListToString(bd.Hangman.WordUser), "_")) == 0) && (choice != bd.Hangman.Word) {
 		http.Redirect(w, r, "/win", http.StatusSeeOther)
-		bd.Hangman.WordUser = classic.StringToList("Congrats !")
+
 	}
 
 	if bd.Hangman.Attempts <= 0 {
@@ -155,18 +150,19 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 }
 
 func Loser(w http.ResponseWriter, r *http.Request) {
-	ho, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
-	if r.FormValue("send") == "submit" {
+	page, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
+	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
-	ho.ExecuteTemplate(w, "loser.html", bd)
+	page.ExecuteTemplate(w, "loser.html", bd)
 }
 
 func Win(w http.ResponseWriter, r *http.Request) {
-	start, _ := template.ParseFiles("./Source/Web/" + "win" + ".html")
-
-	start.ExecuteTemplate(w, "win.html", bd)
-
+	page, _ := template.ParseFiles("./Source/Web/" + "win" + ".html")
+	if r.FormValue("restart") == "submit" {
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
+	}
+	page.ExecuteTemplate(w, "win.html", bd)
 }
 
 func Parameter(w http.ResponseWriter, r *http.Request) {
@@ -183,7 +179,6 @@ func Parameter(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("lg") == "ge" {
 		bd.Set.Langue = bd.Set.Language.Ge
 	}
-
 	if r.FormValue("send") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}

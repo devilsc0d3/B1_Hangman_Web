@@ -26,15 +26,21 @@
         text-align: center;
         margin-top: 14vh;
     }
-    img {
+    .mario {
         animation: but 1.5s infinite;
     }
 
+    img {
+        width: 15vw;
+        margin-right: 8vw;
+        margin-left: 8vw;
+    }
+
     @keyframes but {
-        0%,100% {
+        0%,50%,100% {
             transform: translateY(50px);
         }
-        20% {
+        20%,80% {
             transform: translateY(-50px);
         }
     }
@@ -42,9 +48,11 @@
 
 <body>
 
-<h1>You win</h1>
+<h1>You win !</h1>
 <div class="content">
-    <img src="http://localhost:8080/static/Pictures/mario1.png">
+    <img src="http://localhost:8080/static/Pictures/piece.gif">
+    <img src="http://localhost:8080/static/Pictures/mario2.png" class="mario">
+    <img src="http://localhost:8080/static/Pictures/piece.gif">
 </div>
 
 <form>
