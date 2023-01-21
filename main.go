@@ -60,9 +60,9 @@ type Difficile struct {
 }
 
 func init_board() {
-	Sb.Easy = Facile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
-	Sb.Medium = Moyen{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
-	Sb.Hard = Difficile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
+	Sb.Easy = Facile{Pseudo1: "N/A", Score1: 9, Pseudo2: "N/A", Score2: 1, Pseudo3: "N/A", Score3: 1}
+	Sb.Medium = Moyen{Pseudo1: "N/A", Score1: 8, Pseudo2: "N/A", Score2: 1, Pseudo3: "N/A", Score3: 1}
+	Sb.Hard = Difficile{Pseudo1: "N/A", Score1: 7, Pseudo2: "N/A", Score2: 1, Pseudo3: "N/A", Score3: 1}
 }
 
 var Sb = Board{}
@@ -73,12 +73,9 @@ func Scoreb(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	Sb.Easy = Facile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
-	Sb.Medium = Moyen{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
-	Sb.Hard = Difficile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
 	init_board()
+	print("ui")
 	var Joueur = UserInfo{Score: 3, Difficulty: "Hard", Pseudo: "mwa gem bi1"}
-	scoreboard(Joueur, Sb)
 	fis := http.FileServer(http.Dir("Source"))
 	http.Handle("/static/", http.StripPrefix("/static/", fis))
 	Word := classic.RandomWord(os.Args[1])
@@ -91,6 +88,7 @@ func main() {
 		ToFind:     "",
 		LengthWord: len(Word),
 	}
+	scoreboard(&Joueur, &Sb)
 	http.HandleFunc("/scoreboard", Scoreb)
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		Input := (r.FormValue("wordletter"))
@@ -146,9 +144,9 @@ func main() {
 	http.ListenAndServe(port, nil)
 }
 
-func scoreboard(User UserInfo, Scoreboard Board) {
+func scoreboard(User *UserInfo, Scoreboard *Board) {
+	fmt.Printf("OUI")
 	switch User.Difficulty {
-	//les impairs sont la colonnes des scores
 	case "Hard":
 		if User.Score > Scoreboard.Hard.Score1 {
 			Scoreboard.Hard.Score3 = Scoreboard.Hard.Score2
@@ -158,11 +156,14 @@ func scoreboard(User UserInfo, Scoreboard Board) {
 			Scoreboard.Hard.Score1 = User.Score
 			Scoreboard.Hard.Pseudo1 = User.Pseudo
 			break
-		} else if User.Score < Scoreboard.Hard.Score2 && User.Score > Scoreboard.Hard.Score3 {
+		} else if User.Score < Scoreboard.Hard.Score1 && User.Score > Scoreboard.Hard.Score2 {
+			print(Scoreboard.Hard.Score2)
 			Scoreboard.Hard.Pseudo3 = Scoreboard.Hard.Pseudo2
 			Scoreboard.Hard.Score3 = Scoreboard.Hard.Score2
 			Scoreboard.Hard.Pseudo2 = User.Pseudo
 			Scoreboard.Hard.Score2 = User.Score
+			print(Scoreboard.Hard.Score2)
+			print(User.Score)
 			break
 		} else if User.Score > Scoreboard.Hard.Score3 {
 			Scoreboard.Hard.Score3 = User.Score
