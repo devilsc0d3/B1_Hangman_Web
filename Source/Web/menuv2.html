@@ -15,9 +15,9 @@
 h1 {
   text-align: center;
   font-family: "Super Mario 256";
-  font-size: 3vw;
+  font-size: 6vw;
   margin-bottom: 6vh;
-    color: #0c4e57;
+    color: #cc911d;
 }
 label {
     margin-bottom: 10vh;
@@ -61,7 +61,7 @@ input[type=checkbox] {
 .title {
     margin: 2vw;
     width: 45vw;
-    height: 28vh;
+    height: 50%;
     background-color: #ce5600;
 }
 .menu {
@@ -98,27 +98,39 @@ input[type=checkbox] {
         bottom: 27px;
         margin-left: 20px;
     }
+
+    .right {
+        right: 0px;
+        margin-right: 10px
+    }
+    .send {
+        margin-top: 50px;
+        border-radius: 15px;
+        font-size: 3vw;
+    }
 </style>
 
 <body>
 
-<section class="title"></section>
+<section class="title">
+    <h1>{{index .Set.Langue 0}}</h1>
+</section>
 
 <form method="post">
     <section class="menu">
       <div class="content">
           <input type="radio" name="lg" value="en" id="1">
-          <label for="1">facile</label>
+          <label for="1">{{index .Set.Langue 1}}</label>
       </div>
 
       <div class="content">
           <input type="radio" name="lg" value="fr" id="2">
-          <label for="2">moyen</label>
+          <label for="2">{{index .Set.Langue 2}}</label>
       </div>
 
       <div class="content">
           <input type="radio" name="lg" value="es" id="3">
-          <label for="3">difficile</label>
+          <label for="3">{{index .Set.Langue 3}}</label>
       </div>
     </section>
 
@@ -126,15 +138,17 @@ input[type=checkbox] {
             <input type="text" name="name" placeholder="{{index .Set.Langue 4}}">
         </div>
 
-
 <section class="fin">
     <div class="imfin"></div>
     <div class="imfin"></div>
 </section>
 
-
     <div class="bottom">
         <button value="submit" name="param" class="buttoon"><img src="./static/Pictures/gear.png"></button>
+    </div>
+
+    <div class="bottom right color">
+        <button value="submit" name="send" class="send"> {{index .Set.Langue 5}} </button>
     </div>
 </form>
 

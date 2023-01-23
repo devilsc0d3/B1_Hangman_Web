@@ -49,16 +49,15 @@ type base struct {
 var bd = base{}
 
 func variable() {
-	bd.Set.Language.Fr = []string{"menu", "facile", "moyen", "difficile", "entre un nom", "lancer",
+	bd.Set.Language.Fr = []string{"New Super Hangman Web", "facile", "moyen", "difficile", "entre un nom", "lancer",
 		"Bonne chance ", "Vous avez", "essaie", "entrez une lettre ou un mot", "envoyé", "lettre déja essayer", "rejouer",
-
 		"tu as perdu", "rejoué",
 		"tu as Gagne", "tableaux des scores", "rejoué",
 	}
-	bd.Set.Language.En = []string{"menu", "easy", "medium", "hard", "enter a nickname", "start",
+	bd.Set.Language.En = []string{"New Super Hangman Web", "easy", "medium", "hard", "enter a nickname", "start",
 		"...",
 	}
-	bd.Set.Language.Es = []string{"menú", "fácil", "medio", "difícil", "Introduce un apodo", "iniciar"}
+	bd.Set.Language.Es = []string{"New Super Hangman Web", "fácil", "medio", "difícil", "Introduce un apodo", "iniciar"}
 
 	bd.Set.Langue = bd.Set.Language.En
 
@@ -72,7 +71,7 @@ func variable() {
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	page, _ := template.ParseFiles("./Source/Web/" + "menu" + ".html")
+	page, _ := template.ParseFiles("./Source/Web/" + "menuv2" + ".html")
 	if r.FormValue("send") == "submit" {
 		if r.FormValue("dif") == "fa" {
 			bd.Hangman.File = "words.txt"
@@ -91,7 +90,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("param") == "submit" {
 		http.Redirect(w, r, "/setting", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "menu.html", bd)
+	page.ExecuteTemplate(w, "menuv2.html", bd)
 }
 
 func Hangman(w http.ResponseWriter, r *http.Request) {
@@ -195,6 +194,7 @@ func doublons(liste []string, choice string) int {
 }
 
 func main() {
+
 	variable()
 	http.HandleFunc("/home", Home)
 	http.HandleFunc("/setting", Parameter)
@@ -208,4 +208,5 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static", fs))
 
 	http.ListenAndServe("localhost:8080", nil)
+
 }
