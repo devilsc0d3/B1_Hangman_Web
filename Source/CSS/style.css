@@ -3,17 +3,18 @@ body {
 }
 
 h1   {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: "Super Mario 256";
     color: #ffffff;
-    font-size:8vw;
+    font-size:5vw;
     text-align:center
+
 }
 
 p    {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: "Super Mario 256";
     color: #ffffff;
     text-align:center;
-    font-size: 5vw;
+    font-size: 3vw;
 
 }
 
@@ -23,14 +24,19 @@ p    {
 }
 
 form {
+
     font-size:50px;
     text-align:center
+}
+
+input {
+    font-family: "Super Mario 256";
 }
 
 input[type=submit] {
     border-radius: 30px;
     text-align:center;
-    width: 3vw;
+    width: 8vw;
     height: 5vh;
 }
 
@@ -38,5 +44,7 @@ input[type=text] {
     width: 30vw;
     height: 5vh;
     border-radius: 30px;
+    font-family: "Super Mario 256";
+
 }
 

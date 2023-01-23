@@ -64,7 +64,7 @@ func variable() {
 	var Word = classic.RandomWord("words.txt")
 	var data = game{
 		Title: "...", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
-		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
+		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png", File: "word3.txt",
 	}
 	bd.Hangman = data
 
@@ -72,6 +72,7 @@ func variable() {
 
 func Home(w http.ResponseWriter, r *http.Request) {
 	page, _ := template.ParseFiles("./Source/Web/" + "menuv2" + ".html")
+
 	if r.FormValue("send") == "submit" {
 		if r.FormValue("dif") == "fa" {
 			bd.Hangman.File = "words.txt"
