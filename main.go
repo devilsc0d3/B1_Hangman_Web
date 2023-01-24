@@ -50,12 +50,11 @@ var bd = base{}
 
 func variable() {
 	bd.Set.Language.Fr = []string{"New Super Hangman Web", "facile", "moyen", "difficile", "entre un nom", "lancer",
-		"Bonne chance ", "Vous avez", "essaie", "entrez une lettre ou un mot", "envoyé", "lettre déja essayer", "rejouer",
-		"tu as perdu", "rejoué",
+		"Bonne chance ", "Vous avez", "essaies", "entrez une lettre ou un mot", "envoyé", "lettre déja essayer : ", "rejouer",
 		"tu as Gagne", "tableaux des scores", "rejoué",
 	}
 	bd.Set.Language.En = []string{"New Super Hangman Web", "easy", "medium", "hard", "enter a nickname", "start",
-		"...",
+		"good luck ",
 	}
 	bd.Set.Language.Es = []string{"New Super Hangman Web", "fácil", "medio", "difícil", "Introduce un apodo", "iniciar"}
 
@@ -67,7 +66,6 @@ func variable() {
 		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png", File: "word3.txt",
 	}
 	bd.Hangman = data
-
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
@@ -146,7 +144,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	if bd.Hangman.Attempts <= 0 {
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
-	t.ExecuteTemplate(w, "hangman.tmpl", bd.Hangman)
+	t.ExecuteTemplate(w, "hangman.tmpl", bd)
 }
 
 func Loser(w http.ResponseWriter, r *http.Request) {

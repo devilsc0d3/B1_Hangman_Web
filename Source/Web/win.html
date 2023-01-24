@@ -7,7 +7,7 @@
     </head>
 
     <body>
-    <h1>You win !</h1>
+    <h1>{{index .Set.Langue 13}}</h1>
     <div class="content">
         <img src="http://localhost:8080/static/Pictures/piece.gif">
         <img src="http://localhost:8080/static/Pictures/mario2.png" class="mario">
@@ -15,8 +15,8 @@
     </div>
     <form>
         <div class="content">
-            <button name="scores" value="submit">Scorboard</button>
-            <button name="restart" value="submit">restart</button>
+            <button name="scores" value="submit">{{index .Set.Langue 14}}</button>
+            <button name="restart" value="submit">{{index .Set.Langue 12}}</button>
         </div>
     </form>
     </body>
