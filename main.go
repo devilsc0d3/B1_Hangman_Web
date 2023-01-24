@@ -57,8 +57,14 @@ func variable() {
 		"good luck", "you have", "tries", "enter a letter or word", "sent", "letter already tried:", "replay",
 		"you won", "scoreboard", "replay",
 	}
-	bd.Set.Language.Es = []string{"New Super Hangman Web", "fácil", "medio", "difícil", "Introduce un apodo", "iniciar"}
-
+	bd.Set.Language.Es = []string{"New Super Hangman Web", "facil", "medio", "dificil", "Introduce un apodo", "iniciar",
+		"buena suerte", "tienes", "intentos", "introduce una letra o palabra", "enviado", "letra ya intentada : ", "reproducir",
+		"has ganado", "marcador", "reproducir",
+	}
+	bd.Set.Language.Ge = []string{"New Super Hangman Web", "leicht", "mittel", "schwer", "einen Namen eingeben", "starten",
+		"Viel Gluck", "Sie haben", "Versuche", "Geben Sie einen Buchstaben oder ein Wort ein", "Gesendet", "Buchstabe bereits versucht:", "Wiederholen",
+		"Sie haben gewonnen", "Anzeigetafel", "Wiederholung",
+	}
 	bd.Set.Langue = bd.Set.Language.En
 
 	var Word = classic.RandomWord("words.txt")
