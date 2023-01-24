@@ -1,6 +1,29 @@
 table
 {
+    margin-top: 10vh;
     min-width: 10vw;
     min-height: 20vh;
-border: 1px solid darkblue;
+    height: 50vh;
+    width: 40vw;
+border: 5px solid #23ff00;
+    border-radius: 20px;
+align-self: center;
+    background-color: rgba(0, 192, 0, 0.58);
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 35px;
+
+}
+
+body
+{
+
+}
+
+body#avatar
+{
+    background-image: url("./ba98b7a62c16b8959683e41db47fdc1e.jpg");
+    background-repeat: no-repeat;
+    width: 95vw;
+    height: 108vh;
 }

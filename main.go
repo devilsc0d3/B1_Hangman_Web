@@ -60,9 +60,9 @@ type Difficile struct {
 }
 
 func init_board() {
-	Sb.Easy = Facile{Pseudo1: "N/A", Score1: 9, Pseudo2: "N/A", Score2: 1, Pseudo3: "N/A", Score3: 1}
-	Sb.Medium = Moyen{Pseudo1: "N/A", Score1: 8, Pseudo2: "N/A", Score2: 1, Pseudo3: "N/A", Score3: 1}
-	Sb.Hard = Difficile{Pseudo1: "N/A", Score1: 7, Pseudo2: "N/A", Score2: 1, Pseudo3: "N/A", Score3: 1}
+	Sb.Easy = Facile{Pseudo1: "N/A", Score1: 3, Pseudo2: "N/A", Score2: 2, Pseudo3: "N/A", Score3: 1}
+	Sb.Medium = Moyen{Pseudo1: "N/A", Score1: 3, Pseudo2: "N/A", Score2: 2, Pseudo3: "N/A", Score3: 1}
+	Sb.Hard = Difficile{Pseudo1: "N/A", Score1: 3, Pseudo2: "N/A", Score2: 2, Pseudo3: "N/A", Score3: 1}
 }
 
 var Sb = Board{}
@@ -74,8 +74,7 @@ func Scoreb(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	init_board()
-	print("ui")
-	var Joueur = UserInfo{Score: 3, Difficulty: "Hard", Pseudo: "mwa gem bi1"}
+	var Joueur = UserInfo{Score: 2, Difficulty: "Hard", Pseudo: "mwa gem bi1"}
 	fis := http.FileServer(http.Dir("Source"))
 	http.Handle("/static/", http.StripPrefix("/static/", fis))
 	Word := classic.RandomWord(os.Args[1])
@@ -145,7 +144,6 @@ func main() {
 }
 
 func scoreboard(User *UserInfo, Scoreboard *Board) {
-	fmt.Printf("OUI")
 	switch User.Difficulty {
 	case "Hard":
 		if User.Score > Scoreboard.Hard.Score1 {
@@ -157,13 +155,10 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 			Scoreboard.Hard.Pseudo1 = User.Pseudo
 			break
 		} else if User.Score < Scoreboard.Hard.Score1 && User.Score > Scoreboard.Hard.Score2 {
-			print(Scoreboard.Hard.Score2)
 			Scoreboard.Hard.Pseudo3 = Scoreboard.Hard.Pseudo2
 			Scoreboard.Hard.Score3 = Scoreboard.Hard.Score2
 			Scoreboard.Hard.Pseudo2 = User.Pseudo
 			Scoreboard.Hard.Score2 = User.Score
-			print(Scoreboard.Hard.Score2)
-			print(User.Score)
 			break
 		} else if User.Score > Scoreboard.Hard.Score3 {
 			Scoreboard.Hard.Score3 = User.Score
@@ -214,5 +209,7 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 			break
 		}
 	}
+	User.Score = 0
+	User.Pseudo = "N/A"
 	return
 }
