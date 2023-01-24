@@ -9,15 +9,30 @@ h1 {
     font-family: "Super Mario 256";
     text-align: center;
 }
+
 button {
-    font-family: "Super Mario 256";
-    font-size: 3vw;
+    margin: 30px;
+    font-size: 2vw;
+    font-family: 'Super Mario 256';
     width: 20vw;
     height: 10vh;
+    border-radius: 30px;
+    color: #ffffff;
+    background-color: #de5912;
+    transition: all 300ms;
 }
+
+button:hover {
+    transform: scale(0.8);
+}
+
 .content {
-    text-align: center;
     margin-top: 14vh;
+}
+.contents {
+    margin-top: 14vh;
+    display: flex;
+    justify-content: center;
 }
 .mario {
     animation: but 1.5s infinite;

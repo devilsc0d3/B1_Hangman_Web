@@ -53,8 +53,9 @@ func variable() {
 		"Bonne chance ", "Vous avez", "essaies", "entrez une lettre ou un mot", "envoyé", "lettre déja essayer : ", "rejouer",
 		"tu as Gagne", "tableaux des scores", "rejoué",
 	}
-	bd.Set.Language.En = []string{"New Super Hangman Web", "easy", "medium", "hard", "enter a nickname", "start",
-		"good luck ",
+	bd.Set.Language.En = []string{"New Super Hangman Web", "easy", "medium", "hard", "enter a name", "start",
+		"good luck", "you have", "tries", "enter a letter or word", "sent", "letter already tried:", "replay",
+		"you won", "scoreboard", "replay",
 	}
 	bd.Set.Language.Es = []string{"New Super Hangman Web", "fácil", "medio", "difícil", "Introduce un apodo", "iniciar"}
 

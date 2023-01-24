@@ -14,9 +14,13 @@
         <img src="http://localhost:8080/static/Pictures/piece.gif">
     </div>
     <form>
-        <div class="content">
-            <button name="scores" value="submit">{{index .Set.Langue 14}}</button>
-            <button name="restart" value="submit">{{index .Set.Langue 12}}</button>
+        <div class="contents">
+            <form>
+                <button value="submit" name="restart"> {{index .Set.Langue 14}} </button>
+            </form>
+            <form>
+                <button value="submit" name="restart"> {{index .Set.Langue 12}} </button>
+            </form>
         </div>
     </form>
     </body>
