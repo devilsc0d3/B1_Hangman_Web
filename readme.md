@@ -14,7 +14,7 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 
 ****
  
-**Functionality :**
+**Features :**
 
 - Page on the theme mario : menu, win, lose, hangman, setting
 - Language :
@@ -54,6 +54,7 @@ clone https://ytrack.learn.ynov.com/git/fleo/hangman-web.git
     - A clue mod
     - Create a save
 - Page more responsive, adapt of mobile
+- Add sound
 
 ****
 
