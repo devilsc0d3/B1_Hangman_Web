@@ -16,7 +16,8 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 
 **functionality :**
 
-- page on the theme mario : menu, win, lose, hangman, setting- Language :
+- page on the theme mario : menu, win, lose, hangman, setting
+- Language :
   - English
   - French
   - Spanish
