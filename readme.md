@@ -13,38 +13,47 @@ If the stick figure is fully drawn before the word is guessed, the guessing play
 If the word is guessed before the stick figure is fully drawn, the guessing player wins and get the point corresponding to the remaining chance.
 
 ****
+ 
+**Functionality :**
 
-**functionality :**
-
-- page on the theme mario : menu, win, lose, hangman, setting
+- Page on the theme mario : menu, win, lose, hangman, setting
 - Language :
   - English
   - French
   - Spanish
   - German
 - you can choose a level & a username !
-- a hangman (José) on the gallows 
-- scoreboard sort !
-- array of letter & word already entered
+- A hangman (José) on the gallows 
+- Scoreboard sort !
+- Array of letter & word already entered
 
 ****
 
 **Installation :**
 
-- clone the repo with : <code> clone https://ytrack.learn.ynov.com/git/fleo/hangman-web.git </code>
+- Clone the repo with : 
 
-- start the Hangman-Web with : <code> go run .</code>
+```bash 
+clone https://ytrack.learn.ynov.com/git/fleo/hangman-web.git 
+```
 
-- enjoy :)
+- Start the Hangman-Web with :
+
+```bash 
+ go run .
+```
+
+- Enjoy :)
 
 ****
 
-**update coming...**
+**Update coming...**
 
-- add news languages
-- add a functionalities :
-    - a clue mod
-- page more responsive, adapt of mobile
+- Add news languages
+- Add a functionalities :
+    - A clue mod
+    - Create a save
+- Page more responsive, adapt of mobile
 
 ****
 
