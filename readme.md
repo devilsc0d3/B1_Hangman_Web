@@ -24,7 +24,7 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
   - German
 - you can choose a level & a username !
 - a hangman (José) on the gallows 
-- scorboard sort !
+- scoreboard sort !
 - array of letter & word already entered
 
 ****
