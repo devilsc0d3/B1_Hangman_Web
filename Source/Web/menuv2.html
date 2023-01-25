@@ -1,155 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>settings</title>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="./static/CSS/style_menu.css">
 </head>
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        background-color: #0060c9;
-    }
-
-h1 {
-  text-align: center;
-  font-family: "Super Mario 256";
-  font-size: 6vw;
-  margin-bottom: 6vh;
-    color: #cc911d;
-}
-label {
-    margin-bottom: 10vh;
-  font-family: "Super Mario 256";
-  font-size: 2vw;
-    color: #ffffff;
-
-}
-
-.content {
-    margin-bottom: 4vh;
-    margin-left: 18vw;
-}
-
-input[type=radio] {
-    width: 5%;
-    height: 2vw;
-}
-input[type=checkbox] {
-    width: 5%;
-    height: 2vw;
-}
-
-    .imfin {
-        margin: 0;
-        padding: 0;
-        position: relative;
-        bottom: 0px;
-    width: 100%;
-        height: 4vw;
-    background-image: url("http://localhost:8080/static/Pictures/brick.jpg");
-    background-repeat: repeat-x;
-    background-size: 4vw;
-}
-.fin {
-    width: 100%;
-    position: absolute;
-    bottom: 1px;
-}
-
-.title {
-    margin: 2vw;
-    width: 45vw;
-    height: 50%;
-    background-color: #ce5600;
-}
-.menu {
-    width: 50%;
-}
-.nme {
-    margin-top: -20vh;
-    float: right;
-    margin-right: 3vw;
-}
-    input[type=text] {
-        width: 30vw;
-        height: 5vh;
-        text-decoration-color: #286cc5;
-        border-radius: 30px;
-    }
-
-    .buttoon {
-        /*margin-left: 50px;*/
-        background-color: rgba(255, 255, 255, 0);
-        border-color: rgba(255,255,255,0);
-    }
-
-    .buttoon:hover {
-        transition-duration: 2.5s;
-        transform: rotate(360deg);
-    }
-
-    img {
-        width: 5vw;
-    }
-    .bottom {
-        position: absolute;
-        bottom: 27px;
-        margin-left: 20px;
-    }
-
-    .right {
-        right: 0px;
-        margin-right: 10px
-    }
-    .send {
-        margin-top: 50px;
-        border-radius: 15px;
-        font-size: 3vw;
-    }
-</style>
-
 <body>
+    <div class="title">
+        <h1>{{index .Set.Langue 0}}</h1>
+    </div>
 
-<section class="title">
-    <h1>{{index .Set.Langue 0}}</h1>
-</section>
+    <form method="post">
+        <section class="menu">
+              <div class="content">
+                  <input type="radio" name="dif" value="fa" id="1">
+                  <label for="1">{{index .Set.Langue 1}}</label>
+              </div>
 
-<form method="post">
-    <section class="menu">
-      <div class="content">
-          <input type="radio" name="dif" value="fa" id="1">
-          <label for="1">{{index .Set.Langue 1}}</label>
-      </div>
+              <div class="content">
+                  <input type="radio" name="dif" value="mo" id="2">
+                  <label for="2">{{index .Set.Langue 2}}</label>
+              </div>
 
-      <div class="content">
-          <input type="radio" name="dif" value="mo" id="2">
-          <label for="2">{{index .Set.Langue 2}}</label>
-      </div>
+              <div class="content">
+                  <input type="radio" name="dif" value="di" id="3">
+                  <label for="3">{{index .Set.Langue 3}}</label>
+              </div>
+        </section>
 
-      <div class="content">
-          <input type="radio" name="dif" value="di" id="3">
-          <label for="3">{{index .Set.Langue 3}}</label>
-      </div>
-    </section>
-
-        <div class="nme">
+        <div class="input_name">
             <input type="text" name="name" placeholder="{{index .Set.Langue 4}}">
         </div>
 
-<section class="fin">
-    <div class="imfin"></div>
-    <div class="imfin"></div>
-</section>
+        <div class="bottom_line">
+            <div class="img_line_end"></div>
+            <div class="img_line_end"></div>
+        </div>
 
-    <div class="bottom">
-        <button value="submit" name="param" class="buttoon"><img src="./static/Pictures/gear.png"></button>
-    </div>
+        <div class="bottom">
+            <button value="submit" name="param" class="button"><img src="./static/Pictures/gear.png"></button>
+        </div>
 
-    <div class="bottom right color">
-        <button value="submit" name="send" class="send"> {{index .Set.Langue 5}} </button>
-    </div>
-</form>
+        <div class="bottom right color">
+            <button value="submit" name="send" class="start"> {{index .Set.Langue 5}} </button>
+        </div>
+    </form>
 </body>
 </html>

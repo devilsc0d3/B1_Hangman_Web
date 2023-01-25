@@ -14,25 +14,13 @@ h1 {
     margin-bottom: 6vh;
     color: #0c4e57;
 }
+
 label {
     margin-bottom: 5vh;
     margin-bottom: 10vh;
     font-family: "Super Mario 256";
     font-size: 2vw;
     color: #ffffff;
-
-}
-
-.content {
-    text-align: center;
-    margin-bottom: 2vh;
-}
-
-.abs {
-    position: relative;
-    bottom: 0;
-    margin-bottom: 50px;
-    width: 99%;
 }
 
 button {
@@ -43,19 +31,29 @@ button {
     font-size: 2vw;
     color: #ffffff;
     background-color: #0c4e57;
+    transition: all 300ms;
+}
 
+button:hover {
+    transform: scale(0.8);
 }
 
 input[type=radio] {
     width: 5%;
     height: 2vw;
 }
+
 input[type=checkbox] {
     width: 5%;
     height: 2vw;
 }
 
-.im {
+.content {
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+.img_line_begin {
     z-index: 0;
     margin: 0;
     padding: 0;
@@ -67,25 +65,11 @@ input[type=checkbox] {
     filter: hue-rotate(170deg);
 }
 
-/*.imfin {*/
-/*    position: absolute;*/
-/*    bottom: 0px;*/
-/*    height: 5vw;*/
-/*    width: 100%;*/
-
-/*    background-image: url("http://localhost:8080/static/Pictures/brick.jpg");*/
-/*    transform: rotate(180deg);*/
-/*    background-repeat: repeat-x;*/
-/*    background-size: 4vw;*/
-/*    filter: hue-rotate(170deg);*/
-/*}*/
-
-.imfin {
+.img_line_end {
     position: absolute;
-    display: flex;
     bottom: 0px;
-        height: 5vw;
-        width: 100%;
+    height: 5vw;
+    width: 100%;
     background-image: url("http://localhost:8080/static/Pictures/brick.jpg");
     transform: rotate(180deg);
     background-repeat: repeat-x;

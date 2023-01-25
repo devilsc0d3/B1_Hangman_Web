@@ -22,7 +22,6 @@ type game struct {
 
 type character struct {
 	Name string
-	clue int
 }
 
 type Language struct {
@@ -156,14 +155,21 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 
 func Loser(w http.ResponseWriter, r *http.Request) {
 	page, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
+	if r.FormValue("scoreboard") == "submit" {
+		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
+	}
 	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
+
 	page.ExecuteTemplate(w, "loser.html", bd)
 }
 
 func Win(w http.ResponseWriter, r *http.Request) {
 	page, _ := template.ParseFiles("./Source/Web/" + "win" + ".html")
+	if r.FormValue("scoreboard") == "submit" {
+		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
+	}
 	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}

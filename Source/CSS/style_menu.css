@@ -1,28 +1,30 @@
 body {
     margin: 0;
-    background: #286cc5;
+    background-color: #0060c9;
 }
 
 h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 8vw;
-    display: flex;
-    justify-content: center;
-
-}
-.content {
-    margin-top: 3vh;
-    display: flex;
-    justify-content: space-evenly;
+    text-align: center;
+    font-family: "Super Mario 256";
+    font-size: 6vw;
+    margin-bottom: 6vh;
+    color: #cc911d;
 }
 
-p {
-    font-size: 5vw;
+label {
+    margin-bottom: 10vh;
+    font-family: "Super Mario 256";
+    font-size: 2vw;
+    color: #ffffff;
 }
 
 input[type=radio] {
-    width: 100%;
+    width: 5%;
+    height: 2vw;
+}
+
+input[type=checkbox] {
+    width: 5%;
     height: 2vw;
 }
 
@@ -33,41 +35,73 @@ input[type=text] {
     border-radius: 30px;
 }
 
-
-.send {
-    margin-top: 50px;
-    border-radius: 0px;
-    font-size: 3vw;
+img {
+    width: 5vw;
 }
 
-.send:hover {
-    transition-duration: 500ms;
-    transform: scale(1.2);
+.content {
+    margin-bottom: 4vh;
+    margin-left: 18vw;
 }
 
-.txt {
-    margin-top: 50px;
+.img_line_end {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    bottom: 0px;
+    width: 100%;
+    height: 4vw;
+    background-image: url("http://localhost:8080/static/Pictures/brick.jpg");
+    background-repeat: repeat-x;
+    background-size: 4vw;
 }
 
-.buttoon {
-    /*margin-left: 50px;*/
+.bottom_line {
+    width: 100%;
+    position: absolute;
+    bottom: 1px;
+}
+
+.title {
+    margin: 2vw;
+    width: 45vw;
+    height: 50%;
+    background-color: #ce5600;
+}
+
+.menu {
+    width: 50%;
+}
+
+.input_name {
+    margin-top: -20vh;
+    float: right;
+    margin-right: 3vw;
+}
+
+.button {
     background-color: rgba(255, 255, 255, 0);
     border-color: rgba(255,255,255,0);
 }
 
-.buttoon:hover {
+.button:hover {
     transition-duration: 2.5s;
     transform: rotate(360deg);
 }
-img {
-    width: 10vw;
-}
+
 .bottom {
     position: absolute;
-    bottom: 50px;
+    bottom: 27px;
     margin-left: 20px;
 }
 
-.color {
-    background-color: #cc911d;
+.right {
+    right: 0px;
+    margin-right: 10px
+}
+
+.start {
+    margin-top: 50px;
+    border-radius: 15px;
+    font-size: 3vw;
 }

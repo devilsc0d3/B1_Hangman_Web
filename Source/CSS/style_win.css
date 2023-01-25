@@ -1,8 +1,8 @@
 body {
     margin: 0px;
-    padding: 0px;
     background-color: #ff8800;
 }
+
 h1 {
     margin: 0px;
     font-size: 10vw;
@@ -26,22 +26,20 @@ button:hover {
     transform: scale(0.8);
 }
 
-.content {
-    margin-top: 14vh;
-}
-.contents {
-    margin-top: 14vh;
-    display: flex;
-    justify-content: center;
-}
-.mario {
-    animation: but 1.5s infinite;
-}
-
 img {
     width: 15vw;
     margin-right: 8vw;
     margin-left: 8vw;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    margin-top: 14vh;
+}
+
+.mario {
+    animation: but 1.5s infinite;
 }
 
 @keyframes but {

@@ -7,7 +7,7 @@
     </head>
 
     <body>
-        <h1>{{index .Set.Langue 6}} {{.Hangman.Word}}</h1>
+        <h1>{{index .Set.Langue 6}} {{.Player.Name}} {{.Hangman.Word}}</h1>
         <p> {{index .Set.Langue 7}} {{.Hangman.Attempts}} {{index .Set.Langue 8}}</p>
         <p>
             {{range .Hangman.WordUser}}
@@ -15,18 +15,19 @@
             {{end}}
         </p>
 
-        <form method="post" action="/">
+        <form method="post">
             <input type="text" name="wordletter" placeholder="{{index .Set.Langue 9}}">
             <input type="submit" value="{{index .Set.Langue 10}}" />
-            <p>{{index .Set.Langue 11}} <br>
+            <p>
+                {{index .Set.Langue 11}} <br>
                 {{range .Hangman.ToFind}}
-                {{.}}
+                    {{.}}
                 {{end}}
             </p>
         </form>
 
         <div class="content">
-            <img src={{.Hangman.Position}} alt="testeu" width="300px" height="300px">
+            <img src={{.Hangman.Position}} width="300px" height="300px">
         </div>
 
         <form method="post">

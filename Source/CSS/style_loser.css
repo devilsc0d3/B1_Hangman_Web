@@ -11,6 +11,8 @@ img{
 }
 
 button {
+    margin-left: 3vw;
+    margin-right: 3vw;
     margin-top: 20px;
     font-size: 2vw;
     font-family: 'Super Mario 256';
@@ -26,22 +28,27 @@ button:hover {
     transform: scale(0.8);
 }
 
-.go {
-    font-size: 8vw;
-}
-
-.go span {
+span {
     font-family: 'Super Mario 256';
     position: relative;
     display: inline-block;
     color: #8503ab;
     text-transform: uppercase;
-    animation: go 1s infinite;
+    animation: game_over 1s infinite;
     animation-delay: calc(.1s * var(--i));
-
 }
 
-@keyframes go {
+.game_over {
+    font-size: 8vw;
+}
+
+.content {
+    margin-top: 3vh;
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes game_over {
     0%,40%,100% {
         transform: translateY(0)
     }
@@ -49,6 +56,7 @@ button:hover {
         transform: translateY(-20px)
     }
 }
+
 @keyframes but {
     0%,40%,100% {
         transform: scale(1)

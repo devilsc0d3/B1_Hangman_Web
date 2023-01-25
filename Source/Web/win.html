@@ -2,26 +2,26 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Winner</title>
+        <title>Win</title>
         <link rel="stylesheet" type="text/css" href="./static/CSS/style_win.css">
     </head>
 
     <body>
-    <h1>{{index .Set.Langue 13}}</h1>
-    <div class="content">
-        <img src="http://localhost:8080/static/Pictures/piece.gif">
-        <img src="http://localhost:8080/static/Pictures/mario2.png" class="mario">
-        <img src="http://localhost:8080/static/Pictures/piece.gif">
-    </div>
-    <form>
-        <div class="contents">
-            <form>
-                <button value="submit" name="restart"> {{index .Set.Langue 14}} </button>
-            </form>
-            <form>
-                <button value="submit" name="restart"> {{index .Set.Langue 12}} </button>
-            </form>
+        <h1>{{index .Set.Langue 13}}</h1>
+        <div class="content">
+            <img src="http://localhost:8080/static/Pictures/piece.gif">
+            <img src="http://localhost:8080/static/Pictures/mario2.png" class="mario">
+            <img src="http://localhost:8080/static/Pictures/piece.gif">
         </div>
-    </form>
+        <form>
+            <div class="content">
+                <form>
+                    <button value="submit" name="scoreboard"> {{index .Set.Langue 14}} </button>
+                </form>
+                <form>
+                    <button value="submit" name="restart"> {{index .Set.Langue 12}} </button>
+                </form>
+            </div>
+        </form>
     </body>
 </html>
