@@ -1,0 +1,54 @@
+table
+{
+    margin-top: 10vh;
+    min-width: 10vw;
+    min-height: 20vh;
+    height: 25vh;
+    width: 40vw;
+border: 5px solid #0077ff;
+    border-radius: 20px;
+align-self: center;
+    background-color: rgba(0, 176, 192, 0.62);
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 25px;
+
+}
+.title
+{
+    margin-top: 5vh;
+    text-align: center;
+    font-size: 5vw;
+}
+.Buttons
+{
+    border-color: #ffffff;
+    min-height: 10vh;
+    min-width: 10vw;
+    border-radius: 5vw ;
+    margin-top: 30px;
+    text-align: center;
+}
+button
+{
+    border-color: #ffffff ;
+    height: 10vh;
+    width:  10vw;
+    border-radius: 1vw;
+    background-color: rgba(0, 80, 185, 0.51);
+}
+
+button:hover
+{
+    background-color: rgba(0, 44, 185, 0.66);
+}
+
+body#avatar
+{
+    background-image: url("../pictures/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    width: 95vw;
+    height: 93.6vh;
+}
