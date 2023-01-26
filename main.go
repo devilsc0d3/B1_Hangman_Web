@@ -107,7 +107,7 @@ func variable() {
 	var Word = classic.RandomWord("words.txt")
 	var data = game{
 		Title: "...", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
-		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png", File: "word3.txt",
+		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png", File: "word.txt",
 	}
 	bd.Hangman = data
 
@@ -129,9 +129,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		} else {
 			bd.Hangman.File = "words.txt"
 		}
-		bd.Player = character{Name: r.FormValue("name")}
+		Joueur.Pseudo = r.FormValue("name")
 		var Word = classic.RandomWord(bd.Hangman.File)
-		bd.Hangman = game{Title: "goodluck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5, Position: "https://clipground.com/images/html5-logo-2.png"}
+		bd.Hangman = game{Title: "goodluck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
 	if r.FormValue("param") == "submit" {
@@ -144,14 +144,11 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	reference := "./static/pictures/jose"
 	numeration := 0
 	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".tmpl")
-	if r.FormValue("loser") == "submit" {
-		http.Redirect(w, r, "/loser", http.StatusSeeOther)
-	}
 	if r.FormValue("reset") == "submit" {
 		Word := classic.RandomWord("words.txt")
 		bd.Hangman = game{
 			Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
-			LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
+			LengthWord: len(Word),
 		}
 	}
 
@@ -273,6 +270,9 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 
 func Loser(w http.ResponseWriter, r *http.Request) {
 	page, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
+	scoreboard(&Joueur, &Sb)
+	Joueur.Score = 0
+	Joueur.Pseudo = "N/A"
 	if r.FormValue("scoreboard") == "submit" {
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
