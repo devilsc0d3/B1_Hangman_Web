@@ -49,6 +49,7 @@ clone https://ytrack.learn.ynov.com/git/fleo/hangman-web
 
 **Update coming...**
 
+- page rules
 - Add news languages
 - Add a functionalities :
     - A clue mod
@@ -57,6 +58,7 @@ clone https://ytrack.learn.ynov.com/git/fleo/hangman-web
 - Add sound
 - ScoreBoard Dynamic
 - save of score
+- add 404 error Personalized
 
 ****
 
