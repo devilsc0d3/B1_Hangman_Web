@@ -1,55 +1,44 @@
 body {
     background: #286cc5;
 }
-
 h1   {
     font-family: SuperMario256;
     color: #ffffff;
     font-size:5vw;
     text-align:center
-
 }
-
 p    {
     font-family: SuperMario256;
     color: #ffffff;
     text-align:center;
     font-size: 3vw;
-
 }
-
 .content {
     display: flex;
     justify-content: space-evenly;
 }
-
 form {
     font-size:50px;
     text-align: center;
 }
-
 input {
     font-family: SuperMario256;
 }
-
 input[type=submit] {
     border-radius: 30px;
     text-align:center;
     width: 8vw;
     height: 5vh;
 }
-
 input[type=text] {
     width: 30vw;
     height: 5vh;
     border-radius: 30px;
     font-family: SuperMario256;
 }
-
 .content {
     text-align:center
 }
-
 @font-face {
     font-family: 'SuperMario256';
     src: url('http://localhost:8080/static/fonts/SuperMario256.ttf') format('truetype');

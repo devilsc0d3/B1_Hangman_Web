@@ -6,7 +6,6 @@ body {
     height: 100vh;
     min-height: 50vh;
 }
-
 h1 {
     text-align: center;
     font-family: SuperMario256;
@@ -14,7 +13,6 @@ h1 {
     margin-bottom: 6vh;
     color: #0c4e57;
 }
-
 label {
     margin-bottom: 5vh;
     margin-bottom: 10vh;
@@ -22,7 +20,6 @@ label {
     font-size: 2vw;
     color: #ffffff;
 }
-
 button {
     font-family: SuperMario256;
     border-radius: 20px;
@@ -33,26 +30,21 @@ button {
     background-color: #0c4e57;
     transition: all 300ms;
 }
-
 button:hover {
     transform: scale(0.8);
 }
-
 input[type=radio] {
     width: 5%;
     height: 2vw;
 }
-
 input[type=checkbox] {
     width: 5%;
     height: 2vw;
 }
-
 .content {
     text-align: center;
     margin-bottom: 5vh;
 }
-
 .img_line_begin {
     z-index: 0;
     margin: 0;
@@ -64,7 +56,6 @@ input[type=checkbox] {
     background-size: 4vw;
     filter: hue-rotate(170deg);
 }
-
 .img_line_end {
     position: absolute;
     bottom: 0px;
@@ -76,7 +67,6 @@ input[type=checkbox] {
     background-size: 4vw;
     filter: hue-rotate(170deg);
 }
-
 @font-face {
     font-family: 'SuperMario256';
     src: url('http://localhost:8080/static/fonts/SuperMario256.ttf') format('truetype');

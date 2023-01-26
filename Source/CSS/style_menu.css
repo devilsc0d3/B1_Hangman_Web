@@ -2,7 +2,6 @@ body {
     margin: 0;
     background-color: #0060c9;
 }
-
 h1 {
     padding-top: 100px;
     padding-bottom: 100px;
@@ -12,24 +11,20 @@ h1 {
     margin-bottom: 6vh;
     color: #ffffff;
 }
-
 label {
     margin-bottom: 10vh;
     font-family: SuperMario256;
     font-size: 2vw;
     color: #ffffff;
 }
-
 input[type=radio] {
     width: 5%;
     height: 2vw;
 }
-
 input[type=checkbox] {
     width: 5%;
     height: 2vw;
 }
-
 input[type=text] {
     font-family: SuperMario256;
     width: 30vw;
@@ -37,16 +32,13 @@ input[type=text] {
     text-decoration-color: #286cc5;
     border-radius: 30px;
 }
-
 img {
     width: 5vw;
 }
-
 .content {
     margin-bottom: 4vh;
     margin-left: 18vw;
 }
-
 .img_line_end {
     margin: 0;
     padding: 0;
@@ -58,50 +50,41 @@ img {
     background-repeat: repeat-x;
     background-size: 4vw;
 }
-
 .bottom_line {
     width: 100%;
     position: absolute;
     bottom: 1px;
 }
-
 .menu {
     width: 50%;
 }
-
 .input_name {
     margin-top: -20vh;
     float: right;
     margin-right: 3vw;
 }
-
 .button {
     background-color: rgba(255, 255, 255, 0);
     border-color: rgba(255,255,255,0);
 }
-
 .button:hover {
     transition-duration: 2.5s;
     transform: rotate(360deg);
 }
-
 .bottom {
     position: absolute;
     bottom: 27px;
     margin-left: 20px;
 }
-
 .right {
     right: 0px;
     margin-right: 10px
 }
-
 .start {
     margin-top: 50px;
     border-radius: 15px;
     font-size: 3vw;
 }
-
 @font-face {
     font-family: 'SuperMario256';
     src: url('http://localhost:8080/static/fonts/SuperMario256.ttf') format('truetype');
