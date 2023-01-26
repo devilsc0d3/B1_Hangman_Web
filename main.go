@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 const port = ":8080"
@@ -192,7 +193,10 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 	User.Pseudo = "N/A"
 	return
 }
+
 func Hangman(w http.ResponseWriter, r *http.Request) {
+	reference := "./static/pictures/jose"
+	numeration := 0
 	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".tmpl")
 	if r.FormValue("loser") == "submit" {
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
@@ -218,6 +222,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		}
 	} else {
 		if choice == bd.Hangman.Word {
+			Joueur.Score = +bd.Hangman.Attempts
 			bd.Hangman.WordUser = classic.StringToList("Congrats !")
 			http.Redirect(w, r, "/win", http.StatusSeeOther)
 		} else if choice != bd.Hangman.Word && len(choice) > 1 {
@@ -231,8 +236,16 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/win", http.StatusSeeOther)
 	}
 	if bd.Hangman.Attempts <= 0 {
+		scoreboard(&Joueur, &Sb)
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
+	numeration = (bd.Hangman.Attempts * -1) + 10
+	if numeration > 10 {
+		numeration = 10
+	}
+	bd.Hangman.Position = reference + strconv.FormatInt(int64(numeration), 10) + ".png"
+
+	print(bd.Hangman.Position)
 	t.ExecuteTemplate(w, "hangman.tmpl", bd)
 }
 func Loser(w http.ResponseWriter, r *http.Request) {
@@ -250,8 +263,11 @@ func Win(w http.ResponseWriter, r *http.Request) {
 	page.ExecuteTemplate(w, "win.html", bd)
 }
 func Scoreb(w http.ResponseWriter, r *http.Request) {
-	start, _ := template.ParseFiles("./Web/" + "ScoreBoard.page.tmpl" + ".html")
-	start.ExecuteTemplate(w, "ScoreBoard.page.tmpl.html", Sb)
+	start, _ := template.ParseFiles("./Source/Web/" + "ScoreBoard" + ".html")
+	if r.FormValue("restart") == "submit" {
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
+	}
+	start.ExecuteTemplate(w, "ScoreBoard.html", Sb)
 }
 
 func Parameter(w http.ResponseWriter, r *http.Request) {

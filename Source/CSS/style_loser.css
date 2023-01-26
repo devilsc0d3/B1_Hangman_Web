@@ -1,0 +1,71 @@
+body {
+    background-color: black;
+    text-align: center;
+    font-family: SuperMario256;
+}
+.Bowser{
+    width: 20vw;
+    transform: scale(0.5);
+    animation: but 1.5s infinite;
+}
+.mirror {
+    transform: scaleX(-1);
+}
+button {
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-top: 20px;
+    font-size: 2vw;
+    font-family: SuperMario256;
+    width: 20vw;
+    height: 10vh;
+    border-radius: 30px;
+    color: #ffffff;
+    background-color: #8503ab;
+    transition: all 300ms;
+}
+button:hover {
+    transform: scale(0.8);
+}
+span {
+    font-family: SuperMario256;
+    position: relative;
+    display: inline-block;
+    color: #8503ab;
+    text-transform: uppercase;
+    animation: game_over 1s infinite;
+    animation-delay: calc(.1s * var(--i));
+}
+.game_over {
+    font-size: 8vw;
+}
+.content {
+    margin-top: 3vh;
+    display: flex;
+    justify-content: center;
+}
+@keyframes game_over {
+    0%,40%,100% {
+        transform: translateY(0)
+    }
+    20% {
+        transform: translateY(-20px)
+    }
+}
+@keyframes but {
+    0%,40%,100% {
+        transform: scale(1)
+        rotate(-20grad)
+    }
+    20% {
+        transform: scale(0.7)
+        rotate(20grad)
+    }
+    80% {
+        transform: rotate(20grad)
+    }
+}
+@font-face {
+    font-family: 'SuperMario256';
+    src: url('http://localhost:8080/static/fonts/SuperMario256.ttf') format('truetype');
+}

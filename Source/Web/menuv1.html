@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>menu</title>
+  <link rel="stylesheet" type="text/css" href="./static/CSS/style_menu.css">
+</head>
+<style>
+  body {
+    background: #286cc5;
+  }
+  h1   {
+    font-family: "Super Mario 256";
+    color: #ffffff;
+    font-size:5vw;
+    text-align:center
+  }
+  p    {
+    font-family: "Super Mario 256";
+    color: #ffffff;
+    text-align:center;
+    font-size: 3vw;
+  }
+  .content {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  form {
+    font-size:50px;
+    text-align: center;
+  }
+  input {
+    font-family: "Super Mario 256";
+  }
+  input[type=submit] {
+    border-radius: 30px;
+    text-align:center;
+    width: 8vw;
+    height: 5vh;
+  }
+  input[type=text] {
+    width: 30vw;
+    height: 5vh;
+    border-radius: 30px;
+    font-family: "Super Mario 256";
+  }
+  .content {
+    text-align:center
+  }
+</style>
+<body>
+<h1 >{{index .Set.Langue 0}}</h1>
+<div class="content">
+  <p>{{index .Set.Langue 1}}</p>
+  <p>{{index .Set.Langue 2}}</p>
+  <p>{{index .Set.Langue 3}}</p>
+</div>
+<form method="POST">
+  <div class="content">
+    <input type="radio" name="dif" value="fa">
+    <input type="radio" name="dif" value="mo">
+    <input type="radio" name="dif" value="di">
+  </div>
+  <div class="content txt">
+    <input type="text" name="name" placeholder="{{index .Set.Langue 4}}">
+  </div>
+  <div class="content">
+    <button value="submit" name="send" class="send"> {{index .Set.Langue 5}} </button>
+  </div>
+  <div class="bottom">
+    <button value="submit" name="param" class="buttoon"><img src="./static/Pictures/gear.png"></button>
+  </div>
+</form>
+</body>
+</html>

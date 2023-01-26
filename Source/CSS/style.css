@@ -1,105 +1,45 @@
-body
-{
-    color: #000000;
-    margin: 0;
-    background-color: #8f8f8f;
+body {
+    background: #286cc5;
 }
-
-h1
-{
-    height: 5vw;
-    margin-top: 2vh;
+h1   {
+    font-family: SuperMario256;
+    color: #ffffff;
+    font-size:5vw;
+    text-align:center
+}
+p    {
+    font-family: SuperMario256;
+    color: #ffffff;
+    text-align:center;
+    font-size: 3vw;
+}
+.content {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #0015ff;
+    justify-content: space-evenly;
 }
-h2
-{
-    height: 2vw;
-    margin-top: 2vh;
-    padding-top: 1vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-p
-{
-    height: 2vw;
-    margin-top: 2vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-span
-{
-    color: darkred;
-}
-.Buttons
-{
-    justify-content: center;
-    margin-left: 10vw;
-    display: flex;
-}
-.submit
-{
-    margin-left: -5vw;
-}
-.reset
-{
-    margin-right: 5vw;
-}
-button
-{
-
-    background-color: rgba(45, 7, 155, 0.44);
-    border-color: #003586;
-    margin-top: -1%;
-    min-height: 10vh;
-    min-width: 10vw;
-    border-radius: 1vw ;
-}
-
-button:hover
-{
-    background-color: #009aff;
-}
-.difficulty
-{
-    : row;
-}
-
-.header {
+form {
+    font-size:50px;
     text-align: center;
-    background: #002cb9;
-    color: white;
-    font-size: 100%;
 }
-
-input
-{
-    text-align: center;
-    min-height: 4vh;
-    min-width: 15%;
-    margin-left: auto;
-    margin-right:auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #030303;
-    border-radius:20px ;
+input {
+    font-family: SuperMario256;
 }
-input:hover
-{
-    border-color: #ffffff;
+input[type=submit] {
+    border-radius: 30px;
+    text-align:center;
+    width: 8vw;
+    height: 5vh;
 }
-input::placeholder
-{
-    color: rgba(255, 255, 255, 0.38);
-    text-align: center;
-    font-size: 100%;
+input[type=text] {
+    width: 30vw;
+    height: 5vh;
+    border-radius: 30px;
+    font-family: SuperMario256;
 }
-input:focus
-{
-    background-color: #3f3e3e;
+.content {
+    text-align:center
+}
+@font-face {
+    font-family: 'SuperMario256';
+    src: url('http://localhost:8080/static/fonts/SuperMario256.ttf') format('truetype');
 }
