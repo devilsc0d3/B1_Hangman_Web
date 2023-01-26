@@ -6,14 +6,14 @@ body {
 h1 {
     margin: 0px;
     font-size: 10vw;
-    font-family: "Super Mario 256";
+    font-family: SuperMario256;
     text-align: center;
 }
 
 button {
     margin: 30px;
     font-size: 2vw;
-    font-family: 'Super Mario 256';
+    font-family: SuperMario256;
     width: 20vw;
     height: 10vh;
     border-radius: 30px;
@@ -49,4 +49,9 @@ img {
     20%,80% {
         transform: translateY(-50px);
     }
+}
+
+@font-face {
+    font-family: 'SuperMario256';
+    src: url('http://localhost:8080/static/fonts/SuperMario256.ttf') format('truetype');
 }
