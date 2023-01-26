@@ -1,0 +1,3 @@
+[submodule "hangman_classic_base"]
+	path = hangman_classic_base
+	url = https://ytrack.learn.ynov.com/git/fleo/hangman_classic_base
