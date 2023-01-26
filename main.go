@@ -19,6 +19,7 @@ type game struct {
 	ToFind     []string
 	Position   string
 	File       string
+	Name       string
 }
 
 type Language struct {
@@ -28,12 +29,11 @@ type Language struct {
 	Ge []string
 }
 type Settings struct {
-	Language  Language
-	Langue    []string
-	Scorboard []string
-	Pictures  []string
-	Sound     []string
+	Language Language
+	Langue   []string
+	Name     string
 }
+
 type UserInfo struct {
 	Difficulty string
 	Pseudo     string
@@ -41,11 +41,9 @@ type UserInfo struct {
 }
 
 type Board struct {
-	Easy Facile
-
+	Easy   Facile
 	Medium Moyen
-
-	Hard Difficile
+	Hard   Difficile
 }
 
 type Facile struct {
@@ -127,8 +125,11 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		} else {
 			bd.Hangman.File = "words.txt"
 		}
+
 		Joueur.Pseudo = r.FormValue("name")
+		bd.Set.Name = r.FormValue("name")
 		var Word = classic.RandomWord(bd.Hangman.File)
+		fmt.Println(bd.Hangman.Name)
 		bd.Hangman = game{Title: "goodluck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5, Position: "https://clipground.com/images/html5-logo-2.png"}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
@@ -137,6 +138,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	}
 	page.ExecuteTemplate(w, "menuv2.html", bd)
 }
+
 func scoreboard(User *UserInfo, Scoreboard *Board) {
 	switch User.Difficulty {
 	case "Hard":
@@ -207,9 +209,9 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 }
 
 func Hangman(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".tmpl")
 	reference := "./static/pictures/jose"
 	numeration := 0
-	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".tmpl")
 	if r.FormValue("loser") == "submit" {
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
@@ -221,7 +223,6 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	choice := classic.Upper(r.FormValue("wordletter"))
-	fmt.Println(choice)
 	if len(choice) == 1 {
 		index := classic.Verif(bd.Hangman.Word, choice)
 		for i := 0; i < len(index); i++ {
@@ -234,8 +235,6 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		}
 	} else {
 		if choice == bd.Hangman.Word {
-
-			bd.Hangman.WordUser = classic.StringToList("Congrats !")
 			Joueur.Score = Joueur.Score + bd.Hangman.Attempts
 			http.Redirect(w, r, "/win", http.StatusSeeOther)
 		} else if choice != bd.Hangman.Word && len(choice) > 1 {
@@ -246,6 +245,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		bd.Hangman.ToFind = append(bd.Hangman.ToFind, choice)
 	}
 	if (len(classic.Verif(classic.ListToString(bd.Hangman.WordUser), "_")) == 0) && (choice != bd.Hangman.Word) {
+		Joueur.Score = Joueur.Score + bd.Hangman.Attempts
 		http.Redirect(w, r, "/win", http.StatusSeeOther)
 	}
 	if bd.Hangman.Attempts <= 0 {
@@ -325,8 +325,11 @@ func main() {
 	http.HandleFunc("/win", Win)
 	http.HandleFunc("/scoreboard", Scoreb)
 	http.HandleFunc("/", Hangman)
+
 	fmt.Println("http://localhost" + port + "/home")
+
 	fs := http.FileServer(http.Dir("Source"))
 	http.Handle("/static/", http.StripPrefix("/static", fs))
+
 	http.ListenAndServe("localhost:8080", nil)
 }
