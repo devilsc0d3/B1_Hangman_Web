@@ -106,10 +106,13 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("send") == "submit" {
 		if r.FormValue("dif") == "fa" {
 			bd.Hangman.File = "words.txt"
+			Joueur.Difficulty = "Easy"
 		} else if r.FormValue("dif") == "mo" {
 			bd.Hangman.File = "words2.txt"
+			Joueur.Difficulty = "Medium"
 		} else if r.FormValue("dif") == "di" {
 			bd.Hangman.File = "words3.txt"
+			Joueur.Difficulty = "Hard"
 		} else {
 			bd.Hangman.File = "words.txt"
 		}
@@ -189,8 +192,6 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 			break
 		}
 	}
-	User.Score = 0
-	User.Pseudo = "N/A"
 	return
 }
 
@@ -222,8 +223,9 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		}
 	} else {
 		if choice == bd.Hangman.Word {
-			Joueur.Score = +bd.Hangman.Attempts
+
 			bd.Hangman.WordUser = classic.StringToList("Congrats !")
+			Joueur.Score = Joueur.Score + bd.Hangman.Attempts
 			http.Redirect(w, r, "/win", http.StatusSeeOther)
 		} else if choice != bd.Hangman.Word && len(choice) > 1 {
 			bd.Hangman.Attempts -= 2
@@ -236,7 +238,6 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/win", http.StatusSeeOther)
 	}
 	if bd.Hangman.Attempts <= 0 {
-		scoreboard(&Joueur, &Sb)
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
 	numeration = (bd.Hangman.Attempts * -1) + 10
@@ -244,14 +245,18 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		numeration = 10
 	}
 	bd.Hangman.Position = reference + strconv.FormatInt(int64(numeration), 10) + ".png"
-
-	print(bd.Hangman.Position)
 	t.ExecuteTemplate(w, "hangman.tmpl", bd)
 }
 func Loser(w http.ResponseWriter, r *http.Request) {
 	page, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
+	scoreboard(&Joueur, &Sb)
+	Joueur.Score = 0
+	Joueur.Pseudo = "N/A"
 	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
+	}
+	if r.FormValue("scoreboard") == "submit" {
+		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
 	page.ExecuteTemplate(w, "loser.html", bd)
 }
@@ -260,9 +265,13 @@ func Win(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
+	if r.FormValue("scoreboard") == "submit" {
+		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
+	}
 	page.ExecuteTemplate(w, "win.html", bd)
 }
 func Scoreb(w http.ResponseWriter, r *http.Request) {
+	scoreboard(&Joueur, &Sb)
 	start, _ := template.ParseFiles("./Source/Web/" + "ScoreBoard" + ".html")
 	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
