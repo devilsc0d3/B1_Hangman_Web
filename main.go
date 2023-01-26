@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 const port = ":8080"
@@ -39,6 +40,41 @@ type Settings struct {
 	Sound     []string
 }
 
+type UserInfo struct {
+	Difficulty string
+	Pseudo     string
+	Score      int
+}
+type Board struct {
+	Easy   Facile
+	Medium Moyen
+	Hard   Difficile
+}
+type Facile struct {
+	Pseudo1 string
+	Score1  int
+	Pseudo2 string
+	Score2  int
+	Pseudo3 string
+	Score3  int
+}
+type Moyen struct {
+	Pseudo1 string
+	Score1  int
+	Pseudo2 string
+	Score2  int
+	Pseudo3 string
+	Score3  int
+}
+type Difficile struct {
+	Pseudo1 string
+	Score1  int
+	Pseudo2 string
+	Score2  int
+	Pseudo3 string
+	Score3  int
+}
+
 type base struct {
 	Hangman game
 	Player  character
@@ -46,6 +82,8 @@ type base struct {
 }
 
 var bd = base{}
+var Sb = Board{}
+var Joueur = UserInfo{}
 
 func variable() {
 	bd.Set.Language.Fr = []string{"New Super Hangman Web", "facile", "moyen", "difficile", "entre un nom", "lancer",
@@ -72,6 +110,10 @@ func variable() {
 		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png", File: "word3.txt",
 	}
 	bd.Hangman = data
+
+	Sb.Easy = Facile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
+	Sb.Medium = Moyen{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
+	Sb.Hard = Difficile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
@@ -99,6 +141,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func Hangman(w http.ResponseWriter, r *http.Request) {
+	reference := "./static/pictures/jose"
+	numeration := 0
 	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".tmpl")
 	if r.FormValue("loser") == "submit" {
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
@@ -112,7 +156,6 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	}
 
 	choice := classic.Upper(r.FormValue("wordletter"))
-	fmt.Println(choice)
 
 	if len(choice) == 1 {
 
@@ -131,6 +174,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	} else {
 		if choice == bd.Hangman.Word {
 			bd.Hangman.WordUser = classic.StringToList("Congrats !")
+			Joueur.Score = Joueur.Score + bd.Hangman.Attempts
 			http.Redirect(w, r, "/win", http.StatusSeeOther)
 
 		} else if choice != bd.Hangman.Word && len(choice) > 1 {
@@ -150,7 +194,81 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	if bd.Hangman.Attempts <= 0 {
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
+	numeration = (bd.Hangman.Attempts * -1) + 10
+	if numeration > 10 {
+		numeration = 10
+	}
+	bd.Hangman.Position = reference + strconv.FormatInt(int64(numeration), 10) + ".png"
 	t.ExecuteTemplate(w, "hangman.tmpl", bd)
+}
+
+func scoreboard(User *UserInfo, Scoreboard *Board) {
+	switch User.Difficulty {
+	case "Hard":
+		if User.Score > Scoreboard.Hard.Score1 {
+			Scoreboard.Hard.Score3 = Scoreboard.Hard.Score2
+			Scoreboard.Hard.Pseudo3 = Scoreboard.Hard.Pseudo2
+			Scoreboard.Hard.Score2 = Scoreboard.Hard.Score1
+			Scoreboard.Hard.Pseudo2 = Scoreboard.Hard.Pseudo1
+			Scoreboard.Hard.Score1 = User.Score
+			Scoreboard.Hard.Pseudo1 = User.Pseudo
+			break
+		} else if User.Score < Scoreboard.Hard.Score1 && User.Score > Scoreboard.Hard.Score2 {
+			Scoreboard.Hard.Pseudo3 = Scoreboard.Hard.Pseudo2
+			Scoreboard.Hard.Score3 = Scoreboard.Hard.Score2
+			Scoreboard.Hard.Pseudo2 = User.Pseudo
+			Scoreboard.Hard.Score2 = User.Score
+			break
+		} else if User.Score > Scoreboard.Hard.Score3 {
+			Scoreboard.Hard.Score3 = User.Score
+			Scoreboard.Hard.Pseudo3 = User.Pseudo
+		} else {
+			break
+		}
+	case "Medium":
+		if User.Score > Scoreboard.Medium.Score1 {
+			Scoreboard.Medium.Score3 = Scoreboard.Medium.Score2
+			Scoreboard.Medium.Pseudo3 = Scoreboard.Medium.Pseudo2
+			Scoreboard.Medium.Score2 = Scoreboard.Medium.Score1
+			Scoreboard.Medium.Pseudo2 = Scoreboard.Medium.Pseudo1
+			Scoreboard.Medium.Score1 = User.Score
+			Scoreboard.Medium.Pseudo1 = User.Pseudo
+			break
+		} else if User.Score < Scoreboard.Medium.Score2 && User.Score > Scoreboard.Medium.Score3 {
+			Scoreboard.Medium.Pseudo3 = Scoreboard.Medium.Pseudo2
+			Scoreboard.Medium.Score3 = Scoreboard.Medium.Score2
+			Scoreboard.Medium.Pseudo2 = User.Pseudo
+			Scoreboard.Medium.Score2 = User.Score
+			break
+		} else if User.Score > Scoreboard.Medium.Score3 {
+			Scoreboard.Medium.Score3 = User.Score
+			Scoreboard.Medium.Pseudo3 = User.Pseudo
+		} else {
+			break
+		}
+	case "Easy":
+		if User.Score > Scoreboard.Easy.Score1 {
+			Scoreboard.Easy.Score3 = Scoreboard.Easy.Score2
+			Scoreboard.Easy.Pseudo3 = Scoreboard.Easy.Pseudo2
+			Scoreboard.Easy.Score2 = Scoreboard.Easy.Score1
+			Scoreboard.Easy.Pseudo2 = Scoreboard.Easy.Pseudo1
+			Scoreboard.Easy.Score1 = User.Score
+			Scoreboard.Easy.Pseudo1 = User.Pseudo
+			break
+		} else if User.Score < Scoreboard.Easy.Score2 && User.Score > Scoreboard.Easy.Score3 {
+			Scoreboard.Easy.Pseudo3 = Scoreboard.Easy.Pseudo2
+			Scoreboard.Easy.Score3 = Scoreboard.Easy.Score2
+			Scoreboard.Easy.Pseudo2 = User.Pseudo
+			Scoreboard.Easy.Score2 = User.Score
+			break
+		} else if User.Score > Scoreboard.Easy.Score3 {
+			Scoreboard.Easy.Score3 = User.Score
+			Scoreboard.Easy.Pseudo3 = User.Pseudo
+		} else {
+			break
+		}
+	}
+	return
 }
 
 func Loser(w http.ResponseWriter, r *http.Request) {
@@ -174,6 +292,15 @@ func Win(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
 	page.ExecuteTemplate(w, "win.html", bd)
+}
+
+func Scoreb(w http.ResponseWriter, r *http.Request) {
+	scoreboard(&Joueur, &Sb)
+	start, _ := template.ParseFiles("./Source/Web/" + "ScoreBoard" + ".html")
+	if r.FormValue("restart") == "submit" {
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
+	}
+	start.ExecuteTemplate(w, "ScoreBoard.html", Sb)
 }
 
 func Parameter(w http.ResponseWriter, r *http.Request) {
@@ -211,6 +338,8 @@ func main() {
 	http.HandleFunc("/home", Home)
 	http.HandleFunc("/setting", Parameter)
 	http.HandleFunc("/loser", Loser)
+	http.HandleFunc("/scoreboard", Scoreb)
+
 	http.HandleFunc("/win", Win)
 	http.HandleFunc("/", Hangman)
 

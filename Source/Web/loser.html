@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Loser</title>
-        <link rel="stylesheet" type="text/css" href="./static/CSS/style_loser.css">
-    </head>
-
-    <body>
-        <div class="game_over">
-            <span style="--i:1">G</span>
-            <span style="--i:2">A</span>
-            <span style="--i:3">M</span>
-            <span style="--i:4">E</span>
-            <span style="--i:5"> </span>
-            <span style="--i:6">O</span>
-            <span style="--i:7">V</span>
-            <span style="--i:8">E</span>
-            <span style="--i:9">R</span>
-        </div>
-
-        <img src="./static/pictures/bowser.png">
-
-        <div class="content">
-            <form>
-                <button value="submit" name="scoreboard"> {{index .Set.Langue 14}} </button>
-            </form>
-            <form>
-                <button value="submit" name="restart"> {{index .Set.Langue 12}} </button>
-            </form>
-        </div>
-
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Loser</title>
+    <link rel="stylesheet" type="text/css" href="./static/CSS/style_loser.css">
+</head>
+<body>
+<div class="game_over">
+    <span style="--i:1">G</span>
+    <span style="--i:2">A</span>
+    <span style="--i:3">M</span>
+    <span style="--i:4">E</span>
+    <span style="--i:5"> </span>
+    <span style="--i:6">O</span>
+    <span style="--i:7">V</span>
+    <span style="--i:8">E</span>
+    <span style="--i:9">R</span>
+</div>
+<img src={{.Hangman.Position}}  width="450px" height="300px">
+<img src="./static/pictures/bowser.png" class="Bowser">
+<img src={{.Hangman.Position}} class="mirror" width="450px" height="300px">
+<div class="content">
+    <form>
+        <button value="submit" name="scoreboard"> {{index .Set.Langue 14}} </button>
+    </form>
+    <form>
+        <button value="submit" name="restart"> {{index .Set.Langue 12}} </button>
+    </form>
+</div>
+</body>
 </html>
