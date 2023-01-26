@@ -21,10 +21,6 @@ type game struct {
 	File       string
 }
 
-type character struct {
-	Name string
-}
-
 type Language struct {
 	Fr []string
 	En []string
@@ -33,11 +29,9 @@ type Language struct {
 }
 
 type Settings struct {
-	Language  Language
-	Langue    []string
-	Scorboard []string
-	Pictures  []string
-	Sound     []string
+	Language Language
+	Langue   []string
+	Pictures []string
 }
 
 type UserInfo struct {
@@ -77,7 +71,6 @@ type Difficile struct {
 
 type base struct {
 	Hangman game
-	Player  character
 	Set     Settings
 }
 
@@ -145,7 +138,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	numeration := 0
 	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".tmpl")
 	if r.FormValue("reset") == "submit" {
-		Word := classic.RandomWord("words.txt")
+		Word := classic.RandomWord(bd.Hangman.File)
 		bd.Hangman = game{
 			Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
 			LengthWord: len(Word),
@@ -339,7 +332,6 @@ func main() {
 	http.HandleFunc("/setting", Parameter)
 	http.HandleFunc("/loser", Loser)
 	http.HandleFunc("/scoreboard", Scoreb)
-
 	http.HandleFunc("/win", Win)
 	http.HandleFunc("/", Hangman)
 
