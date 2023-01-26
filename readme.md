@@ -34,7 +34,7 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 - Clone the repo with : 
 
 ```bash 
-clone https://ytrack.learn.ynov.com/git/fleo/hangman-web.git 
+clone https://ytrack.learn.ynov.com/git/fleo/hangman-web
 ```
 
 - Start the Hangman-Web with :
@@ -55,6 +55,8 @@ clone https://ytrack.learn.ynov.com/git/fleo/hangman-web.git
     - Create a save
 - Page more responsive, adapt of mobile
 - Add sound
+- ScoreBoard Dynamic
+- save of score
 
 ****
 
