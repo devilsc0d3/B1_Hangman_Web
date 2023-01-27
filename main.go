@@ -115,13 +115,13 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("send") == "submit" {
 		if r.FormValue("dif") == "fa" {
 			bd.Hangman.File = "words.txt"
-			Joueur.Difficulty = "Easy"
+			Joueur.Difficulty = "fa"
 		} else if r.FormValue("dif") == "mo" {
 			bd.Hangman.File = "words2.txt"
-			Joueur.Difficulty = "Medium"
+			Joueur.Difficulty = "mo"
 		} else if r.FormValue("dif") == "di" {
 			bd.Hangman.File = "words3.txt"
-			Joueur.Difficulty = "Hard"
+			Joueur.Difficulty = "di"
 		} else {
 			bd.Hangman.File = "words.txt"
 		}
