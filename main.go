@@ -104,7 +104,7 @@ func variable() {
 		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png", File: "word.txt",
 	}
 	bd.Hangman = data
-
+	Joueur.Difficulty = "fa"
 	Sb.Easy = Facile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
 	Sb.Medium = Moyen{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
 	Sb.Hard = Difficile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}

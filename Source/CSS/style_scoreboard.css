@@ -1,3 +1,7 @@
+body
+{
+    font-family: SuperMario256;
+}
 table
 {
     margin-top: 10vh;
@@ -5,14 +9,13 @@ table
     min-height: 20vh;
     height: 25vh;
     width: 40vw;
-border: 5px solid #0077ff;
+    border: 5px solid #0077ff;
     border-radius: 20px;
-align-self: center;
+    align-self: center;
     background-color: rgba(0, 176, 192, 0.62);
     margin-right: auto;
     margin-left: auto;
     font-size: 25px;
-
 }
 .title
 {
@@ -31,18 +34,17 @@ align-self: center;
 }
 button
 {
+    font-family: Mario256;
     border-color: #ffffff ;
     height: 10vh;
     width:  10vw;
     border-radius: 1vw;
     background-color: rgba(0, 80, 185, 0.51);
 }
-
 button:hover
 {
     background-color: rgba(0, 44, 185, 0.66);
 }
-
 body#avatar
 {
     background-image: url("../pictures/background.jpg");
@@ -51,4 +53,8 @@ body#avatar
     background-position: bottom;
     width: 95vw;
     height: 93.6vh;
+}
+@font-face {
+    font-family: 'SuperMario256';
+    src: url('http://localhost:8080/static/fonts/SuperMario256.ttf') format('truetype');
 }
