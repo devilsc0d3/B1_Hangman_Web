@@ -1,17 +1,23 @@
 body {
-    background: #286cc5;
+    background-image: url("../pictures/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 96vh;
+    margin: 0;
 }
+
 h1   {
     font-family: SuperMario256;
     color: #ffffff;
-    font-size:5vw;
-    text-align:center
+    font-size:4vw;
+    text-align:center;
+    margin: auto 15px;
 }
 p    {
     font-family: SuperMario256;
     color: #ffffff;
     text-align:center;
-    font-size: 3vw;
+    font-size: 2vw;
 }
 .content {
     display: flex;
@@ -28,11 +34,11 @@ input[type=submit] {
     border-radius: 30px;
     text-align:center;
     width: 8vw;
-    height: 5vh;
+    height: 4vh;
 }
 input[type=text] {
     width: 30vw;
-    height: 5vh;
+    height: 4vh;
     border-radius: 30px;
     font-family: SuperMario256;
 }
