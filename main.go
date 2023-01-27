@@ -141,7 +141,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 func scoreboard(User *UserInfo, Scoreboard *Board) {
 	switch User.Difficulty {
-	case "Hard":
+	case "di":
 		if User.Score > Scoreboard.Hard.Score1 {
 			Scoreboard.Hard.Score3 = Scoreboard.Hard.Score2
 			Scoreboard.Hard.Pseudo3 = Scoreboard.Hard.Pseudo2
@@ -156,13 +156,13 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 			Scoreboard.Hard.Pseudo2 = User.Pseudo
 			Scoreboard.Hard.Score2 = User.Score
 			break
-		} else if User.Score > Scoreboard.Hard.Score3 {
+		} else if User.Score > Scoreboard.Hard.Score3 && User.Score < Scoreboard.Hard.Score2 {
 			Scoreboard.Hard.Score3 = User.Score
 			Scoreboard.Hard.Pseudo3 = User.Pseudo
 		} else {
 			break
 		}
-	case "Medium":
+	case "mo":
 		if User.Score > Scoreboard.Medium.Score1 {
 			Scoreboard.Medium.Score3 = Scoreboard.Medium.Score2
 			Scoreboard.Medium.Pseudo3 = Scoreboard.Medium.Pseudo2
@@ -177,13 +177,13 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 			Scoreboard.Medium.Pseudo2 = User.Pseudo
 			Scoreboard.Medium.Score2 = User.Score
 			break
-		} else if User.Score > Scoreboard.Medium.Score3 {
+		} else if User.Score > Scoreboard.Medium.Score3 && User.Score < Scoreboard.Medium.Score2 {
 			Scoreboard.Medium.Score3 = User.Score
 			Scoreboard.Medium.Pseudo3 = User.Pseudo
 		} else {
 			break
 		}
-	case "Easy":
+	case "fa":
 		if User.Score > Scoreboard.Easy.Score1 {
 			Scoreboard.Easy.Score3 = Scoreboard.Easy.Score2
 			Scoreboard.Easy.Pseudo3 = Scoreboard.Easy.Pseudo2
@@ -198,7 +198,7 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 			Scoreboard.Easy.Pseudo2 = User.Pseudo
 			Scoreboard.Easy.Score2 = User.Score
 			break
-		} else if User.Score > Scoreboard.Easy.Score3 {
+		} else if User.Score > Scoreboard.Easy.Score3 && User.Score < Scoreboard.Easy.Score2 {
 			Scoreboard.Easy.Score3 = User.Score
 			Scoreboard.Easy.Pseudo3 = User.Pseudo
 		} else {
@@ -236,6 +236,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	} else {
 		if choice == bd.Hangman.Word {
 			Joueur.Score = Joueur.Score + bd.Hangman.Attempts
+			bd.Hangman = game{}
 			http.Redirect(w, r, "/win", http.StatusSeeOther)
 		} else if choice != bd.Hangman.Word && len(choice) > 1 {
 			bd.Hangman.Attempts -= 2
@@ -246,6 +247,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	}
 	if (len(classic.Verif(classic.ListToString(bd.Hangman.WordUser), "_")) == 0) && (choice != bd.Hangman.Word) {
 		Joueur.Score = Joueur.Score + bd.Hangman.Attempts
+		bd.Hangman = game{}
 		http.Redirect(w, r, "/win", http.StatusSeeOther)
 	}
 	if bd.Hangman.Attempts <= 0 {
@@ -281,8 +283,11 @@ func Win(w http.ResponseWriter, r *http.Request) {
 	}
 	page.ExecuteTemplate(w, "win.html", bd)
 }
+
 func Scoreb(w http.ResponseWriter, r *http.Request) {
 	scoreboard(&Joueur, &Sb)
+	Joueur.Score = 0
+	Joueur.Pseudo = "N/A"
 	start, _ := template.ParseFiles("./Source/Web/" + "ScoreBoard" + ".html")
 	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
