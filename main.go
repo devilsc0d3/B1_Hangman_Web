@@ -142,7 +142,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 func scoreboard(User *UserInfo, Scoreboard *Board) {
 	switch User.Difficulty {
 	case "di":
-		if User.Score > Scoreboard.Hard.Score1 {
+		if User.Score >= Scoreboard.Hard.Score1 {
 			Scoreboard.Hard.Score3 = Scoreboard.Hard.Score2
 			Scoreboard.Hard.Pseudo3 = Scoreboard.Hard.Pseudo2
 			Scoreboard.Hard.Score2 = Scoreboard.Hard.Score1
@@ -156,14 +156,14 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 			Scoreboard.Hard.Pseudo2 = User.Pseudo
 			Scoreboard.Hard.Score2 = User.Score
 			break
-		} else if User.Score > Scoreboard.Hard.Score3 && User.Score < Scoreboard.Hard.Score2 {
+		} else if User.Score > Scoreboard.Hard.Score3 && User.Score <= Scoreboard.Hard.Score2 {
 			Scoreboard.Hard.Score3 = User.Score
 			Scoreboard.Hard.Pseudo3 = User.Pseudo
 		} else {
 			break
 		}
 	case "mo":
-		if User.Score > Scoreboard.Medium.Score1 {
+		if User.Score >= Scoreboard.Medium.Score1 {
 			Scoreboard.Medium.Score3 = Scoreboard.Medium.Score2
 			Scoreboard.Medium.Pseudo3 = Scoreboard.Medium.Pseudo2
 			Scoreboard.Medium.Score2 = Scoreboard.Medium.Score1
@@ -171,20 +171,20 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 			Scoreboard.Medium.Score1 = User.Score
 			Scoreboard.Medium.Pseudo1 = User.Pseudo
 			break
-		} else if User.Score < Scoreboard.Medium.Score2 && User.Score > Scoreboard.Medium.Score3 {
+		} else if User.Score < Scoreboard.Medium.Score1 && User.Score > Scoreboard.Medium.Score2 {
 			Scoreboard.Medium.Pseudo3 = Scoreboard.Medium.Pseudo2
 			Scoreboard.Medium.Score3 = Scoreboard.Medium.Score2
 			Scoreboard.Medium.Pseudo2 = User.Pseudo
 			Scoreboard.Medium.Score2 = User.Score
 			break
-		} else if User.Score > Scoreboard.Medium.Score3 && User.Score < Scoreboard.Medium.Score2 {
+		} else if User.Score >= Scoreboard.Medium.Score3 && User.Score < Scoreboard.Medium.Score2 {
 			Scoreboard.Medium.Score3 = User.Score
 			Scoreboard.Medium.Pseudo3 = User.Pseudo
 		} else {
 			break
 		}
 	case "fa":
-		if User.Score > Scoreboard.Easy.Score1 {
+		if User.Score >= Scoreboard.Easy.Score1 {
 			Scoreboard.Easy.Score3 = Scoreboard.Easy.Score2
 			Scoreboard.Easy.Pseudo3 = Scoreboard.Easy.Pseudo2
 			Scoreboard.Easy.Score2 = Scoreboard.Easy.Score1
@@ -192,7 +192,7 @@ func scoreboard(User *UserInfo, Scoreboard *Board) {
 			Scoreboard.Easy.Score1 = User.Score
 			Scoreboard.Easy.Pseudo1 = User.Pseudo
 			break
-		} else if User.Score < Scoreboard.Easy.Score2 && User.Score > Scoreboard.Easy.Score3 {
+		} else if User.Score < Scoreboard.Easy.Score1 && User.Score > Scoreboard.Easy.Score2 {
 			Scoreboard.Easy.Pseudo3 = Scoreboard.Easy.Pseudo2
 			Scoreboard.Easy.Score3 = Scoreboard.Easy.Score2
 			Scoreboard.Easy.Pseudo2 = User.Pseudo
