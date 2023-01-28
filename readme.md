@@ -36,7 +36,7 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 ```bash 
 git clone https://ytrack.learn.ynov.com/git/fleo/hangman-web
 ```
-or download and extract the repo : https://ytrack.learn.ynov.com/git/fleo/hangman-web/commits/branch/master
+or download and extract the repo : [click here !](https://ytrack.learn.ynov.com/git/fleo/hangman-web/commits/branch/master)
 
 - Start the Hangman-Web with :
 
@@ -67,4 +67,4 @@ or download and extract the repo : https://ytrack.learn.ynov.com/git/fleo/hangma
 
 Fauré Léo
 
-Reungoat Nathan
+~~Reungoat Nathan~~
