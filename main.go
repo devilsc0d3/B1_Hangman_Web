@@ -4,8 +4,9 @@ import (
 	"classic"
 	"fmt"
 	"html/template"
+	"math/rand"
 	"net/http"
-	"strconv"
+	"time"
 )
 
 const port = ":8080"
@@ -19,7 +20,7 @@ type game struct {
 	ToFind     []string
 	Position   string
 	File       string
-	Name       string
+	ClueNbr    int
 }
 
 type Language struct {
@@ -29,200 +30,144 @@ type Language struct {
 	Ge []string
 }
 type Settings struct {
-	Language Language
-	Langue   []string
-	Name     string
+	Language        Language
+	CurrentLanguage []string
+	Name            string
+	CurrentPage     string
 }
 
-type UserInfo struct {
-	Difficulty string
-	Pseudo     string
-	Score      int
+type Score struct {
+	Top   int
+	Name  string
+	Score int
 }
 
 type Board struct {
-	Easy   Facile
-	Medium Moyen
-	Hard   Difficile
+	Tab     []Score
+	Tab2    []Score
+	Player1 Score
+	Player2 Score
+	Player3 Score
+	Player4 Score
+	Player5 Score
+	Player6 Score
+	Player7 Score
+	Player8 Score
+	Player9 Score
 }
 
-type Facile struct {
-	Pseudo1 string
-	Score1  int
-	Pseudo2 string
-	Score2  int
-	Pseudo3 string
-	Score3  int
-}
-type Moyen struct {
-	Pseudo1 string
-	Score1  int
-	Pseudo2 string
-	Score2  int
-	Pseudo3 string
-	Score3  int
-}
-type Difficile struct {
-	Pseudo1 string
-	Score1  int
-	Pseudo2 string
-	Score2  int
-	Pseudo3 string
-	Score3  int
-}
 type base struct {
-	Hangman game
-	Set     Settings
+	Hangman    game
+	Set        Settings
+	Scoreboard Board
 }
 
 var bd = base{}
-var Sb = Board{}
-var Joueur = UserInfo{}
 
 func variable() {
-	bd.Set.Language.Fr = []string{"New Super Hangman Web", "facile", "moyen", "difficile", "entre un nom", "lancer",
+	InitScoreboard()
+	FixTop()
+	HighScore()
+
+	bd.Set.Language.Fr = []string{"Pac-Hangman Adventure", "facile", "moyen", "difficile", "entre un nom", "lancer",
 		"Bonne chance ", "Vous avez", "essaies", "entrez une lettre ou un mot", "envoyé", "lettre déja essayer : ", "rejouer",
 		"tu as Gagne", "tableaux des scores", "rejoué",
 	}
-	bd.Set.Language.En = []string{"New Super Hangman Web", "easy", "medium", "hard", "enter a name", "start",
+	bd.Set.Language.En = []string{"Pac-Hangman Adventure", "easy", "medium", "hard", "enter a name", "start",
 		"good luck", "you have", "tries", "enter a letter or word", "sent", "letter already tried:", "replay",
 		"you won", "scoreboard", "replay",
 	}
-	bd.Set.Language.Es = []string{"New Super Hangman Web", "facil", "medio", "dificil", "Introduce un apodo", "iniciar",
+	bd.Set.Language.Es = []string{"Pac-Hangman Adventure", "facil", "medio", "dificil", "Introduce un apodo", "iniciar",
 		"buena suerte", "tienes", "intentos", "introduce una letra o palabra", "enviado", "letra ya intentada : ", "reproducir",
 		"has ganado", "marcador", "reproducir",
 	}
-	bd.Set.Language.Ge = []string{"New Super Hangman Web", "leicht", "mittel", "schwer", "einen Namen eingeben", "starten",
+	bd.Set.Language.Ge = []string{"Pac-Hangman Adventure", "leicht", "mittel", "schwer", "einen Namen eingeben", "starten",
 		"Viel Gluck", "Sie haben", "Versuche", "Geben Sie einen Buchstaben oder ein Wort ein", "Gesendet", "Buchstabe bereits versucht:", "Wiederholen",
 		"Sie haben gewonnen", "Anzeigetafel", "Wiederholung",
 	}
-	bd.Set.Langue = bd.Set.Language.En
+	bd.Set.CurrentLanguage = bd.Set.Language.En
 
 	var Word = classic.RandomWord("words.txt")
 	var data = game{
 		Title: "...", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
-		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png", File: "word.txt",
+		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png", File: "word.txt", ClueNbr: 0,
 	}
 	bd.Hangman = data
-	Joueur.Difficulty = "fa"
-	Sb.Easy = Facile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
-	Sb.Medium = Moyen{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
-	Sb.Hard = Difficile{Pseudo1: "N/A", Score1: 0, Pseudo2: "N/A", Score2: 0, Pseudo3: "N/A", Score3: 0}
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	page, _ := template.ParseFiles("./Source/Web/" + "menuv2" + ".html")
+	page, _ := template.ParseFiles("./Source/Web/" + "menuv1" + ".html")
+
+	File := ""
 	if r.FormValue("send") == "submit" {
 		if r.FormValue("dif") == "fa" {
-			bd.Hangman.File = "words.txt"
-			Joueur.Difficulty = "Easy"
+			File = "words.txt"
 		} else if r.FormValue("dif") == "mo" {
-			bd.Hangman.File = "words2.txt"
-			Joueur.Difficulty = "Medium"
+			File = "words2.txt"
 		} else if r.FormValue("dif") == "di" {
-			bd.Hangman.File = "words3.txt"
-			Joueur.Difficulty = "Hard"
+			File = "words3.txt"
 		} else {
-			bd.Hangman.File = "words.txt"
+			File = "words.txt"
 		}
 
-		Joueur.Pseudo = r.FormValue("name")
 		bd.Set.Name = r.FormValue("name")
-		var Word = classic.RandomWord(bd.Hangman.File)
-		fmt.Println(bd.Hangman.Name)
-		bd.Hangman = game{Title: "goodluck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5, Position: "https://clipground.com/images/html5-logo-2.png"}
+		if r.FormValue("name") == "" {
+			bd.Set.Name = "Gertrude"
+		}
+
+		var Word = classic.RandomWord(File)
+		bd.Hangman = game{ClueNbr: 0, File: File, Title: "goodluck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5, Position: "https://clipground.com/images/html5-logo-2.png"}
+		if File == "words3.txt" {
+			bd.Hangman.ClueNbr = 1
+		}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
-	if r.FormValue("param") == "submit" {
+
+	if r.FormValue("setting") == "submit" {
 		http.Redirect(w, r, "/setting", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "menuv2.html", bd)
-}
 
-func scoreboard(User *UserInfo, Scoreboard *Board) {
-	switch User.Difficulty {
-	case "di":
-		if User.Score > Scoreboard.Hard.Score1 {
-			Scoreboard.Hard.Score3 = Scoreboard.Hard.Score2
-			Scoreboard.Hard.Pseudo3 = Scoreboard.Hard.Pseudo2
-			Scoreboard.Hard.Score2 = Scoreboard.Hard.Score1
-			Scoreboard.Hard.Pseudo2 = Scoreboard.Hard.Pseudo1
-			Scoreboard.Hard.Score1 = User.Score
-			Scoreboard.Hard.Pseudo1 = User.Pseudo
-			break
-		} else if User.Score < Scoreboard.Hard.Score1 && User.Score > Scoreboard.Hard.Score2 {
-			Scoreboard.Hard.Pseudo3 = Scoreboard.Hard.Pseudo2
-			Scoreboard.Hard.Score3 = Scoreboard.Hard.Score2
-			Scoreboard.Hard.Pseudo2 = User.Pseudo
-			Scoreboard.Hard.Score2 = User.Score
-			break
-		} else if User.Score > Scoreboard.Hard.Score3 && User.Score < Scoreboard.Hard.Score2 {
-			Scoreboard.Hard.Score3 = User.Score
-			Scoreboard.Hard.Pseudo3 = User.Pseudo
-		} else {
-			break
-		}
-	case "mo":
-		if User.Score > Scoreboard.Medium.Score1 {
-			Scoreboard.Medium.Score3 = Scoreboard.Medium.Score2
-			Scoreboard.Medium.Pseudo3 = Scoreboard.Medium.Pseudo2
-			Scoreboard.Medium.Score2 = Scoreboard.Medium.Score1
-			Scoreboard.Medium.Pseudo2 = Scoreboard.Medium.Pseudo1
-			Scoreboard.Medium.Score1 = User.Score
-			Scoreboard.Medium.Pseudo1 = User.Pseudo
-			break
-		} else if User.Score < Scoreboard.Medium.Score2 && User.Score > Scoreboard.Medium.Score3 {
-			Scoreboard.Medium.Pseudo3 = Scoreboard.Medium.Pseudo2
-			Scoreboard.Medium.Score3 = Scoreboard.Medium.Score2
-			Scoreboard.Medium.Pseudo2 = User.Pseudo
-			Scoreboard.Medium.Score2 = User.Score
-			break
-		} else if User.Score > Scoreboard.Medium.Score3 && User.Score < Scoreboard.Medium.Score2 {
-			Scoreboard.Medium.Score3 = User.Score
-			Scoreboard.Medium.Pseudo3 = User.Pseudo
-		} else {
-			break
-		}
-	case "fa":
-		if User.Score > Scoreboard.Easy.Score1 {
-			Scoreboard.Easy.Score3 = Scoreboard.Easy.Score2
-			Scoreboard.Easy.Pseudo3 = Scoreboard.Easy.Pseudo2
-			Scoreboard.Easy.Score2 = Scoreboard.Easy.Score1
-			Scoreboard.Easy.Pseudo2 = Scoreboard.Easy.Pseudo1
-			Scoreboard.Easy.Score1 = User.Score
-			Scoreboard.Easy.Pseudo1 = User.Pseudo
-			break
-		} else if User.Score < Scoreboard.Easy.Score2 && User.Score > Scoreboard.Easy.Score3 {
-			Scoreboard.Easy.Pseudo3 = Scoreboard.Easy.Pseudo2
-			Scoreboard.Easy.Score3 = Scoreboard.Easy.Score2
-			Scoreboard.Easy.Pseudo2 = User.Pseudo
-			Scoreboard.Easy.Score2 = User.Score
-			break
-		} else if User.Score > Scoreboard.Easy.Score3 && User.Score < Scoreboard.Easy.Score2 {
-			Scoreboard.Easy.Score3 = User.Score
-			Scoreboard.Easy.Pseudo3 = User.Pseudo
-		} else {
-			break
-		}
+	if r.FormValue("rules") == "submit" {
+		bd.Set.CurrentPage = "/home"
+		http.Redirect(w, r, "/rules", http.StatusSeeOther)
 	}
-	return
+
+	if r.FormValue("scores") == "submit" {
+		bd.Set.CurrentPage = "/home"
+		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
+	}
+	page.ExecuteTemplate(w, "menuv1.html", bd)
 }
 
 func Hangman(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".tmpl")
-	reference := "./static/pictures/jose"
-	numeration := 0
-	if r.FormValue("loser") == "submit" {
-		http.Redirect(w, r, "/loser", http.StatusSeeOther)
+	t, _ := template.ParseFiles("./Source/Web/" + "hangman1.0" + ".html")
+
+	if r.URL.Path != "/" {
+		http.Redirect(w, r, "/404", 303)
 	}
-	if r.FormValue("reset") == "submit" {
-		Word := classic.RandomWord("words.txt")
-		bd.Hangman = game{
-			Title: "Hangman by Léo & Nathan", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
-			LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png",
+
+	if r.FormValue("back") == "submit" {
+		http.Redirect(w, r, "/home", 303)
+	}
+
+	if r.FormValue("rules") == "submit" {
+		bd.Set.CurrentPage = "/"
+		http.Redirect(w, r, "/rules", 303)
+	}
+
+	if r.FormValue("clue") == "submit" {
+		Clue(bd.Hangman.File, bd.Hangman.Word, bd.Hangman.WordUser)
+		if len(classic.Verif(classic.ListToString(bd.Hangman.WordUser), "_")) == 0 {
+			bd.Scoreboard.Tab = append(bd.Scoreboard.Tab, Score{Score: bd.Hangman.Attempts * 100, Name: bd.Set.Name, Top: 0})
+			tri(bd.Scoreboard.Tab)
+			FixTop()
+			HighScore()
+			http.Redirect(w, r, "/win2", 303)
 		}
 	}
+
 	choice := classic.Upper(r.FormValue("wordletter"))
+
 	if len(choice) == 1 {
 		index := classic.Verif(bd.Hangman.Word, choice)
 		for i := 0; i < len(index); i++ {
@@ -234,101 +179,194 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 			bd.Hangman.Attempts += doublons(bd.Hangman.ToFind, choice)
 		}
 	} else {
-		if choice == bd.Hangman.Word {
-			Joueur.Score = Joueur.Score + bd.Hangman.Attempts
-			bd.Hangman = game{}
-			http.Redirect(w, r, "/win", http.StatusSeeOther)
+		if choice == bd.Hangman.Word && len(choice) == len(bd.Hangman.Word) {
+			bd.Scoreboard.Tab = append(bd.Scoreboard.Tab, Score{Score: bd.Hangman.Attempts * 100, Name: bd.Set.Name, Top: 0})
+			tri(bd.Scoreboard.Tab)
+			FixTop()
+			HighScore()
+			http.Redirect(w, r, "/win2", 303)
 		} else if choice != bd.Hangman.Word && len(choice) > 1 {
 			bd.Hangman.Attempts -= 2
 		}
 	}
+
 	if choice != "" {
 		bd.Hangman.ToFind = append(bd.Hangman.ToFind, choice)
 	}
-	if (len(classic.Verif(classic.ListToString(bd.Hangman.WordUser), "_")) == 0) && (choice != bd.Hangman.Word) {
-		Joueur.Score = Joueur.Score + bd.Hangman.Attempts
-		bd.Hangman = game{}
-		http.Redirect(w, r, "/win", http.StatusSeeOther)
+
+	if (len(choice) == 1) && (len(classic.Verif(classic.ListToString(bd.Hangman.WordUser), "_")) == 0) {
+		bd.Scoreboard.Tab = append(bd.Scoreboard.Tab, Score{Score: bd.Hangman.Attempts * 100, Name: bd.Set.Name, Top: 0})
+		tri(bd.Scoreboard.Tab)
+		FixTop()
+		HighScore()
+		http.Redirect(w, r, "/win2", 303)
 	}
 	if bd.Hangman.Attempts <= 0 {
-		http.Redirect(w, r, "/loser", http.StatusSeeOther)
+		bd.Hangman.Attempts = 10
+		bd.Scoreboard.Tab = append(bd.Scoreboard.Tab, Score{Score: 0, Name: bd.Set.Name, Top: 0})
+		tri(bd.Scoreboard.Tab)
+		FixTop()
+		HighScore()
+		FixTop()
+		http.Redirect(w, r, "/loser2", 303)
 	}
-	numeration = (bd.Hangman.Attempts * -1) + 10
-	if numeration > 10 {
-		numeration = 10
-	}
-	bd.Hangman.Position = reference + strconv.FormatInt(int64(numeration), 10) + ".png"
-	t.ExecuteTemplate(w, "hangman.tmpl", bd)
+
+	t.ExecuteTemplate(w, "hangman1.0.html", bd)
 }
+
 func Loser(w http.ResponseWriter, r *http.Request) {
-	page, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
-	scoreboard(&Joueur, &Sb)
-	Joueur.Score = 0
-	Joueur.Pseudo = "N/A"
+	page, _ := template.ParseFiles("./Source/Web/" + "loser1.0" + ".html")
+
 	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
 	if r.FormValue("scoreboard") == "submit" {
+		bd.Set.CurrentPage = "/loser2"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "loser.html", bd)
+	page.ExecuteTemplate(w, "loser1.0.html", bd)
 }
+
+func NotFound(w http.ResponseWriter, r *http.Request) {
+	page, _ := template.ParseFiles("./Source/Web/" + "404" + ".html")
+	if r.FormValue("home") == "submit" {
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
+	}
+	page.ExecuteTemplate(w, "404.html", bd)
+}
+
+func Rules(w http.ResponseWriter, r *http.Request) {
+	page, _ := template.ParseFiles("./Source/Web/" + "rules" + ".html")
+	if r.FormValue("back") == "submit" {
+		http.Redirect(w, r, bd.Set.CurrentPage, http.StatusSeeOther)
+	}
+	page.ExecuteTemplate(w, "rules.html", bd)
+}
+
 func Win(w http.ResponseWriter, r *http.Request) {
-	page, _ := template.ParseFiles("./Source/Web/" + "win" + ".html")
+	page, _ := template.ParseFiles("./Source/Web/" + "win1.0" + ".html")
 	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
 	if r.FormValue("scoreboard") == "submit" {
+		bd.Set.CurrentPage = "/win2"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "win.html", bd)
+	page.ExecuteTemplate(w, "win1.0.html", bd)
 }
 
-func Scoreb(w http.ResponseWriter, r *http.Request) {
-	scoreboard(&Joueur, &Sb)
-	Joueur.Score = 0
-	Joueur.Pseudo = "N/A"
-	start, _ := template.ParseFiles("./Source/Web/" + "ScoreBoard" + ".html")
-	if r.FormValue("restart") == "submit" {
-		http.Redirect(w, r, "/home", http.StatusSeeOther)
-	}
-	start.ExecuteTemplate(w, "ScoreBoard.html", Sb)
-}
-
-func Parameter(w http.ResponseWriter, r *http.Request) {
-	page, _ := template.ParseFiles("./Source/Web/" + "param" + ".html")
+func Setting(w http.ResponseWriter, r *http.Request) {
+	page, _ := template.ParseFiles("./Source/Web/" + "setting" + ".html")
 	if r.FormValue("lg") == "en" {
-		bd.Set.Langue = bd.Set.Language.En
+		bd.Set.CurrentLanguage = bd.Set.Language.En
 	}
 	if r.FormValue("lg") == "fr" {
-		bd.Set.Langue = bd.Set.Language.Fr
+		bd.Set.CurrentLanguage = bd.Set.Language.Fr
 	}
 	if r.FormValue("lg") == "es" {
-		bd.Set.Langue = bd.Set.Language.Es
+		bd.Set.CurrentLanguage = bd.Set.Language.Es
 	}
 	if r.FormValue("lg") == "ge" {
-		bd.Set.Langue = bd.Set.Language.Ge
+		bd.Set.CurrentLanguage = bd.Set.Language.Ge
 	}
-	if r.FormValue("send") == "submit" {
+	if r.FormValue("apply") == "submit" || r.FormValue("back") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "param.html", bd)
+	page.ExecuteTemplate(w, "setting.html", bd)
 }
-func doublons(liste []string, choice string) int {
-	for i := 0; i < len(liste); i++ {
-		if liste[i] == choice {
+
+func doublons(array []string, choice string) int {
+	for i := 0; i < len(array); i++ {
+		if array[i] == choice {
 			return -1
 		}
 	}
 	return 0
 }
+
+func board(w http.ResponseWriter, r *http.Request) {
+	start, _ := template.ParseFiles("./Source/Web/" + "scores1.0" + ".html")
+	if r.FormValue("back") == "submit" {
+		http.Redirect(w, r, bd.Set.CurrentPage, http.StatusSeeOther)
+	}
+	if r.FormValue("more") == "submit" {
+		http.Redirect(w, r, "/board", http.StatusSeeOther)
+	}
+	start.ExecuteTemplate(w, "scores1.0.html", bd.Scoreboard)
+}
+
+func board2(w http.ResponseWriter, r *http.Request) {
+	start, _ := template.ParseFiles("./Source/Web/" + "board" + ".html")
+	if r.FormValue("back") == "submit" {
+		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
+	}
+	start.ExecuteTemplate(w, "board.html", bd.Scoreboard)
+}
+
+func InitScoreboard() {
+	var array []Score
+	for i := 1; i <= 9; i++ {
+		array = append(array, Score{Top: i, Name: "N/A", Score: 0})
+	}
+	bd.Scoreboard.Tab = array
+
+	for i := 1; i <= 59; i++ {
+		array = append(array, Score{Top: i, Name: "N/A", Score: 0})
+	}
+	bd.Scoreboard.Tab2 = array
+}
+
+func tri(array []Score) {
+	n := len(array)
+	for i := 0; i < n-1; i++ {
+		minIndex := i
+		for j := i + 1; j < n; j++ {
+			if array[j].Score >= array[minIndex].Score {
+				minIndex = j
+			}
+		}
+		array[i], array[minIndex] = array[minIndex], array[i]
+	}
+}
+
+func FixTop() {
+	for i := 0; i < len(bd.Scoreboard.Tab); i++ {
+		bd.Scoreboard.Tab[i].Top = i + 1
+	}
+}
+
+func HighScore() {
+	bd.Scoreboard.Player1 = bd.Scoreboard.Tab[0]
+	bd.Scoreboard.Player2 = bd.Scoreboard.Tab[1]
+	bd.Scoreboard.Player3 = bd.Scoreboard.Tab[2]
+	bd.Scoreboard.Player4 = bd.Scoreboard.Tab[3]
+	bd.Scoreboard.Player5 = bd.Scoreboard.Tab[4]
+	bd.Scoreboard.Player6 = bd.Scoreboard.Tab[5]
+	bd.Scoreboard.Player7 = bd.Scoreboard.Tab[6]
+	bd.Scoreboard.Player8 = bd.Scoreboard.Tab[7]
+	bd.Scoreboard.Player9 = bd.Scoreboard.Tab[8]
+}
+
+func Clue(difficulty string, word string, word2 []string) {
+	rand.Seed(time.Now().UnixNano())
+	if difficulty == "words3.txt" && bd.Hangman.ClueNbr >= 1 {
+		index := classic.Verif(classic.ListToString(word2), "_")
+		nbr := rand.Intn(len(index))
+		bd.Hangman.WordUser[index[nbr]] = string(word[index[nbr]])
+		bd.Hangman.ClueNbr -= 1
+	}
+}
+
 func main() {
 	variable()
 	http.HandleFunc("/home", Home)
-	http.HandleFunc("/setting", Parameter)
-	http.HandleFunc("/loser", Loser)
-	http.HandleFunc("/win", Win)
-	http.HandleFunc("/scoreboard", Scoreb)
+	http.HandleFunc("/404", NotFound)
+	http.HandleFunc("/rules", Rules)
+	http.HandleFunc("/setting", Setting)
+	http.HandleFunc("/loser2", Loser)
+	http.HandleFunc("/win2", Win)
+	http.HandleFunc("/scoreboard", board)
+	http.HandleFunc("/board", board2)
 	http.HandleFunc("/", Hangman)
 
 	fmt.Println("http://localhost" + port + "/home")
@@ -336,5 +374,8 @@ func main() {
 	fs := http.FileServer(http.Dir("Source"))
 	http.Handle("/static/", http.StripPrefix("/static", fs))
 
-	http.ListenAndServe("localhost:8080", nil)
+	err := http.ListenAndServe("localhost:8080", nil)
+	if err != nil {
+		return
+	}
 }

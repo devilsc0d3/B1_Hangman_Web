@@ -3,42 +3,111 @@
     <head>
         <meta charset="UTF-8">
         <title>menu</title>
-        <link rel="stylesheet" type="text/css" href="./static/CSS/style_menu.css">
     </head>
 
     <style>
         body {
-            background: #286cc5;
+            background: black;
+            text-align: center;
         }
 
-        h1   {
-            font-family: "Super Mario 256";
+        .h1   {
+            font-family: pacman,serif;
             color: #ffffff;
-            font-size:5vw;
-            text-align:center
+            font-size:120px;
+            text-align:center;
+            animation: ne 2s infinite;
+        }
 
+        @keyframes ne {
+
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+                text-shadow:  0 0 7px #d52525,
+                0 0 10px #fff,
+                0 0 42px rgb(230, 18, 124),
+                0 0 77px rgb(230, 18, 124),
+                0 0 100px rgb(230, 18, 124)
+            }
+
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
         }
 
         p    {
-            font-family: "Super Mario 256";
+            font-family: pixel,serif;
             color: #ffffff;
             text-align:center;
             font-size: 3vw;
+        }
+        label    {
+            font-family: pixel,serif;
+            color: #ffffff;
+            text-align:center;
+            font-size: 3vw;
+        }
 
+        label:hover {
+            transform: scale(1.3);
+        }
+
+        .neon {
+            margin: 0;
+            color: #fff;
+            text-shadow:  0 0 7px #d52525,
+            0 0 10px #fff,
+            0 0 42px rgb(230, 18, 124),
+            0 0 77px rgb(230, 18, 124),
+            0 0 100px rgb(230, 18, 124)
+        }
+
+        .neon2 {
+            margin: 0;
+            color: #fff;
+            text-shadow:  0 0 7px #d57d25,
+            0 0 10px #fff,
+            0 0 42px rgb(230, 131, 18),
+            0 0 77px rgb(230, 145, 18),
+            0 0 100px rgb(230, 170, 18)
+        }
+
+        .neon3 {
+            margin: 0;
+            color: #fff;
+            text-shadow:  0 0 7px #255dd5,
+            0 0 10px #fff,
+            0 0 42px rgb(18, 53, 230),
+            0 0 77px rgb(18, 110, 230),
+            0 0 100px rgb(18, 142, 230)
+        }
+
+        ::placeholder {
+            margin: 0;
+            padding: 50px;
+            color: #fff;
+            text-shadow:  0 0 7px #255dd5,
+            0 0 10px #fff,
+            0 0 42px rgb(18, 53, 230),
+            0 0 77px rgb(18, 110, 230),
+            0 0 100px rgb(18, 142, 230)
         }
 
         .content {
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
+            margin: 50px;
         }
 
         form {
+            margin-top: 100px;
             font-size:50px;
             text-align: center;
         }
 
         input {
-            font-family: "Super Mario 256";
+            font-family: pixel,serif;
+            padding: 30px;
         }
 
         input[type=submit] {
@@ -49,42 +118,95 @@
         }
 
         input[type=text] {
-            width: 30vw;
-            height: 5vh;
-            border-radius: 30px;
-            font-family: "Super Mario 256";
+            margin: 1vw;
+            text-align: center;
+            border: none;
+            outline: none;
+            font-size: 3vw;
+            font-family: pixel,serif;
+            background-color: rgba(255,255,255,0);
         }
 
         .content {
-            text-align:center
+            text-align:center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .right {
+            float: right;
+            margin: 30px;
+        }
+
+        .left {
+            float: left;
+            margin: 30px;
+        }
+
+        .center  {
+            text-align: center;
+            margin: 30px;
+        }
+
+        .bottom {
+            margin-left: 1.8vw;
+            position: absolute;
+            width: 95%;
+            bottom: 0;
+        }
+
+        button {
+            background-color: rgba(255, 255, 255, 0);
+            border-color: rgba(255, 255, 255, 0);
+            border-radius: 50px;
+            font-size: 3vw;
+            font-family: pixel,serif;
+        }
+
+        button:hover {
+            transform: scale(1.3);
+        }
+
+        @font-face {
+            font-family: 'pixel';
+            src: url('http://localhost:8080/static/fonts/04B_30__.TTF') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'pacman';
+            src: url('http://localhost:8080/static/fonts/Pacmania.otf') format('truetype');
         }
     </style>
 
     <body>
-        <h1 >{{index .Set.Langue 0}}</h1>
-        <div class="content">
-            <p>{{index .Set.Langue 1}}</p>
-            <p>{{index .Set.Langue 2}}</p>
-            <p>{{index .Set.Langue 3}}</p>
-        </div>
+        <p class="h1 neon">{{index .Set.CurrentLanguage 0}}</p>
 
         <form method="POST">
-            <div class="content">
-                <input type="radio" name="dif" value="fa">
-                <input type="radio" name="dif" value="mo">
-                <input type="radio" name="dif" value="di">
-            </div>
 
-            <div class="content txt">
-                <input type="text" name="name" placeholder="{{index .Set.Langue 4}}">
-            </div>
-
-            <div class="content">
-                <button value="submit" name="send" class="send"> {{index .Set.Langue 5}} </button>
-            </div>
             <div class="bottom">
-                <button value="submit" name="param" class="buttoon"><img src="./static/Pictures/gear.png"></button>
+                <button value="submit" name="send" class="neon right"> {{index .Set.CurrentLanguage 5}} </button>
+                <button value="submit" name="rules" class="neon center"> rules </button>
+                <button value="submit" name="setting" class="neon left">setting</button>
             </div>
+
+            <button value="submit" name="scores" class="neon3">High Score</button>
+
+
+            <div class="content neon2">
+                <input type="radio" name="dif" value="fa" id="1">
+                <label for="1">{{index .Set.CurrentLanguage 1}}</label>
+            </div>
+            <div class="content neon3">
+                <input type="radio" name="dif" value="mo" id="2">
+                <label for="2">{{index .Set.CurrentLanguage 2}}</label>
+            </div>
+
+            <div class="content neon2">
+                <input type="radio" name="dif" value="di" id="3">
+                <label for="3">{{index .Set.CurrentLanguage 3}}</label>
+            </div>
+
+            <input type="text" name="name" class="neon3" placeholder="{{index .Set.CurrentLanguage 4}}" maxlength="16">
         </form>
     </body>
 </html>

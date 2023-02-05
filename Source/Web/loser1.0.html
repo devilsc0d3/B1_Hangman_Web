@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Loser</title>
+</head>
+<style>
+    body {
+        background-color: black;
+        margin: 0;
+        text-align: center;
+    }
+
+    form {
+        margin: 2vw;
+    }
+
+    .neon {
+        color: #fff;
+        text-shadow:  0 0 1px #d57425,
+        0 0 10px rgba(255, 255, 255, 0.25),
+        0 0 40px rgb(230, 18, 145),
+        0 0 70px rgb(216, 18, 230),
+        0 0 10px rgb(184, 18, 230)
+    }
+
+    .content {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    button {
+        font-family: pixel,serif;
+        font-size: 5vw;
+        border: none;
+        outline: none;
+        background-color: rgba(0,0,0,0);
+    }
+
+    button:hover {
+      transform: scale(1.2);
+    }
+
+    img {
+        width: 18vw;
+        margin-top: 3vw;
+        animation: Ghost 2.5s infinite;
+    }
+
+    p {
+        font-size: 2vw;
+        font-family: pixel,serif;
+    }
+
+    span {
+        display: inline-block;
+        text-transform: uppercase;
+        animation: game_over 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    .game_over {
+        font-family: pacman,serif;
+        font-size: 8vw;
+    }
+
+    @keyframes game_over {
+        0%,40%,100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
+
+    @keyframes Ghost {
+        0% {
+            transform: translateX(-25vw)
+            scaleX(1);
+            rotate: 0deg;
+        }
+
+        20% {
+            rotate: 20deg;
+        }
+
+        39% {
+            transform: translateX(25vw)
+            scaleX(1);
+        }
+
+        40% {
+            transform: translateX(25vw)
+            scaleX(-1);
+            rotate: 0deg;
+        }
+
+        60% {
+            rotate: 20deg;
+        }
+
+        100% {
+            transform: translateX(-25vw)
+            scaleX(-1);
+            rotate: 0deg;
+        }
+    }
+
+    @font-face {
+        font-family: 'pacman';
+        src: url('http://localhost:8080/static/fonts/Pacmania.otf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'pixel';
+        src: url('http://localhost:8080/static/fonts/04B_30__.TTF') format('truetype');
+    }
+
+</style>
+
+<body>
+
+<div class="game_over neon">
+    <span style="--i:1">G</span>
+    <span style="--i:2">A</span>
+    <span style="--i:3">M</span>
+    <span style="--i:4">E</span>
+    <span style="--i:5"> </span>
+    <span style="--i:6">O</span>
+    <span style="--i:7">V</span>
+    <span style="--i:8">E</span>
+    <span style="--i:9">R</span>
+</div>
+<img src="./static/pictures/Ghost.png" class="left" alt="Ghost angry">
+<div class="content">
+    <form>
+        <button value="submit" name="scoreboard" class="neon"> {{index .Set.CurrentLanguage 14}} </button>
+    </form>
+    <form>
+        <button value="submit" name="restart" class="neon"> {{index .Set.CurrentLanguage 12}} </button>
+    </form>
+    <p class="neon">The word was : {{.Hangman.Word}}</p>
+</div>
+</body>
+</html>

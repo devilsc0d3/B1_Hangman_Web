@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ScoreBoard</title>
+</head>
+
+<style>
+    body {
+        background-color: black;
+    }
+
+    .h1 {
+        font-family: pacman,serif;
+        text-align: center;
+        font-size: 4vw;
+    }
+
+    p {
+        font-family: pixel,serif;
+        margin: 10px;
+        font-size: 2vw;
+    }
+
+    .neon {
+        margin: 0;
+        color: #fff;
+        text-shadow:  0 0 7px #d52525,
+        0 0 10px #fff,
+        0 0 42px rgb(230, 18, 124),
+        0 0 77px rgb(230, 18, 124),
+        0 0 100px rgb(230, 18, 124)
+    }
+
+    .neon2 {
+        margin: 0;
+        color: #fff;
+        text-shadow:  0 0 7px #d57d25,
+        0 0 10px #fff,
+        0 0 42px rgb(230, 131, 18),
+        0 0 77px rgb(230, 145, 18),
+        0 0 100px rgb(230, 170, 18)
+    }
+
+    .content {
+        font-family: pixel,serif;
+        margin: 50px auto;
+        width: 40vw;
+    }
+
+    .data {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    button {
+        background-color: rgba(255, 255, 255, 0);
+        border-color: rgba(255, 255, 255, 0);
+        border-radius: 50px;
+        font-size: 3vw;
+        font-family: pixel,serif;
+    }
+
+    button:hover {
+        transform: scale(1.2);
+    }
+
+    form {
+        text-align: center;
+    }
+
+    @font-face {
+        font-family: 'pixel';
+        src: url('http://localhost:8080/static/fonts/04B_30__.TTF') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'pacman';
+        src: url('http://localhost:8080/static/fonts/Pacmania.otf') format('truetype');
+    }
+</style>
+<body>
+    <p class="h1 neon2">--- ScoreBoard ---</p>
+    <div class="content">
+        <div class="neon">
+            {{range .Tab2}}
+            <div class="data">
+                <p class="left"> {{.Top}} </p>
+                <p> {{.Name}} </p>
+                <p class="right"> {{.Score}} </p>
+            </div>
+            {{end}}
+        </div>
+    </div>
+
+    <form>
+        <button name="back" value="submit" class="neon2">Back</button>
+    </form>
+</body>
+</html>
