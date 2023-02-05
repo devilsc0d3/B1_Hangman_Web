@@ -392,7 +392,7 @@ func InitRankingBoard() {
 	var array []Score
 	array = append(array, Score{Top: -1, Name: "RV", Score: 999})
 	array = append(array, Score{Top: -1, Name: "smith", Score: 900})
-	array = append(array, Score{Top: -1, Name: "chatchat", Score: 800})
+	array = append(array, Score{Top: -1, Name: "Chat chat", Score: 800})
 	array = append(array, Score{Top: -1, Name: "Luc1ll3", Score: 700})
 	array = append(array, Score{Top: -1, Name: "Leo", Score: 600})
 	array = append(array, Score{Top: -1, Name: "REMI", Score: 500})
