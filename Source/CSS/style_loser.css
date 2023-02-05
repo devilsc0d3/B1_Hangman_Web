@@ -1,49 +1,62 @@
 body {
     background-color: black;
+    margin: 0;
     text-align: center;
-    font-family: SuperMario256;
 }
-.Bowser{
-    width: 20vw;
-    transform: scale(0.5);
-    animation: but 1.5s infinite;
+
+form {
+    margin: 2vw;
 }
-.mirror {
-    transform: scaleX(-1);
+
+.neon {
+    color: #fff;
+    text-shadow:  0 0 1px #d57425,
+    0 0 10px rgba(255, 255, 255, 0.25),
+    0 0 40px rgb(230, 18, 145),
+    0 0 70px rgb(216, 18, 230),
+    0 0 10px rgb(184, 18, 230)
 }
+
+.content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 button {
-    margin-left: 3vw;
-    margin-right: 3vw;
-    margin-top: 20px;
-    font-size: 2vw;
-    font-family: SuperMario256;
-    width: 20vw;
-    height: 10vh;
-    border-radius: 30px;
-    color: #ffffff;
-    background-color: #8503ab;
-    transition: all 300ms;
+    font-family: pixel,serif;
+    font-size: 5vw;
+    border: none;
+    outline: none;
+    background-color: rgba(0,0,0,0);
 }
+
 button:hover {
-    transform: scale(0.8);
+    transform: scale(1.2);
 }
+
+img {
+    width: 18vw;
+    margin-top: 3vw;
+    animation: Ghost 2.5s infinite;
+}
+
+p {
+    font-size: 2vw;
+    font-family: pixel,serif;
+}
+
 span {
-    font-family: SuperMario256;
-    position: relative;
     display: inline-block;
-    color: #8503ab;
     text-transform: uppercase;
     animation: game_over 1s infinite;
     animation-delay: calc(.1s * var(--i));
 }
 .game_over {
+    font-family: pacman,serif;
     font-size: 8vw;
 }
-.content {
-    margin-top: 3vh;
-    display: flex;
-    justify-content: center;
-}
+
 @keyframes game_over {
     0%,40%,100% {
         transform: translateY(0)
@@ -52,20 +65,46 @@ span {
         transform: translateY(-20px)
     }
 }
-@keyframes but {
-    0%,40%,100% {
-        transform: scale(1)
-        rotate(-20grad)
+
+@keyframes Ghost {
+    0% {
+        transform: translateX(-25vw)
+        scaleX(1);
+        rotate: 0deg;
     }
+
     20% {
-        transform: scale(0.7)
-        rotate(20grad)
+        rotate: 20deg;
     }
-    80% {
-        transform: rotate(20grad)
+
+    39% {
+        transform: translateX(25vw)
+        scaleX(1);
+    }
+
+    40% {
+        transform: translateX(25vw)
+        scaleX(-1);
+        rotate: 0deg;
+    }
+
+    60% {
+        rotate: 20deg;
+    }
+
+    100% {
+        transform: translateX(-25vw)
+        scaleX(-1);
+        rotate: 0deg;
     }
 }
+
 @font-face {
-    font-family: 'SuperMario256';
-    src: url('http://localhost:8080/static/fonts/SuperMario256.ttf') format('truetype');
+    font-family: 'pacman';
+    src: url('http://localhost:8080/static/fonts/Pacmania.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'pixel';
+    src: url('http://localhost:8080/static/fonts/04B_30__.TTF') format('truetype');
 }

@@ -3,161 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Settings</title>
+        <link rel="stylesheet" type="text/css" href="/static/CSS/style_setting.css">
+
     </head>
 
-    <style>
-        body {
-            background-color: black;
-            margin: 0;
-            text-align: center;
-        }
-
-        .content {
-            text-align: center;
-            margin: 5vw;
-            display: flex;
-            justify-content: center;
-        }
-
-        .h1 {
-            font-family: pacman,serif;
-        }
-
-        p {
-            font-family: pixel,serif;
-            color: #ffffff;
-            font-size:5vw;
-            text-align:center
-        }
-
-        .neon {
-            margin: 0;
-            color: #fff;
-            text-shadow:  0 0 7px #d57d25,
-            0 0 10px #fff,
-            0 0 42px rgb(230, 131, 18),
-            0 0 77px rgb(230, 145, 18),
-            0 0 100px rgb(230, 170, 18)
-        }
-        .neon2 {
-            margin: 0;
-            color: #fff;
-            text-shadow:  0 0 7px #2563d5,
-            0 0 10px #fff,
-            0 0 42px rgb(18, 92, 230),
-            0 0 77px rgb(18, 85, 230),
-            0 0 100px rgb(32, 18, 230)
-        }
-        .neon3 {
-            margin: 0;
-            color: #fff;
-            text-shadow:  0 0 7px #d52525,
-            0 0 10px #fff,
-            0 0 42px rgb(230, 18, 99),
-            0 0 77px rgb(230, 50, 18),
-            0 0 100px rgb(230, 18, 82)
-        }
-        .neon4 {
-            margin: 0;
-            color: #fff;
-            text-shadow:  0 0 7px #cbc7c7,
-            0 0 1px #fff,
-            0 0 42px rgb(196, 186, 190),
-            0 0 77px rgb(168, 165, 164),
-            0 0 100px rgb(145, 139, 141)
-        }
-
-        .right {
-            float: right;
-            margin: 30px;
-        }
-
-        .left {
-            float: left;
-            margin: 30px;
-        }
-
-        .bottom {
-            margin: 0 0 50px 40vw;
-            position: absolute;
-            bottom: 0;
-            text-align: center;
-            font-family: pixel,serif;
-            font-size: 2vw;
-        }
-
-        .bottomL {
-            left: 0;
-            margin: 20px;
-            position: absolute;
-            width: 20%;
-            bottom: 0;
-        }
-        .bottomR {
-            right: 0;
-            margin: 20px;
-            position: absolute;
-            width: 20%;
-            bottom: 0;
-        }
-
-        label {
-            font-family: pixel,serif;
-            color: #ffffff;
-            text-align:center;
-            font-size: 3vw;
-        }
-
-        label:hover {
-            transform: scale(1.3);
-        }
-
-        button {
-            background-color: rgba(255, 255, 255, 0);
-            border-color: rgba(255, 255, 255, 0);
-            text-align: center;
-            border-radius: 50px;
-            font-size: 3vw;
-            font-family: pixel,serif;
-        }
-
-        button:hover {
-            transform: scale(1.3);
-        }
-
-        input[type=radio] {
-            width: 5%;
-            height: 2vw;
-        }
-
-        .Language {
-            width: 45%;
-            float: left;
-        }
-
-        .sound {
-            width: 45%;
-            float: right;
-        }
-
-        .marge {
-            font-size: 3vw;
-            margin: 50px;
-            font-family: pixel,serif;
-
-        }
-
-        @font-face {
-            font-family: 'pixel';
-            src: url('http://localhost:8080/static/fonts/04B_30__.TTF') format('truetype');
-        }
-
-        @font-face {
-            font-family: 'pacman';
-            src: url('http://localhost:8080/static/fonts/Pacmania.otf') format('truetype');
-        }
-
-    </style>
     <body>
             <form method="post">
                 <div class="Language">
@@ -165,22 +14,22 @@
                     <p class="h1 neon3">Language :</p>
 
                     <div class="content ">
-                      <input type="radio" name="lg" value="en" id="1">
+                      <input type="radio" name="language" value="en" id="1">
                       <label for="1" class="neon">English</label>
                     </div>
 
                     <div class="content ">
-                      <input type="radio" name="lg" value="fr" id="2">
+                      <input type="radio" name="language" value="fr" id="2">
                       <label for="2" class="neon2">French</label>
                     </div>
 
                     <div class="content ">
-                      <input type="radio" name="lg" value="es" id="3">
+                      <input type="radio" name="language" value="es" id="3">
                       <label for="3" class="neon">Spanish</label>
                     </div>
 
                     <div class="content ">
-                      <input type="radio" name="lg" value="ge" id="4">
+                      <input type="radio" name="language" value="ge" id="4">
                       <label for="4" class="neon2">German</label>
                     </div>
                 </div>

@@ -3,76 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Win</title>
+        <link rel="stylesheet" type="text/css" href="/static/CSS/style_win.css">
     </head>
 
-    <style>
-        body {
-            margin: 0;
-            background-color: black;
-            text-align: center;
-        }
-
-        .h1 {
-            font-size: 8vw;
-            font-family: pacman,serif;
-        }
-
-        .content {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-
-        form {
-            margin: 2vw;
-        }
-
-        button {
-            font-family: pix,serif;
-            font-size: 5vw;
-            border: none;
-            outline: none;
-            background-color: rgba(0,0,0,0);
-        }
-        button:hover {
-            transform: scale(1.2);
-        }
-
-        img {
-            width: 20vw;
-            margin-top: 3vw;
-            animation: pacman 3s infinite;
-        }
-
-        .neon {
-            margin: 0;
-            color: #fff;
-            text-shadow:  0 0 1px #d57425,
-            0 0 3px #fff,
-            0 0 40px rgb(230, 219, 18),
-            0 0 70px rgb(230, 163, 18),
-            0 0 10px rgb(230, 181, 18)
-        }
-
-        @keyframes pacman {
-            0% {
-                transform: rotate(0deg);
-            }
-            40% {
-                transform: rotate(-360deg);
-            }
-        }
-
-        @font-face {
-            font-family: 'pacman';
-            src: url('http://localhost:8080/static/fonts/Pacmania.otf') format('truetype');
-        }
-
-        @font-face {
-            font-family: 'pix';
-            src: url('http://localhost:8080/static/fonts/04B_30__.TTF') format('truetype');
-        }
-    </style>
     <body>
         <p class="neon h1">{{index .Set.CurrentLanguage 13}}</p>
         <div class="">

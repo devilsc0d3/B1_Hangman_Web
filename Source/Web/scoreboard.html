@@ -3,82 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>ScoreBoard</title>
+    <link rel="stylesheet" type="text/css" href="/static/CSS/style_scoreboard.css">
+
 </head>
-
-<style>
-    body {
-        background-color: black;
-    }
-
-    .h1 {
-        font-family: pacman,serif;
-        text-align: center;
-        font-size: 4vw;
-    }
-
-    p {
-        font-family: pixel,serif;
-        margin: 10px;
-        font-size: 2vw;
-    }
-
-    .neon {
-        margin: 0;
-        color: #fff;
-        text-shadow:  0 0 7px #d52525,
-        0 0 10px #fff,
-        0 0 42px rgb(230, 18, 124),
-        0 0 77px rgb(230, 18, 124),
-        0 0 100px rgb(230, 18, 124)
-    }
-
-    .neon2 {
-        margin: 0;
-        color: #fff;
-        text-shadow:  0 0 7px #d57d25,
-        0 0 10px #fff,
-        0 0 42px rgb(230, 131, 18),
-        0 0 77px rgb(230, 145, 18),
-        0 0 100px rgb(230, 170, 18)
-    }
-
-    .content {
-        font-family: pixel,serif;
-        margin: 50px auto;
-        width: 30vw;
-    }
-
-    .data {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    button {
-        background-color: rgba(255, 255, 255, 0);
-        border-color: rgba(255, 255, 255, 0);
-        border-radius: 50px;
-        font-size: 3vw;
-        font-family: pixel,serif;
-    }
-
-    button:hover {
-        transform: scale(1.2);
-    }
-
-    form {
-        text-align: center;
-    }
-
-    @font-face {
-        font-family: 'pixel';
-        src: url('http://localhost:8080/static/fonts/04B_30__.TTF') format('truetype');
-    }
-
-    @font-face {
-        font-family: 'pacman';
-        src: url('http://localhost:8080/static/fonts/Pacmania.otf') format('truetype');
-    }
-</style>
 <body>
     <p class="h1 neon2">--- {{index .Set.CurrentLanguage 14}} ---</p>
     <div class="content">

@@ -65,10 +65,12 @@ type base struct {
 var bd = base{}
 
 func variable() {
+	//initialisation of board ranking
 	InitScoreboard()
 	FixTop(bd.Scoreboard.Tab)
 	HighScore()
 
+	//initialisation of languages
 	bd.Set.Language.Fr = []string{"Pac-Hangman Adventure", "facile", "moyen", "difficile", "entre un nom", "lancer",
 		"Bonne chance ", "Vous avez", "essaies", "entrez une lettre ou un mot", "envoye", "lettre deja essayer : ", "rejouer",
 		"tu as Gagne", "tableaux des scores", "rejoué",
@@ -91,6 +93,7 @@ func variable() {
 	}
 	bd.Set.CurrentLanguage = bd.Set.Language.En
 
+	//initialisation of the game
 	var Word = classic.RandomWord("words.txt")
 	var data = game{
 		Title: "...", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
@@ -120,7 +123,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		}
 
 		var Word = classic.RandomWord(File)
-		bd.Hangman = game{ClueNbr: 0, File: File, Title: "goodluck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5, Position: "https://clipground.com/images/html5-logo-2.png"}
+		bd.Hangman = game{ClueNbr: 0, File: File, Title: "Good luck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5, Position: "https://clipground.com/images/html5-logo-2.png"}
 		if File == "words3.txt" {
 			bd.Hangman.ClueNbr = 1
 		}
@@ -150,16 +153,16 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".html")
 
 	if r.URL.Path != "/" {
-		http.Redirect(w, r, "/404", 303)
+		http.Redirect(w, r, "/404", http.StatusSeeOther)
 	}
 
 	if r.FormValue("back") == "submit" {
-		http.Redirect(w, r, "/home", 303)
+		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
 
 	if r.FormValue("rules") == "submit" {
 		bd.Set.CurrentPage = "/"
-		http.Redirect(w, r, "/rules", 303)
+		http.Redirect(w, r, "/rules", http.StatusSeeOther)
 	}
 
 	if r.FormValue("clue") == "submit" {
@@ -170,7 +173,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 			SortingSelection(bd.Scoreboard.Tab)
 			FixTop(bd.Scoreboard.Tab)
 			HighScore()
-			http.Redirect(w, r, "/win", 303)
+			http.Redirect(w, r, "/win", http.StatusSeeOther)
 		}
 	}
 
@@ -184,7 +187,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		if len(index) == 0 {
 			bd.Hangman.Attempts -= 1
 		} else {
-			bd.Hangman.Attempts += doublons(bd.Hangman.ToFind, choice)
+			bd.Hangman.Attempts += multiLetterFound(bd.Hangman.ToFind, choice)
 		}
 	} else {
 		if choice == bd.Hangman.Word && len(choice) == len(bd.Hangman.Word) {
@@ -211,7 +214,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		SortingSelection(bd.Scoreboard.Tab)
 		FixTop(bd.Scoreboard.Tab)
 		HighScore()
-		http.Redirect(w, r, "/win", 303)
+		http.Redirect(w, r, "/win", http.StatusSeeOther)
 	}
 	if bd.Hangman.Attempts <= 0 {
 		bd.Hangman.Attempts = 10
@@ -220,7 +223,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		SortingSelection(bd.Scoreboard.Tab)
 		FixTop(bd.Scoreboard.Tab)
 		HighScore()
-		http.Redirect(w, r, "/loser", 303)
+		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
 
 	err := t.ExecuteTemplate(w, "hangman.html", bd)
@@ -284,16 +287,16 @@ func Win(w http.ResponseWriter, r *http.Request) {
 
 func Setting(w http.ResponseWriter, r *http.Request) {
 	page, _ := template.ParseFiles("./Source/Web/" + "setting" + ".html")
-	if r.FormValue("lg") == "en" {
+	if r.FormValue("language") == "en" {
 		bd.Set.CurrentLanguage = bd.Set.Language.En
 	}
-	if r.FormValue("lg") == "fr" {
+	if r.FormValue("language") == "fr" {
 		bd.Set.CurrentLanguage = bd.Set.Language.Fr
 	}
-	if r.FormValue("lg") == "es" {
+	if r.FormValue("language") == "es" {
 		bd.Set.CurrentLanguage = bd.Set.Language.Es
 	}
-	if r.FormValue("lg") == "ge" {
+	if r.FormValue("language") == "ge" {
 		bd.Set.CurrentLanguage = bd.Set.Language.Ge
 	}
 	if r.FormValue("apply") == "submit" || r.FormValue("back") == "submit" {
@@ -305,7 +308,7 @@ func Setting(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func doublons(array []string, choice string) int {
+func multiLetterFound(array []string, choice string) int {
 	for i := 0; i < len(array); i++ {
 		if array[i] == choice {
 			return -1

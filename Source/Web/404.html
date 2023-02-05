@@ -1,114 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>404</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>404</title>
+        <link rel="stylesheet" type="text/css" href="/static/CSS/style_404.css">
+    </head>
 
-<style>
-    body {
-        margin: 0;
-        text-align: center;
-        background: black;
-    }
-    .title {
-        margin: 2vw;
-        font-size: 14vw;
-        font-family: pacman,serif;
-        color: yellow;
-        animation: flicker 3s infinite;
-    }
+    <body>
+      <p class="title neon">404 error</p>
 
-    .error {
-        margin: 0;
-        font-size: 50px;
-        font-family: pacman,serif;
-    }
-
-    a {
-        text-decoration:none;
-    }
-    .center {
-        width: 100%;
-        position: absolute;
-        margin-top: 20vh;
-    }
-    .neon {
-        margin: 0;
-        color: #fff;
-        text-shadow:  0 0 1px #d57425,
-        0 0 10px rgba(255, 255, 255, 0.25),
-        0 0 40px rgb(230, 219, 18),
-        0 0 70px rgb(230, 163, 18),
-        0 0 10px rgb(230, 181, 18)
-    }
-
-    .neon3 {
-        margin: 0;
-        color: #fff;
-        text-shadow:  0 0 1px #2548d5,
-        0 0 10px rgba(255, 255, 255, 0.25),
-        0 0 40px rgb(18, 67, 230),
-        0 0 70px rgb(18, 78, 230),
-        0 0 10px rgb(18, 60, 230)
-    }
-
-    button {
-        text-align: center;
-        border: none;
-        outline: none;
-        font-size: 8vw;
-        background-color: rgba(0,0,0,0);
-        font-family: pix,serif;
-    }
-
-    button:hover {
-        transform: scale(1.3);
-    }
-
-    form {
-        width: 100%;
-        position: absolute;
-        bottom: 3vh;
-        margin: auto;
-    }
-
-    @keyframes flicker {
-        0%, 18%, 22%, 25%, 53%, 57%, 100% {
-            text-shadow:  0 0 1px #d57425,
-            0 0 10px rgba(255, 255, 255, 0.25),
-            0 0 40px rgb(230, 219, 18),
-            0 0 70px rgb(230, 163, 18),
-            0 0 10px rgb(230, 181, 18)
-        }
-
-        20%, 24%, 55% {
-            text-shadow: none;
-        }
-    }
-
-  @font-face {
-    font-family: 'pacman';
-    src: url('http://localhost:8080/static/fonts/Pacmania.otf') format('truetype');
-  }
-
-    @font-face {
-        font-family: 'pix';
-        src: url('http://localhost:8080/static/fonts/04B_30__.TTF') format('truetype');
-    }
-</style>
-
-<body>
-  <p class="title neon">404 error</p>
-
-  <div class="center">
-      <a href="https://www.google.fr/logos/2010/pacman10-i.html">
-          <p class="error neon3">Page Not Found !</p>
-      </a>
-  </div>
-    <form>
-        <button class="neon" name="home" value="submit">Home</button>
-    </form>
-
-</body>
+      <div class="center">
+          <a href="https://www.google.fr/logos/2010/pacman10-i.html">
+              <p class="error neon3">Page Not Found !</p>
+          </a>
+      </div>
+        <form>
+            <button class="neon" name="home" value="submit">Home</button>
+        </form>
+    </body>
 </html>

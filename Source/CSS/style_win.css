@@ -1,49 +1,66 @@
 body {
-    margin: 0px;
-    background-color: #ff8800;
-}
-h1 {
-    margin: 0px;
-    font-size: 10vw;
-    font-family: SuperMario256;
+    margin: 0;
+    background-color: black;
     text-align: center;
 }
+
+.h1 {
+    font-size: 8vw;
+    font-family: pacman,serif;
+}
+
+.content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+form {
+    margin: 2vw;
+}
+
 button {
-    margin: 30px;
-    font-size: 2vw;
-    font-family: SuperMario256;
-    width: 20vw;
-    height: 10vh;
-    border-radius: 30px;
-    color: #ffffff;
-    background-color: #de5912;
-    transition: all 300ms;
+    font-family: pix,serif;
+    font-size: 5vw;
+    border: none;
+    outline: none;
+    background-color: rgba(0,0,0,0);
 }
 button:hover {
-    transform: scale(0.8);
+    transform: scale(1.2);
 }
+
 img {
-    width: 15vw;
-    margin-right: 8vw;
-    margin-left: 8vw;
+    width: 20vw;
+    margin-top: 3vw;
+    animation: pacman 3s infinite;
 }
-.content {
-    display: flex;
-    justify-content: center;
-    margin-top: 14vh;
+
+.neon {
+    margin: 0;
+    color: #fff;
+    text-shadow:  0 0 1px #d57425,
+    0 0 3px #fff,
+    0 0 40px rgb(230, 219, 18),
+    0 0 70px rgb(230, 163, 18),
+    0 0 10px rgb(230, 181, 18)
 }
-.mario {
-    animation: but 1.5s infinite;
-}
-@keyframes but {
-    0%,50%,100% {
-        transform: translateY(50px);
+
+@keyframes pacman {
+    0% {
+        transform: rotate(0deg);
     }
-    20%,80% {
-        transform: translateY(-50px);
+    40% {
+        transform: rotate(-360deg);
     }
 }
+
 @font-face {
-    font-family: 'SuperMario256';
-    src: url('http://localhost:8080/static/fonts/SuperMario256.ttf') format('truetype');
+    font-family: 'pacman';
+    src: url('http://localhost:8080/static/fonts/Pacmania.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'pix';
+    src: url('http://localhost:8080/static/fonts/04B_30__.TTF') format('truetype');
 }
