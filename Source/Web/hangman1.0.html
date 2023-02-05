@@ -149,12 +149,12 @@
 <!--        </div>-->
         <div class="bottom">
             <form method="post" class="content">
-                <button value="submit" name="back" class="neon"> Back </button>
-                <button value="submit" name="rules" class="neon"> Rules </button>
+                <button value="submit" name="back" class="neon"> {{index .Set.CurrentLanguage 16}} </button>
+                <button value="submit" name="rules" class="neon"> {{index .Set.CurrentLanguage 18}} </button>
                 {{if .Hangman.ClueNbr}}
-                    <button name="clue" value="submit" class="neon">clue</button>
+                    <button name="clue" value="submit" class="neon">{{index .Set.CurrentLanguage 20}}</button>
                 {{else}}
-                    <button name="clue" value="submit" class="neon3">clue</button>
+                    <button name="clue" value="submit" class="neon3">{{index .Set.CurrentLanguage 20}}</button>
                 {{end}}
             </form>
         </div>

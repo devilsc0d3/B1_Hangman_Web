@@ -80,10 +80,10 @@
     }
 </style>
 <body>
-    <p class="h1 neon2">--- ScoreBoard ---</p>
+    <p class="h1 neon2">--- {{index .Set.CurrentLanguage 14}} ---</p>
     <div class="content">
         <div class="neon">
-            {{range .Tab2}}
+            {{range .Scoreboard.Tab2}}
             <div class="data">
                 <p class="left"> {{.Name}} </p>
                 <p class="right"> {{.Score}} </p>
@@ -93,7 +93,7 @@
     </div>
 
     <form>
-        <button name="back" value="submit" class="neon2">Back</button>
+        <button name="back" value="submit" class="neon2">{{index .Set.CurrentLanguage 16}}</button>
     </form>
 </body>
 </html>

@@ -72,21 +72,22 @@ func variable() {
 	bd.Set.Language.Fr = []string{"Pac-Hangman Adventure", "facile", "moyen", "difficile", "entre un nom", "lancer",
 		"Bonne chance ", "Vous avez", "essaies", "entrez une lettre ou un mot", "envoye", "lettre deja essayer : ", "rejouer",
 		"tu as Gagne", "tableaux des scores", "rejoué",
-		"Retour", "Parametre", "Regles", "hauts scores", "Indices ?", "Plus", "Score",
+		"Retour", "Parametre", "Regles", "classement", "Indices ?", "Plus", "le mot etait",
 	}
 	bd.Set.Language.En = []string{"Pac-Hangman Adventure", "easy", "medium", "hard", "enter a name", "start",
 		"good luck", "you have", "tries", "enter a letter or word", "sent", "letter already tried:", "replay",
 		"you won", "scoreboard", "replay",
-		"Back", "Setting", "Rules", "Hight Score", "Clues ?", "More", "Score",
-		"Atras", "parametro", "Reglas", "Puntuacion alta", "Pistas ?", "Mas", "Puntuacion",
+		"Back", "Setting", "Rules", "Hight Score", "Clues ?", "More", "The word was",
 	}
 	bd.Set.Language.Es = []string{"Pac-Hangman Adventure", "facil", "medio", "dificil", "Introduce un apodo", "iniciar",
 		"buena suerte", "tienes", "intentos", "introduce una letra o palabra", "enviado", "letra ya intentada : ", "reproducir",
 		"has ganado", "marcador", "reproducir",
+		"Atras", "parametro", "Reglas", "clasificacion", "Pistas ?", "Mas", "La palabra era",
 	}
 	bd.Set.Language.Ge = []string{"Pac-Hangman Adventure", "leicht", "mittel", "schwer", "einen Namen eingeben", "starten",
 		"Viel Gluck", "Sie haben", "Versuche", "Geben Sie einen Buchstaben oder ein Wort ein", "Gesendet", "Buchstabe bereits versucht:", "Wiederholen",
 		"Sie haben gewonnen", "Anzeigetafel", "Wiederholung",
+		"Zuruck", "Einstellung", "Regeln", "Hohe Punktzahl", "Hinweise?", "Mehr", "Das Wort war",
 	}
 	bd.Set.CurrentLanguage = bd.Set.Language.En
 
@@ -169,7 +170,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 			SortingSelection(bd.Scoreboard.Tab)
 			FixTop(bd.Scoreboard.Tab)
 			HighScore()
-			http.Redirect(w, r, "/win2", 303)
+			http.Redirect(w, r, "/win", 303)
 		}
 	}
 
@@ -193,7 +194,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 			SortingSelection(bd.Scoreboard.Tab)
 			FixTop(bd.Scoreboard.Tab)
 			HighScore()
-			http.Redirect(w, r, "/win2", 303)
+			http.Redirect(w, r, "/win", 303)
 		} else if choice != bd.Hangman.Word && len(choice) > 1 {
 			bd.Hangman.Attempts -= 2
 		}
@@ -210,7 +211,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		SortingSelection(bd.Scoreboard.Tab)
 		FixTop(bd.Scoreboard.Tab)
 		HighScore()
-		http.Redirect(w, r, "/win2", 303)
+		http.Redirect(w, r, "/win", 303)
 	}
 	if bd.Hangman.Attempts <= 0 {
 		bd.Hangman.Attempts = 10
@@ -219,7 +220,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		SortingSelection(bd.Scoreboard.Tab)
 		FixTop(bd.Scoreboard.Tab)
 		HighScore()
-		http.Redirect(w, r, "/loser2", 303)
+		http.Redirect(w, r, "/loser", 303)
 	}
 
 	err := t.ExecuteTemplate(w, "hangman1.0.html", bd)
@@ -235,7 +236,7 @@ func Loser(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
 	if r.FormValue("scoreboard") == "submit" {
-		bd.Set.CurrentPage = "/loser2"
+		bd.Set.CurrentPage = "/loser"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
 	err := page.ExecuteTemplate(w, "loser1.0.html", bd)
@@ -272,7 +273,7 @@ func Win(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
 	if r.FormValue("scoreboard") == "submit" {
-		bd.Set.CurrentPage = "/win2"
+		bd.Set.CurrentPage = "/win"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
 	err := page.ExecuteTemplate(w, "win1.0.html", bd)
@@ -313,7 +314,7 @@ func doublons(array []string, choice string) int {
 	return 0
 }
 
-func board(w http.ResponseWriter, r *http.Request) {
+func Ranking(w http.ResponseWriter, r *http.Request) {
 	start, _ := template.ParseFiles("./Source/Web/" + "scores1.0" + ".html")
 	if r.FormValue("back") == "submit" {
 		http.Redirect(w, r, bd.Set.CurrentPage, http.StatusSeeOther)
@@ -321,18 +322,18 @@ func board(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("more") == "submit" {
 		http.Redirect(w, r, "/board", http.StatusSeeOther)
 	}
-	err := start.ExecuteTemplate(w, "scores1.0.html", bd.Scoreboard)
+	err := start.ExecuteTemplate(w, "scores1.0.html", bd)
 	if err != nil {
 		return
 	}
 }
 
-func board2(w http.ResponseWriter, r *http.Request) {
+func Scoreboard(w http.ResponseWriter, r *http.Request) {
 	start, _ := template.ParseFiles("./Source/Web/" + "board" + ".html")
 	if r.FormValue("back") == "submit" {
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	err := start.ExecuteTemplate(w, "board.html", bd.Scoreboard)
+	err := start.ExecuteTemplate(w, "board.html", bd)
 	if err != nil {
 		return
 	}
@@ -344,11 +345,6 @@ func InitScoreboard() {
 		array = append(array, Score{Top: i, Name: "N/A", Score: 0})
 	}
 	bd.Scoreboard.Tab = array
-
-	//for i := 1; i <= 59; i++ {
-	//	array = append(array, Score{Top: i, Name: "N/A", Score: 0})
-	//}
-	//bd.Scoreboard.Tab2 = array
 }
 
 func SortingSelection(array []Score) {
@@ -392,16 +388,38 @@ func Clue(difficulty string, word string, word2 []string) {
 	}
 }
 
+func InitRankingBoard() {
+	var array []Score
+	array = append(array, Score{Top: -1, Name: "RV", Score: 999})
+	array = append(array, Score{Top: -1, Name: "smith", Score: 900})
+	array = append(array, Score{Top: -1, Name: "chatchat", Score: 800})
+	array = append(array, Score{Top: -1, Name: "Luc1ll3", Score: 700})
+	array = append(array, Score{Top: -1, Name: "Leo", Score: 600})
+	array = append(array, Score{Top: -1, Name: "REMI", Score: 500})
+	array = append(array, Score{Top: -1, Name: "ADAN", Score: 200})
+
+	bd.Scoreboard.Tab2 = array
+
+	array = append(array, Score{Top: -1, Name: "N/A", Score: 0})
+	array = append(array, Score{Top: -1, Name: "N/A", Score: 0})
+
+	bd.Scoreboard.Tab = array
+	FixTop(bd.Scoreboard.Tab)
+	HighScore()
+
+}
+
 func main() {
 	variable()
+	InitRankingBoard()
 	http.HandleFunc("/home", Home)
 	http.HandleFunc("/404", NotFound)
 	http.HandleFunc("/rules", Rules)
 	http.HandleFunc("/setting", Setting)
-	http.HandleFunc("/loser2", Loser)
-	http.HandleFunc("/win2", Win)
-	http.HandleFunc("/scoreboard", board)
-	http.HandleFunc("/board", board2)
+	http.HandleFunc("/loser", Loser)
+	http.HandleFunc("/win", Win)
+	http.HandleFunc("/scoreboard", Ranking)
+	http.HandleFunc("/board", Scoreboard)
 	http.HandleFunc("/", Hangman)
 
 	fmt.Println("http://localhost" + port + "/home")
