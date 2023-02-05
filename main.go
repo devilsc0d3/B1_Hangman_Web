@@ -100,7 +100,7 @@ func variable() {
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	page, _ := template.ParseFiles("./Source/Web/" + "menuv1" + ".html")
+	page, _ := template.ParseFiles("./Source/Web/" + "menu" + ".html")
 
 	File := ""
 	if r.FormValue("send") == "submit" {
@@ -140,14 +140,14 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		bd.Set.CurrentPage = "/home"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	err := page.ExecuteTemplate(w, "menuv1.html", bd)
+	err := page.ExecuteTemplate(w, "menu.html", bd)
 	if err != nil {
 		return
 	}
 }
 
 func Hangman(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("./Source/Web/" + "hangman1.0" + ".html")
+	t, _ := template.ParseFiles("./Source/Web/" + "hangman" + ".html")
 
 	if r.URL.Path != "/" {
 		http.Redirect(w, r, "/404", 303)
@@ -223,14 +223,14 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/loser", 303)
 	}
 
-	err := t.ExecuteTemplate(w, "hangman1.0.html", bd)
+	err := t.ExecuteTemplate(w, "hangman.html", bd)
 	if err != nil {
 		return
 	}
 }
 
 func Loser(w http.ResponseWriter, r *http.Request) {
-	page, _ := template.ParseFiles("./Source/Web/" + "loser1.0" + ".html")
+	page, _ := template.ParseFiles("./Source/Web/" + "loser" + ".html")
 
 	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
@@ -239,7 +239,7 @@ func Loser(w http.ResponseWriter, r *http.Request) {
 		bd.Set.CurrentPage = "/loser"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	err := page.ExecuteTemplate(w, "loser1.0.html", bd)
+	err := page.ExecuteTemplate(w, "loser.html", bd)
 	if err != nil {
 		return
 	}
@@ -268,7 +268,7 @@ func Rules(w http.ResponseWriter, r *http.Request) {
 }
 
 func Win(w http.ResponseWriter, r *http.Request) {
-	page, _ := template.ParseFiles("./Source/Web/" + "win1.0" + ".html")
+	page, _ := template.ParseFiles("./Source/Web/" + "win" + ".html")
 	if r.FormValue("restart") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
@@ -276,7 +276,7 @@ func Win(w http.ResponseWriter, r *http.Request) {
 		bd.Set.CurrentPage = "/win"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	err := page.ExecuteTemplate(w, "win1.0.html", bd)
+	err := page.ExecuteTemplate(w, "win.html", bd)
 	if err != nil {
 		return
 	}
@@ -315,25 +315,25 @@ func doublons(array []string, choice string) int {
 }
 
 func Ranking(w http.ResponseWriter, r *http.Request) {
-	start, _ := template.ParseFiles("./Source/Web/" + "scores1.0" + ".html")
+	start, _ := template.ParseFiles("./Source/Web/" + "ranking" + ".html")
 	if r.FormValue("back") == "submit" {
 		http.Redirect(w, r, bd.Set.CurrentPage, http.StatusSeeOther)
 	}
 	if r.FormValue("more") == "submit" {
 		http.Redirect(w, r, "/board", http.StatusSeeOther)
 	}
-	err := start.ExecuteTemplate(w, "scores1.0.html", bd)
+	err := start.ExecuteTemplate(w, "ranking.html", bd)
 	if err != nil {
 		return
 	}
 }
 
 func Scoreboard(w http.ResponseWriter, r *http.Request) {
-	start, _ := template.ParseFiles("./Source/Web/" + "board" + ".html")
+	start, _ := template.ParseFiles("./Source/Web/" + "scoreboard" + ".html")
 	if r.FormValue("back") == "submit" {
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	err := start.ExecuteTemplate(w, "board.html", bd)
+	err := start.ExecuteTemplate(w, "scoreboard.html", bd)
 	if err != nil {
 		return
 	}
@@ -406,12 +406,12 @@ func InitRankingBoard() {
 	bd.Scoreboard.Tab = array
 	FixTop(bd.Scoreboard.Tab)
 	HighScore()
-
 }
 
 func main() {
 	variable()
 	InitRankingBoard()
+
 	http.HandleFunc("/home", Home)
 	http.HandleFunc("/404", NotFound)
 	http.HandleFunc("/rules", Rules)
