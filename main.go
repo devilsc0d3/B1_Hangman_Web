@@ -70,12 +70,15 @@ func variable() {
 	HighScore()
 
 	bd.Set.Language.Fr = []string{"Pac-Hangman Adventure", "facile", "moyen", "difficile", "entre un nom", "lancer",
-		"Bonne chance ", "Vous avez", "essaies", "entrez une lettre ou un mot", "envoyé", "lettre déja essayer : ", "rejouer",
+		"Bonne chance ", "Vous avez", "essaies", "entrez une lettre ou un mot", "envoye", "lettre deja essayer : ", "rejouer",
 		"tu as Gagne", "tableaux des scores", "rejoué",
+		"Retour", "Parametre", "Regles", "hauts scores", "Indices ?", "Plus", "Score",
 	}
 	bd.Set.Language.En = []string{"Pac-Hangman Adventure", "easy", "medium", "hard", "enter a name", "start",
 		"good luck", "you have", "tries", "enter a letter or word", "sent", "letter already tried:", "replay",
 		"you won", "scoreboard", "replay",
+		"Back", "Setting", "Rules", "Hight Score", "Clues ?", "More", "Score",
+		"Atras", "parametro", "Reglas", "Puntuacion alta", "Pistas ?", "Mas", "Puntuacion",
 	}
 	bd.Set.Language.Es = []string{"Pac-Hangman Adventure", "facil", "medio", "dificil", "Introduce un apodo", "iniciar",
 		"buena suerte", "tienes", "intentos", "introduce una letra o palabra", "enviado", "letra ya intentada : ", "reproducir",
