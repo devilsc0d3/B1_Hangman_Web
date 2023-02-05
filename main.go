@@ -159,7 +159,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		Clue(bd.Hangman.File, bd.Hangman.Word, bd.Hangman.WordUser)
 		if len(classic.Verif(classic.ListToString(bd.Hangman.WordUser), "_")) == 0 {
 			bd.Scoreboard.Tab = append(bd.Scoreboard.Tab, Score{Score: bd.Hangman.Attempts * 100, Name: bd.Set.Name, Top: 0})
-			tri(bd.Scoreboard.Tab)
+			SortingSelection(bd.Scoreboard.Tab)
 			FixTop()
 			HighScore()
 			http.Redirect(w, r, "/win2", 303)
@@ -181,7 +181,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	} else {
 		if choice == bd.Hangman.Word && len(choice) == len(bd.Hangman.Word) {
 			bd.Scoreboard.Tab = append(bd.Scoreboard.Tab, Score{Score: bd.Hangman.Attempts * 100, Name: bd.Set.Name, Top: 0})
-			tri(bd.Scoreboard.Tab)
+			SortingSelection(bd.Scoreboard.Tab)
 			FixTop()
 			HighScore()
 			http.Redirect(w, r, "/win2", 303)
@@ -196,7 +196,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 
 	if (len(choice) == 1) && (len(classic.Verif(classic.ListToString(bd.Hangman.WordUser), "_")) == 0) {
 		bd.Scoreboard.Tab = append(bd.Scoreboard.Tab, Score{Score: bd.Hangman.Attempts * 100, Name: bd.Set.Name, Top: 0})
-		tri(bd.Scoreboard.Tab)
+		SortingSelection(bd.Scoreboard.Tab)
 		FixTop()
 		HighScore()
 		http.Redirect(w, r, "/win2", 303)
@@ -204,7 +204,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	if bd.Hangman.Attempts <= 0 {
 		bd.Hangman.Attempts = 10
 		bd.Scoreboard.Tab = append(bd.Scoreboard.Tab, Score{Score: 0, Name: bd.Set.Name, Top: 0})
-		tri(bd.Scoreboard.Tab)
+		SortingSelection(bd.Scoreboard.Tab)
 		FixTop()
 		HighScore()
 		FixTop()
@@ -316,7 +316,7 @@ func InitScoreboard() {
 	bd.Scoreboard.Tab2 = array
 }
 
-func tri(array []Score) {
+func SortingSelection(array []Score) {
 	n := len(array)
 	for i := 0; i < n-1; i++ {
 		minIndex := i
