@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Loser</title>
-    <link rel="stylesheet" type="text/css" href="/static/CSS/style_loser.css">
+    <head>
+        <meta charset="UTF-8">
+        <title>Loser</title>
+        <link rel="stylesheet" type="text/css" href="/static/CSS/style_loser.css">
+    </head>
 
-</head>
+    <body>
+        <div class="game_over neon">
+            <span style="--i:1">G</span>
+            <span style="--i:2">A</span>
+            <span style="--i:3">M</span>
+            <span style="--i:4">E</span>
+            <span style="--i:5"> </span>
+            <span style="--i:6">O</span>
+            <span style="--i:7">V</span>
+            <span style="--i:8">E</span>
+            <span style="--i:9">R</span>
+        </div>
 
-<body>
+        <img src="./static/pictures/Ghost.png" class="left" alt="Ghost angry">
 
-<div class="game_over neon">
-    <span style="--i:1">G</span>
-    <span style="--i:2">A</span>
-    <span style="--i:3">M</span>
-    <span style="--i:4">E</span>
-    <span style="--i:5"> </span>
-    <span style="--i:6">O</span>
-    <span style="--i:7">V</span>
-    <span style="--i:8">E</span>
-    <span style="--i:9">R</span>
-</div>
-<img src="./static/pictures/Ghost.png" class="left" alt="Ghost angry">
-<div class="content">
-    <form>
-        <button value="submit" name="scoreboard" class="neon"> {{index .Set.CurrentLanguage 14}} </button>
-    </form>
-    <form>
-        <button value="submit" name="restart" class="neon"> {{index .Set.CurrentLanguage 12}} </button>
-    </form>
-    <p class="neon">{{index .Set.CurrentLanguage 22}} : {{.Hangman.Word}}</p>
-</div>
-</body>
+        <div class="content">
+            <form method="post">
+                <button value="submit" name="scoreboard" class="neon"> {{index .Set.CurrentLanguage 14}} </button>
+            </form>
+            <form method="post">
+                <button value="submit" name="restart" class="neon"> {{index .Set.CurrentLanguage 12}} </button>
+            </form>
+            <p class="neon">{{index .Set.CurrentLanguage 22}} : {{.Hangman.Word}}</p>
+        </div>
+    </body>
 </html>

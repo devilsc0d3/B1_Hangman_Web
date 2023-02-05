@@ -4,53 +4,50 @@
         <meta charset="UTF-8">
         <title>Settings</title>
         <link rel="stylesheet" type="text/css" href="/static/CSS/style_setting.css">
-
     </head>
 
     <body>
+        <form method="post">
+
+            <div class="Language">
+
+                <p class="h1 neon3">Language :</p>
+
+                <div class="content ">
+                  <input type="radio" name="language" value="en" id="1">
+                  <label for="1" class="neon">English</label>
+                </div>
+                <div class="content ">
+                  <input type="radio" name="language" value="fr" id="2">
+                  <label for="2" class="neon2">French</label>
+                </div>
+                <div class="content ">
+                  <input type="radio" name="language" value="es" id="3">
+                  <label for="3" class="neon">Spanish</label>
+                </div>
+                <div class="content ">
+                  <input type="radio" name="language" value="ge" id="4">
+                  <label for="4" class="neon2">German</label>
+                </div>
+            </div>
+
+            <div class="sound">
+                <p class="h1 neon4">Sound :</p>
+                <p class="neon4 marge"><br><br><br><br><br>COMING SOON !!!</p>
+            </div>
+
+            <div class="bottomR">
+                <button value="submit" name="apply" class="neon right"> Apply </button>
+            </div>
+        </form>
+
+        <div class="bottom">
+            <p class="neon3">V2.0.3</p>
+        </div>
+        <div class="bottomL">
             <form method="post">
-                <div class="Language">
-
-                    <p class="h1 neon3">Language :</p>
-
-                    <div class="content ">
-                      <input type="radio" name="language" value="en" id="1">
-                      <label for="1" class="neon">English</label>
-                    </div>
-
-                    <div class="content ">
-                      <input type="radio" name="language" value="fr" id="2">
-                      <label for="2" class="neon2">French</label>
-                    </div>
-
-                    <div class="content ">
-                      <input type="radio" name="language" value="es" id="3">
-                      <label for="3" class="neon">Spanish</label>
-                    </div>
-
-                    <div class="content ">
-                      <input type="radio" name="language" value="ge" id="4">
-                      <label for="4" class="neon2">German</label>
-                    </div>
-                </div>
-
-                <div class="sound">
-                    <p class="h1 neon4">Sound :</p>
-                    <p class="neon4 marge"><br><br><br><br><br>COMING SOON !!!</p>
-                </div>
-
-
-                <div class="bottomR">
-                    <button value="submit" name="apply" class="neon right"> Apply </button>
-                </div>
+                <button value="submit" name="back" class="neon left"> Back </button>
             </form>
-            <div class="bottom">
-                <p class="neon3">V2.0.3</p>
-            </div>
-            <div class="bottomL">
-                <form>
-                    <button value="submit" name="back" class="neon left"> Back</button>
-                </form>
-            </div>
+        </div>
     </body>
 </html>

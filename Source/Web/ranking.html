@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Top Scores</title>
-    <link rel="stylesheet" type="text/css" href="/static/CSS/style_boardranking.css">
-</head>
-<body>
-    <p class="h1 neon">--- {{index .Set.CurrentLanguage 19}} ---</p>
-    <div class="content">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Top Scores</title>
+        <link rel="stylesheet" type="text/css" href="/static/CSS/style_boardranking.css">
+    </head>
+
+    <body>
+        <p class="h1 neon">--- {{index .Set.CurrentLanguage 19}} ---</p>
+        <div class="content">
             <div class="data neon">
                 <p class="left"> {{.Scoreboard.Player1.Top}} </p>
                 <p> {{.Scoreboard.Player1.Name}} </p>
@@ -61,13 +62,13 @@
                 <p> {{.Scoreboard.Player9.Name}} </p>
                 <p class="right"> {{.Scoreboard.Player9.Score}} </p>
             </div>
-    </div>
-    <div class="content2">
-        <form>
-            <button name="more" value="submit" class="neon right marge">{{index .Set.CurrentLanguage 21}}</button>
-            <button name="back" value="submit" class="neon left marge">{{index .Set.CurrentLanguage 16}}</button>
-        </form>
-    </div>
+        </div>
 
-</body>
+        <div class="content2">
+            <form method="post">
+                <button name="more" value="submit" class="neon right marge">{{index .Set.CurrentLanguage 21}}</button>
+                <button name="back" value="submit" class="neon left marge">{{index .Set.CurrentLanguage 16}}</button>
+            </form>
+        </div>
+    </body>
 </html>

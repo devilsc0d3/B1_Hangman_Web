@@ -4,14 +4,12 @@
         <meta charset="UTF-8">
         <title>menu</title>
         <link rel="stylesheet" type="text/css" href="/static/CSS/style_menu.css">
-
     </head>
 
     <body>
         <p class="h1 neon">{{index .Set.CurrentLanguage 0}}</p>
 
-        <form method="POST">
-
+        <form method="post">
             <div class="bottom">
                 <button value="submit" name="send" class="neon right"> {{index .Set.CurrentLanguage 5}} </button>
                 <button value="submit" name="rules" class="neon center"> {{index .Set.CurrentLanguage 18}} </button>
@@ -19,7 +17,6 @@
             </div>
 
             <button value="submit" name="scores" class="neon3">{{index .Set.CurrentLanguage 19}}</button>
-
 
             <div class="content neon2">
                 <input type="radio" name="dif" value="fa" id="1">
@@ -29,7 +26,6 @@
                 <input type="radio" name="dif" value="mo" id="2">
                 <label for="2">{{index .Set.CurrentLanguage 2}}</label>
             </div>
-
             <div class="content neon2">
                 <input type="radio" name="dif" value="di" id="3">
                 <label for="3">{{index .Set.CurrentLanguage 3}}</label>

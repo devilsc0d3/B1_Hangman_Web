@@ -2,9 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>N.S.H.W</title>
+        <title>P.H.A</title>
         <link rel="stylesheet" type="text/css" href="/static/CSS/style_hangman.css">
     </head>
+
     <body>
         <p class="h1 neon">{{index .Set.CurrentLanguage 6}} {{.Set.Name}} </p>
         <p class="neon2"> {{index .Set.CurrentLanguage 7}} {{.Hangman.Attempts}} {{index .Set.CurrentLanguage 8}}</p>
@@ -24,9 +25,11 @@
                 {{end}}
             </p>
         </form>
+
 <!--        <div class="content">-->
 <!--            <img src={{.Hangman.Position}} width="300px" height="300px">-->
 <!--        </div>-->
+
         <div class="bottom">
             <form method="post" class="content">
                 <button value="submit" name="back" class="neon"> {{index .Set.CurrentLanguage 16}} </button>

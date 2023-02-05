@@ -11,13 +11,13 @@
         <div class="">
             <img src="http://localhost:8080/static/Pictures/pacman.png" class="pacman" alt="pacman happy">
         </div>
-            <div class="content">
-                <form>
-                    <button value="submit" name="scoreboard" class="neon"> {{index .Set.CurrentLanguage 14}} </button>
-                </form>
-                <form>
-                    <button value="submit" name="restart" class="neon"> {{index .Set.CurrentLanguage 12}} </button>
-                </form>
-            </div>
+        <div class="content">
+            <form method="post">
+                <button value="submit" name="scoreboard" class="neon"> {{index .Set.CurrentLanguage 14}} </button>
+            </form>
+            <form method="post">
+                <button value="submit" name="restart" class="neon"> {{index .Set.CurrentLanguage 12}} </button>
+            </form>
+        </div>
     </body>
 </html>

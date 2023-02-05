@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ScoreBoard</title>
-    <link rel="stylesheet" type="text/css" href="/static/CSS/style_scoreboard.css">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ScoreBoard</title>
+        <link rel="stylesheet" type="text/css" href="/static/CSS/style_scoreboard.css">
+    </head>
 
-</head>
-<body>
-    <p class="h1 neon2">--- {{index .Set.CurrentLanguage 14}} ---</p>
-    <div class="content">
-        <div class="neon">
+    <body>
+        <p class="h1 neon2">--- {{index .Set.CurrentLanguage 14}} ---</p>
+
+        <div class="content neon">
             {{range .Scoreboard.Tab2}}
             <div class="data">
                 <p class="left"> {{.Name}} </p>
@@ -17,10 +17,9 @@
             </div>
             {{end}}
         </div>
-    </div>
 
-    <form>
-        <button name="back" value="submit" class="neon2">{{index .Set.CurrentLanguage 16}}</button>
-    </form>
-</body>
+        <form method="post">
+            <button name="back" value="submit" class="neon2">{{index .Set.CurrentLanguage 16}}</button>
+        </form>
+    </body>
 </html>

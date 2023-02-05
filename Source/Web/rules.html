@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Rules</title>
-    <link rel="stylesheet" type="text/css" href="/static/CSS/style_rules.css">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rules</title>
+        <link rel="stylesheet" type="text/css" href="/static/CSS/style_rules.css">
+    </head>
 
-</head>
+    <body>
+        <p class="h1 neon"> -Rules- </p>
 
-<body>
+        <div class="content">
+            <p class="p neon2">
+                at first, choose a difficulty and a name, <br>
+                if you do not choose, by default the difficulty will be easy and the name will be "Gertrude" <br>
+                You can choose different language ! <br>
+                A word is randomly selected by the website. <br>
+                The guessing player is given only 10 chances to correctly guess the word. <br>
+                The guessing player guesses letters, one at a time, by typing them into a designated field.<br>
+                Incorrect guesses are indicated by displaying the letters already used.<br>
+                For each incorrect letter, <br>
+                a part of a stick figure is drawn and -1 life will be subtracted to player and For each incorrect word,<br>
+                -2 life will be subtracted to player. <br>
+                If the stick figure is fully drawn before the word is guessed, <br>
+                the guessing player loses and the game is over. <br>
+                If the word is guessed before the stick figure is fully drawn, <br>
+                the guessing player wins and get the point corresponding to the remaining chance. <br>
+                There is a mod clue for the difficult difficulty, each player will have 1 clue since the words can be complex to guess
+            </p>
+        </div>
 
-    <p class="h1 neon"> -Rules- </p>
-
-    <div class="content">
-        <p class="p neon2">
-            at first, choose a difficulty and a name, <br>
-            if you do not choose, by default the difficulty will be easy and the name will be "Gertrude" <br>
-            You can choose different language ! <br>
-            A word is randomly selected by the website. <br>
-            The guessing player is given only 10 chances to correctly guess the word. <br>
-            The guessing player guesses letters, one at a time, by typing them into a designated field.<br>
-            Incorrect guesses are indicated by displaying the letters already used.<br>
-            For each incorrect letter, <br>
-            a part of a stick figure is drawn and -1 life will be subtracted to player and For each incorrect word,<br>
-            -2 life will be subtracted to player. <br>
-            If the stick figure is fully drawn before the word is guessed, <br>
-            the guessing player loses and the game is over. <br>
-            If the word is guessed before the stick figure is fully drawn, <br>
-            the guessing player wins and get the point corresponding to the remaining chance. <br>
-            There is a mod clue for the difficult difficulty, each player will have 1 clue since the words can be complex to guess
-        </p>
-    </div>
-
-    <form>
-        <button name="back" value="submit" class="neon"> Back </button>
-    </form>
-</body>
+        <form method="post">
+            <button name="back" value="submit" class="neon"> Back </button>
+        </form>
+    </body>
 </html>
