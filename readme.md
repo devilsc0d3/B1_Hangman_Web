@@ -16,14 +16,14 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
  
 **Features :**
 
-- Page on the theme mario : menu, win, lose, hangman, setting
+- Page on the theme PAC-MAN : menu, win, lose, hangman, setting, 404, rules, scoreboard, ranking board
 - Language :
   - English
   - French
   - Spanish
   - German
 - you can choose a level & a username !
-- A hangman (José) on the gallows 
+- A hangman (PacMan move step by step around the ghost)
 - Scoreboard sort !
 - Array of letter & word already entered
 
@@ -34,9 +34,9 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 - Clone the repo with : 
 
 ```bash 
-git clone https://ytrack.learn.ynov.com/git/fleo/hangman-web
+git clone https://ytrack.learn.ynov.com/git/fleo/hangman-web/src/branch/devphav2
 ```
-or download and extract the repo : [click here !](https://ytrack.learn.ynov.com/git/fleo/hangman-web/commits/branch/master)
+or download and extract the repo : [click here !](https://ytrack.learn.ynov.com/git/fleo/hangman-web/src/branch/devphav2)
 
 - Start the Hangman-Web with :
 
@@ -50,21 +50,14 @@ or download and extract the repo : [click here !](https://ytrack.learn.ynov.com/
 
 **Update coming...**
 
-- page rules
 - Add news languages
 - Add a functionalities :
-    - A clue mod
     - Create a save
 - Page more responsive, adapt of mobile
 - Add sound
-- ScoreBoard Dynamic
-- save of score
-- add 404 error Personalized
 
 ****
 
 **Credit :**
 
 Fauré Léo
-
-~~Reungoat Nathan~~
