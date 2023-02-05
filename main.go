@@ -136,7 +136,10 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		bd.Set.CurrentPage = "/home"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "menuv1.html", bd)
+	err := page.ExecuteTemplate(w, "menuv1.html", bd)
+	if err != nil {
+		return
+	}
 }
 
 func Hangman(w http.ResponseWriter, r *http.Request) {
@@ -211,7 +214,10 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/loser2", 303)
 	}
 
-	t.ExecuteTemplate(w, "hangman1.0.html", bd)
+	err := t.ExecuteTemplate(w, "hangman1.0.html", bd)
+	if err != nil {
+		return
+	}
 }
 
 func Loser(w http.ResponseWriter, r *http.Request) {
@@ -224,7 +230,10 @@ func Loser(w http.ResponseWriter, r *http.Request) {
 		bd.Set.CurrentPage = "/loser2"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "loser1.0.html", bd)
+	err := page.ExecuteTemplate(w, "loser1.0.html", bd)
+	if err != nil {
+		return
+	}
 }
 
 func NotFound(w http.ResponseWriter, r *http.Request) {
@@ -232,7 +241,10 @@ func NotFound(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("home") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "404.html", bd)
+	err := page.ExecuteTemplate(w, "404.html", bd)
+	if err != nil {
+		return
+	}
 }
 
 func Rules(w http.ResponseWriter, r *http.Request) {
@@ -240,7 +252,10 @@ func Rules(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("back") == "submit" {
 		http.Redirect(w, r, bd.Set.CurrentPage, http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "rules.html", bd)
+	err := page.ExecuteTemplate(w, "rules.html", bd)
+	if err != nil {
+		return
+	}
 }
 
 func Win(w http.ResponseWriter, r *http.Request) {
@@ -252,7 +267,10 @@ func Win(w http.ResponseWriter, r *http.Request) {
 		bd.Set.CurrentPage = "/win2"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "win1.0.html", bd)
+	err := page.ExecuteTemplate(w, "win1.0.html", bd)
+	if err != nil {
+		return
+	}
 }
 
 func Setting(w http.ResponseWriter, r *http.Request) {
@@ -272,7 +290,10 @@ func Setting(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("apply") == "submit" || r.FormValue("back") == "submit" {
 		http.Redirect(w, r, "/home", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "setting.html", bd)
+	err := page.ExecuteTemplate(w, "setting.html", bd)
+	if err != nil {
+		return
+	}
 }
 
 func doublons(array []string, choice string) int {
@@ -292,7 +313,10 @@ func board(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("more") == "submit" {
 		http.Redirect(w, r, "/board", http.StatusSeeOther)
 	}
-	start.ExecuteTemplate(w, "scores1.0.html", bd.Scoreboard)
+	err := start.ExecuteTemplate(w, "scores1.0.html", bd.Scoreboard)
+	if err != nil {
+		return
+	}
 }
 
 func board2(w http.ResponseWriter, r *http.Request) {
@@ -300,7 +324,10 @@ func board2(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("back") == "submit" {
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	start.ExecuteTemplate(w, "board.html", bd.Scoreboard)
+	err := start.ExecuteTemplate(w, "board.html", bd.Scoreboard)
+	if err != nil {
+		return
+	}
 }
 
 func InitScoreboard() {
