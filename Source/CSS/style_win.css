@@ -4,17 +4,6 @@ body {
     text-align: center;
 }
 
-.h1 {
-    font-size: 8vw;
-    font-family: pacman,serif;
-}
-
-.content {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
 form {
     margin: 2vw;
 }
@@ -34,6 +23,17 @@ img {
     width: 20vw;
     margin-top: 3vw;
     animation: pacman 3s infinite;
+}
+
+.h1 {
+    font-size: 8vw;
+    font-family: pacman,serif;
+}
+
+.content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .neon {

@@ -2,16 +2,43 @@ body {
     background-color: black;
 }
 
-.h1 {
-    font-family: pacman,serif;
+form {
     text-align: center;
-    font-size: 4vw;
 }
 
 p {
     font-family: pixel,serif;
     margin: 10px;
     font-size: 2vw;
+}
+
+button {
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0);
+    border-radius: 50px;
+    font-size: 3vw;
+    font-family: pixel,serif;
+}
+
+button:hover {
+    transform: scale(1.2);
+}
+
+.h1 {
+    font-family: pacman,serif;
+    text-align: center;
+    font-size: 4vw;
+}
+
+.content {
+    font-family: pixel,serif;
+    margin: 50px auto;
+    width: 30vw;
+}
+
+.data {
+    display: flex;
+    justify-content: space-between;
 }
 
 .neon {
@@ -32,33 +59,6 @@ p {
     0 0 42px rgb(230, 131, 18),
     0 0 77px rgb(230, 145, 18),
     0 0 100px rgb(230, 170, 18)
-}
-
-.content {
-    font-family: pixel,serif;
-    margin: 50px auto;
-    width: 30vw;
-}
-
-.data {
-    display: flex;
-    justify-content: space-between;
-}
-
-button {
-    background-color: rgba(255, 255, 255, 0);
-    border-color: rgba(255, 255, 255, 0);
-    border-radius: 50px;
-    font-size: 3vw;
-    font-family: pixel,serif;
-}
-
-button:hover {
-    transform: scale(1.2);
-}
-
-form {
-    text-align: center;
 }
 
 @font-face {

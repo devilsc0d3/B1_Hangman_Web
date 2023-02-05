@@ -4,8 +4,43 @@ body {
     text-align: center;
 }
 
+p {
+    font-size: 2vw;
+    font-family: pixel,serif;
+}
+
+span {
+    display: inline-block;
+    text-transform: uppercase;
+    animation: game_over 1s infinite;
+    animation-delay: calc(.1s * var(--i));
+}
+
+img {
+    width: 18vw;
+    margin-top: 3vw;
+    animation: Ghost 2.5s infinite;
+}
+
+button {
+    font-family: pixel,serif;
+    font-size: 5vw;
+    border: none;
+    outline: none;
+    background-color: rgba(0,0,0,0);
+}
+
+button:hover {
+    transform: scale(1.2);
+}
+
 form {
     margin: 2vw;
+}
+
+.game_over {
+    font-family: pacman,serif;
+    font-size: 8vw;
 }
 
 .neon {
@@ -21,40 +56,6 @@ form {
     position: absolute;
     bottom: 0;
     width: 100%;
-}
-
-button {
-    font-family: pixel,serif;
-    font-size: 5vw;
-    border: none;
-    outline: none;
-    background-color: rgba(0,0,0,0);
-}
-
-button:hover {
-    transform: scale(1.2);
-}
-
-img {
-    width: 18vw;
-    margin-top: 3vw;
-    animation: Ghost 2.5s infinite;
-}
-
-p {
-    font-size: 2vw;
-    font-family: pixel,serif;
-}
-
-span {
-    display: inline-block;
-    text-transform: uppercase;
-    animation: game_over 1s infinite;
-    animation-delay: calc(.1s * var(--i));
-}
-.game_over {
-    font-family: pacman,serif;
-    font-size: 8vw;
 }
 
 @keyframes game_over {
