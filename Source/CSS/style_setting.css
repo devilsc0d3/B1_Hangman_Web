@@ -19,7 +19,7 @@ p {
     font-family: pixel,serif;
     color: #ffffff;
     font-size:5vw;
-    text-align:center
+    text-align:center;
 }
 
 .neon {
@@ -136,6 +136,27 @@ input[type=radio] {
     font-size: 3vw;
     margin: 50px;
     font-family: pixel,serif;
+
+}
+
+.anim {
+    animation: ver 2s infinite;
+}
+
+@keyframes ver {
+    0%,100% {
+    transform: rotate(-10deg)
+        scale(1.1);
+    }
+
+    50% {
+        transform: rotate(10deg)
+        scale(1.2);
+    }
+
+    80% {
+        transform: scale(1);
+    }
 
 }
 
