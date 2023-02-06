@@ -29,6 +29,12 @@ body {
     bottom: 0;
 }
 
+img {
+    margin: auto;
+    width: 1200px;
+    height: 200px;
+}
+
 .neon {
     color: #fff;
     text-shadow:  0 0 7px #d52525,
@@ -45,10 +51,6 @@ body {
     0 0 42px rgb(230, 138, 18),
     0 0 77px rgb(230, 170, 18),
     0 0 100px rgb(230, 170, 18)
-}
-
-img {
-    width: 15vw;
 }
 
 p    {
