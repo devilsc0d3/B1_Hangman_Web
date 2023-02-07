@@ -10,7 +10,7 @@ const port = ":8080"
 
 func main() {
 	pages.Variable()
-	//pages.InitRankingBoard()
+	pages.InitRankingBoard()
 
 	http.HandleFunc("/home", pages.Home)
 	http.HandleFunc("/404", pages.NotFound)

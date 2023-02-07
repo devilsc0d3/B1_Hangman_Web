@@ -68,7 +68,7 @@ func Variable() {
 	Bd.Set.Language.En = []string{"Pac-Hangman Adventure", "easy", "medium", "hard", "enter a name", "start",
 		"good luck", "you have", "tries", "enter a letter or word", "sent", "letter already tried:", "replay",
 		"you won", "scoreboard", "replay",
-		"Back", "Setting", "Rules", "Hight Score", "Clues ?", "More", "The word was",
+		"Back", "Setting", "Rules", "High Score", "Clues ?", "More", "The word was",
 	}
 	Bd.Set.Language.Es = []string{"Pac-Hangman Adventure", "facil", "medio", "dificil", "Introduce un apodo", "iniciar",
 		"buena suerte", "tienes", "intentos", "introduce una letra o palabra", "enviado", "letra ya intentada : ", "reproducir",
@@ -131,19 +131,20 @@ func HighScore() {
 
 func InitRankingBoard() {
 	var array []Score
-	array = append(array, Score{Top: -1, Name: "RV", Score: 999})
+	array = append(array, Score{Top: -1, Name: "RV", Score: 200})
 	array = append(array, Score{Top: -1, Name: "smith", Score: 900})
-	array = append(array, Score{Top: -1, Name: "Chat chat", Score: 800})
-	array = append(array, Score{Top: -1, Name: "Luc1ll3", Score: 700})
+	array = append(array, Score{Top: -1, Name: "Chat chat", Score: 300})
+	array = append(array, Score{Top: -1, Name: "Luc1ll3", Score: 1000})
 	array = append(array, Score{Top: -1, Name: "Leo", Score: 600})
 	array = append(array, Score{Top: -1, Name: "REMI", Score: 500})
-	array = append(array, Score{Top: -1, Name: "ADAN", Score: 200})
+	array = append(array, Score{Top: -1, Name: "ADAN", Score: 800})
 
 	Bd.Scoreboard.Tab2 = array
 
 	array = append(array, Score{Top: -1, Name: "N/A", Score: 0})
 	array = append(array, Score{Top: -1, Name: "N/A", Score: 0})
 
+	SortingSelection(array)
 	Bd.Scoreboard.Tab = array
 	FixTop(Bd.Scoreboard.Tab)
 	HighScore()
