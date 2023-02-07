@@ -36,7 +36,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	choice := classic.Upper(r.FormValue("wordletter"))
+	choice := classic.Upper(r.FormValue("Word-letter"))
 
 	if len(choice) == 1 {
 		index := classic.Verif(Bd.Hangman.Word, choice)

@@ -1,7 +1,9 @@
 package pages
 
-import "net/http"
-import "html/template"
+import (
+	"html/template"
+	"net/http"
+)
 
 func Win(w http.ResponseWriter, r *http.Request) {
 	page, _ := template.ParseFiles("../Source/Web/" + "win" + ".html")

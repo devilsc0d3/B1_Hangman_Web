@@ -1,8 +1,8 @@
 package pages
 
-import "net/http"
 import (
 	"html/template"
+	"net/http"
 )
 
 func NotFound(w http.ResponseWriter, r *http.Request) {

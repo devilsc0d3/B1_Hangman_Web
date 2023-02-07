@@ -1,7 +1,9 @@
 package pages
 
-import "net/http"
-import "html/template"
+import (
+	"html/template"
+	"net/http"
+)
 
 func Ranking(w http.ResponseWriter, r *http.Request) {
 	start, _ := template.ParseFiles("../Source/Web/" + "ranking" + ".html")

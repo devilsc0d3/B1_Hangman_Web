@@ -47,6 +47,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		Bd.Set.CurrentPage = "/home"
 		http.Redirect(w, r, "/scoreboard", http.StatusSeeOther)
 	}
-	page.ExecuteTemplate(w, "menu.html", Bd)
+	err := page.ExecuteTemplate(w, "menu.html", Bd)
+	if err != nil {
+		return
+	}
 
 }
