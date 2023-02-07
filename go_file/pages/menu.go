@@ -11,11 +11,11 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	File := ""
 	if r.FormValue("send") == "submit" {
-		if r.FormValue("dif") == "fa" {
+		if r.FormValue("difficulty") == "easy" {
 			File = "words.txt"
-		} else if r.FormValue("dif") == "mo" {
+		} else if r.FormValue("difficulty") == "medium" {
 			File = "words2.txt"
-		} else if r.FormValue("dif") == "di" {
+		} else if r.FormValue("difficulty") == "hard" {
 			File = "words3.txt"
 		} else {
 			File = "words.txt"
@@ -23,11 +23,12 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 		Bd.Set.Name = r.FormValue("name")
 		if r.FormValue("name") == "" {
-			Bd.Set.Name = "Gertrude"
+			Bd.Set.Name = "R0B1"
 		}
 
 		var Word = classic.RandomWord(File)
-		Bd.Hangman = game{ClueNbr: 0, File: File, Title: "Good luck " + r.FormValue("name"), Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), LengthWord: 5, Position: "https://clipground.com/images/html5-logo-2.png"}
+		Bd.Hangman = game{ClueNbr: 0, File: File, Title: "Good luck " + r.FormValue("name"), Word: classic.Upper(Word),
+			WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList("")}
 		if File == "words3.txt" {
 			Bd.Hangman.ClueNbr = 1
 		}

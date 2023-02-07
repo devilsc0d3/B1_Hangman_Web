@@ -82,7 +82,7 @@ label:hover {
     0 0 10px #fff,
     0 0 42px rgb(18, 53, 230),
     0 0 77px rgb(18, 110, 230),
-    0 0 100px rgb(18, 142, 230)
+    0 0 10px rgb(18, 142, 230)
 }
 
 .content {
@@ -118,6 +118,12 @@ input[type=text] {
     width: 90%;
     font-family: pixel,serif;
     background-color: rgba(255,255,255,0);
+    color: #fff;
+    text-shadow:  0 0 7px #255dd5,
+    0 0 5px #fff,
+    0 0 4px rgb(18, 53, 230),
+    0 0 7px rgb(18, 110, 230),
+    0 0 10px rgb(18, 142, 230)
 }
 
 .content {

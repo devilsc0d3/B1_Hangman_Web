@@ -3,15 +3,13 @@ package pages
 import "classic"
 
 type game struct {
-	Title      string
-	Word       string
-	WordUser   []string
-	LengthWord int
-	Attempts   int
-	ToFind     []string
-	Position   string
-	File       string
-	ClueNbr    int
+	Title    string
+	Word     string
+	WordUser []string
+	Attempts int
+	ToFind   []string
+	File     string
+	ClueNbr  int
 }
 
 type Language struct {
@@ -87,8 +85,7 @@ func Variable() {
 	//initialisation of the game
 	var Word = classic.RandomWord("words.txt")
 	var data = game{
-		Title: "...", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""),
-		LengthWord: len(Word), Position: "https://clipground.com/images/html5-logo-2.png", File: "word.txt", ClueNbr: 0,
+		Title: "...", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), File: "word.txt", ClueNbr: 0,
 	}
 	Bd.Hangman = data
 }

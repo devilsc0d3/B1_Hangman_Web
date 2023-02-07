@@ -41,6 +41,10 @@ or download and extract the repo : [click here !](https://ytrack.learn.ynov.com/
 - Start the Hangman-Web with :
 
 ```bash 
+ cd go_file 
+```
+and this command :
+```bash 
  go run .
 ```
 
@@ -51,6 +55,7 @@ or download and extract the repo : [click here !](https://ytrack.learn.ynov.com/
 **Update coming...**
 
 - Add news languages
+- translated word
 - Add a functionalities :
     - Create a save
 - Page more responsive, adapt of mobile
