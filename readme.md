@@ -27,6 +27,9 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 - Scoreboard sort !
 - Array of letter & word already entered
 
+
+V2 --> [Here !](https://ytrack.learn.ynov.com/git/fleo/hangman-web/src/branch/devphav2)
+
 ****
 
 **Installation :**
@@ -67,4 +70,4 @@ or download and extract the repo : [click here !](https://ytrack.learn.ynov.com/
 
 Fauré Léo
 
-~~Reungoat Nathan~~
+Reungoat Nathan
