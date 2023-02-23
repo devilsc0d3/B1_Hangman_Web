@@ -1,14 +1,24 @@
 package main
 
 import (
+	"classic"
 	"fmt"
 	"net/http"
+	"os"
 	"web/go_file/pages"
 )
 
 const port = ":8080"
 
 func main() {
+	if len(os.Args) == 2 {
+		classic.Hangman()
+	} else {
+		Server()
+	}
+}
+
+func Server() {
 	pages.Variable()
 	pages.InitRankingBoard()
 

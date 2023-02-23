@@ -15,7 +15,7 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 ****
  
 **Features :**
-
+- version 1.0 available !!!
 - Page on the theme PAC-MAN : menu, win, lose, hangman, setting, 404, rules, scoreboard, ranking board
 - Language :
   - English
@@ -46,6 +46,11 @@ or download and extract the repo : [click here !](https://ytrack.learn.ynov.com/
 and this command :
 ```bash 
  go run .
+```
+or run this command with "words.txt", "words2.txt" or "words3.txt" for play at the first version :
+
+```bash
+go run . words.txt
 ```
 
 - Enjoy :)
