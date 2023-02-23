@@ -11,7 +11,7 @@ import (
 const port = ":8080"
 
 func main() {
-	if len(os.Args) == 2 {
+	if len(os.Args) >= 2 {
 		classic.Hangman()
 	} else {
 		Server()
