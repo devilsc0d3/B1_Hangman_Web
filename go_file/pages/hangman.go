@@ -26,7 +26,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 
 	if r.FormValue("clue") == "submit" {
 		Clue(Bd.Hangman.File, Bd.Hangman.Word, Bd.Hangman.WordUser)
-		if len(classic.Verif(classic.ListToString(Bd.Hangman.WordUser), "_")) == 0 {
+		if len(classic.Checking(classic.ListToString(Bd.Hangman.WordUser), "_")) == 0 {
 			Bd.Scoreboard.Tab = append(Bd.Scoreboard.Tab, Score{Score: Bd.Hangman.Attempts * 100, Name: Bd.Set.Name, Top: 0})
 			Bd.Scoreboard.Tab2 = append(Bd.Scoreboard.Tab2, Score{Score: Bd.Hangman.Attempts * 100, Name: Bd.Set.Name, Top: 0})
 			SortingSelection(Bd.Scoreboard.Tab)
@@ -39,7 +39,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 	choice := classic.Upper(r.FormValue("Word-letter"))
 
 	if len(choice) == 1 {
-		index := classic.Verif(Bd.Hangman.Word, choice)
+		index := classic.Checking(Bd.Hangman.Word, choice)
 		for i := 0; i < len(index); i++ {
 			Bd.Hangman.WordUser[index[i]] = choice
 		}
@@ -66,7 +66,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		Bd.Hangman.ToFind = append(Bd.Hangman.ToFind, choice)
 	}
 
-	if (len(choice) == 1) && (len(classic.Verif(classic.ListToString(Bd.Hangman.WordUser), "_")) == 0) {
+	if (len(choice) == 1) && (len(classic.Checking(classic.ListToString(Bd.Hangman.WordUser), "_")) == 0) {
 		Bd.Scoreboard.Tab = append(Bd.Scoreboard.Tab, Score{Score: Bd.Hangman.Attempts * 100, Name: Bd.Set.Name, Top: 0})
 		Bd.Scoreboard.Tab2 = append(Bd.Scoreboard.Tab2, Score{Score: Bd.Hangman.Attempts * 100, Name: Bd.Set.Name, Top: 0})
 
@@ -103,7 +103,7 @@ func multiLetterFound(array []string, choice string) int {
 func Clue(difficulty string, word string, word2 []string) {
 	rand.Seed(time.Now().UnixNano())
 	if difficulty == "words3.txt" && Bd.Hangman.ClueNbr >= 1 {
-		index := classic.Verif(classic.ListToString(word2), "_")
+		index := classic.Checking(classic.ListToString(word2), "_")
 		nbr := rand.Intn(len(index))
 		Bd.Hangman.WordUser[index[nbr]] = string(word[index[nbr]])
 		Bd.Hangman.ClueNbr -= 1
