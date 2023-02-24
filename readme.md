@@ -64,7 +64,7 @@ go run . words.txt
 
 **Update coming...**
 
-- translated word
+- translated word ___(coming soon)___
 - Create a save
 - Page more responsive, adapt of mobile
 - Add sound
