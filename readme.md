@@ -50,6 +50,8 @@ A scoreboard
 A list of all letters suggested during the game.
 Those are only examples, you are free to implement any features you like that can make the project look better, and feel like a real game.
 
+***
+
 ### Rules : ###
 
 A word is randomly selected by the website. The guessing player is given only 10 chances to correctly guess the word.
