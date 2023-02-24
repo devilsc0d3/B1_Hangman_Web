@@ -1,6 +1,6 @@
 # Hangman Web
 
-****
+---
 
 **Rules :**
 
@@ -12,9 +12,10 @@ For each incorrect letter, a part of a stick figure is drawn and -1 life will be
 If the stick figure is fully drawn before the word is guessed, the guessing player loses and the game is over.
 If the word is guessed before the stick figure is fully drawn, the guessing player wins and get the point corresponding to the remaining chance.
 
-****
+---
 
 **Features :**
+
 - version 1.0 available !!!
 - Page on the theme PAC-MAN : menu, win, lose, hangman, setting, 404, rules, scoreboard, ranking board
 - Language :
@@ -27,7 +28,7 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 - Scoreboard sort !
 - Array of letter & word already entered
 
-****
+---
 
 **Installation :**
 
@@ -36,6 +37,7 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 ```bash
 git clone https://ytrack.learn.ynov.com/git/fleo/hangman-web/src/branch/devphav2
 ```
+
 or download and extract the repo : [click here !](https://ytrack.learn.ynov.com/git/fleo/hangman-web/src/branch/devphav2)
 
 - Start the Hangman-Web with :
@@ -43,10 +45,13 @@ or download and extract the repo : [click here !](https://ytrack.learn.ynov.com/
 ```bash
 cd go_file
 ```
+
 and this command :
+
 ```bash
 go run .
 ```
+
 or run this command with "words.txt", "words2.txt" or "words3.txt" for play at the first version :
 
 ```bash
@@ -55,18 +60,16 @@ go run . words.txt
 
 - Enjoy :)
 
-****
+---
 
 **Update coming...**
 
-- Add news languages
 - translated word
-- Add a functionalities :
 - Create a save
 - Page more responsive, adapt of mobile
 - Add sound
 
-****
+---
 
 **Credit :**
 
