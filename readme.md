@@ -2,7 +2,55 @@
 
 ---
 
-**Rules :**
+### instruction : ###
+
+Create a program that will take a file as parameter . Create a file which contains a bunch of words with which the program will play. Each word is separated with a newline.hangman-webwords.txtwords.txt
+
+The behavior of the game is the same as the hangman project, refers to it for more details.
+
+In this project you will need to implement at least the following endpoints:
+
+GET : Sends HTML response - the main page, it will basically display your interface.
+1.1. GET Tip: go templates to receive and display data from the server/
+
+POST : that sends data to the Golang server (the letter you want to find)
+2.1. POST Tip: use form and other types of tags to make the post request. The form must redirect to /hangman/hangman
+
+The main page must have at least:
+
+A text representing the word to reveal.
+A text input
+
+A button which sends a POST request to and outputs the result on page./hangman
+
+### Bonus : level ###
+Hangman-level consists in adding difficulties to your website : You need to implement a dedicated page at the start of your game that allows the user to choose between the following difficulties
+
+EASY: is file words.txt.
+NORMAL: is file words2 .txt.
+HARD is: file words3.txt.
+
+### Bonus : JOSE ###
+
+Hangman-bring-to-death consists in making a stick-man, representing the attempts you have left. 
+
+Just like in the real hangman game. Each time you suggest a wrong letter or a wrong word, the stick-man grows,
+until the scheme is done, and the man completely hanging.
+
+### Bonus : Gamify ###
+
+Hangman-gamify consists in making your interface more game oriented.
+
+You can implement other routes to help you have other interfaces representing the state of your game For example:
+
+A startup page asking for you UserName and a button to start
+A losing or/and winning screen
+A button somewhere to allow the user to play again.
+A scoreboard
+A list of all letters suggested during the game.
+Those are only examples, you are free to implement any features you like that can make the project look better, and feel like a real game.
+
+### Rules : ###
 
 A word is randomly selected by the website. The guessing player is given only 10 chances to correctly guess the word.
 The guessing player guesses letters, one at a time, by typing them into a designated field.
