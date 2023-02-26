@@ -68,7 +68,7 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 
 - version 1.0 available !!!
 - Page on the theme PAC-MAN : menu, win, lose, hangman, setting, 404, rules, scoreboard, ranking board
-- Language :
+- Words language & language :
   - English
   - French
   - Spanish
