@@ -54,6 +54,7 @@ type base struct {
 var Bd = base{}
 
 func Variable() {
+
 	//initialisation of board ranking
 	InitScoreboard()
 	FixTop(Bd.Scoreboard.Tab)
@@ -64,26 +65,30 @@ func Variable() {
 		"Bonne chance ", "Vous avez", "essaies", "entrez une lettre ou un mot", "envoye", "lettre deja essayer : ", "rejouer",
 		"tu as Gagne", "tableaux des scores", "rejoué",
 		"Retour", "Parametre", "Regles", "classement", "Indices ?", "Plus", "le mot etait",
+		"fr",
 	}
 	Bd.Set.Language.En = []string{"Pac-Hangman Adventure", "easy", "medium", "hard", "enter a name", "start",
 		"good luck", "you have", "tries", "enter a letter or word", "sent", "letter already tried:", "replay",
 		"you won", "scoreboard", "replay",
 		"Back", "Setting", "Rules", "High Score", "Clues ?", "More", "The word was",
+		"en",
 	}
 	Bd.Set.Language.Es = []string{"Pac-Hangman Adventure", "facil", "medio", "dificil", "Introduce un apodo", "iniciar",
 		"buena suerte", "tienes", "intentos", "introduce una letra o palabra", "enviado", "letra ya intentada : ", "reproducir",
 		"has ganado", "marcador", "reproducir",
 		"Atras", "parametro", "Reglas", "clasificacion", "Pistas ?", "Mas", "La palabra era",
+		"es",
 	}
 	Bd.Set.Language.Ge = []string{"Pac-Hangman Adventure", "leicht", "mittel", "schwer", "einen Namen eingeben", "starten",
 		"Viel Gluck", "Sie haben", "Versuche", "Geben Sie einen Buchstaben oder ein Wort ein", "Gesendet", "Buchstabe bereits versucht:", "Wiederholen",
 		"Sie haben gewonnen", "Anzeigetafel", "Wiederholung",
 		"Zuruck", "Einstellung", "Regeln", "Hohe Punktzahl", "Hinweise?", "Mehr", "Das Wort war",
+		"ge",
 	}
 	Bd.Set.CurrentLanguage = Bd.Set.Language.En
 
 	//initialisation of the game
-	var Word = classic.RandomWord("words.txt")
+	var Word = classic.RandomWord("../Source/txt/" + "words.txt")
 	var data = game{
 		Title: "...", Word: classic.Upper(Word), WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList(""), File: "word.txt", ClueNbr: 0,
 	}

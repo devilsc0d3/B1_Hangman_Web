@@ -1,4 +1,4 @@
-# Hangman Web
+# Hangman Web V2.04
 
 ---
 
@@ -69,10 +69,10 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 - version 1.0 available !!!
 - Page on the theme PAC-MAN : menu, win, lose, hangman, setting, 404, rules, scoreboard, ranking board
 - Language :
-- English
-- French
-- Spanish
-- German
+  - English
+  - French
+  - Spanish
+  - German
 - you can choose a level & a username !
 - A hangman (PacMan move step by step around the ghost)
 - Scoreboard sort !
@@ -102,7 +102,7 @@ and this command :
 go run .
 ```
 
-or run this command with "words.txt", "words2.txt" or "words3.txt" for play at the first version :
+or run this command with a text file as "words.txt", "words2.txt", ...,  for play at the first version :
 
 ```bash
 go run . words.txt
@@ -114,7 +114,6 @@ go run . words.txt
 
 **Update coming...**
 
-- translated word ___(coming soon)___
 - Create a save
 - Page more responsive, adapt of mobile
 - Add sound
