@@ -12,7 +12,7 @@ const port = ":8080"
 
 func main() {
 	if len(os.Args) >= 2 {
-		path := []string{"../Source", "/txt/", "words/", "asci-art/"}
+		path := []string{"../hangman_classic_base", "/txt/", "words/", "asci-art/"}
 		classic.Hangman(path)
 	} else {
 		Server()
