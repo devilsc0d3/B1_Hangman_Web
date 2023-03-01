@@ -13,12 +13,16 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("send") == "submit" {
 		if r.FormValue("difficulty") == "easy" {
 			File = "words" + Bd.Set.CurrentLanguage[23] + ".txt"
+			Bd.Hangman.ClueNbr = 0
 		} else if r.FormValue("difficulty") == "medium" {
 			File = "words" + Bd.Set.CurrentLanguage[23] + "2" + ".txt"
+			Bd.Hangman.ClueNbr = 0
 		} else if r.FormValue("difficulty") == "hard" {
 			File = "words" + Bd.Set.CurrentLanguage[23] + "3" + ".txt"
+			Bd.Hangman.ClueNbr = 1
 		} else {
 			File = "words.txt"
+			Bd.Hangman.ClueNbr = 0
 		}
 
 		Bd.Set.Name = r.FormValue("name")
@@ -26,13 +30,16 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			Bd.Set.Name = "R0B1"
 		}
 
-		var Word = classic.RandomWord("../Source/txt/" + File)
-		Bd.Hangman = game{ClueNbr: 0, File: File, Title: "Good luck " + r.FormValue("name"), Word: classic.Upper(Word),
-			WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList("")}
+		//var Word = classic.RandomWord("../Source/txt/" + File)
+		//Bd.Hangman = game{ClueNbr: 0, File: File, Title: "Good luck " + r.FormValue("name"), Word: classic.Upper(Word),
+		//	WordUser: classic.WordChoice(Word), Attempts: 10, ToFind: classic.StringToList("")}
 
-		if File == "words3.txt" {
-			Bd.Hangman.ClueNbr = 1
-		}
+		var Word = classic.RandomWord("../Source/txt/" + File)
+		Bd.Hangman.Attempts = 10
+		Bd.Hangman.Title = "Good luck " + r.FormValue("name")
+		Bd.Hangman.Word = classic.Upper(Word)
+		Bd.Hangman.WordUser = classic.WordChoice(Word)
+		Bd.Hangman.ToFind = classic.StringToList("")
 
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}
