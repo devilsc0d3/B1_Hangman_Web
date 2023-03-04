@@ -12,7 +12,7 @@ button {
     text-align: center;
     border: none;
     outline: none;
-    font-size: 8vw;
+    font-size: 10vw;
     background-color: rgba(0,0,0,0);
     font-family: pix,serif;
 }
@@ -38,7 +38,7 @@ form {
 
 .error {
     margin: 0;
-    font-size: 50px;
+    font-size: 5vw;
     font-family: pacman,serif;
 }
 
