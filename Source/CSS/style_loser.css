@@ -24,7 +24,7 @@ img {
 
 button {
     font-family: pixel,serif;
-    font-size: 5vw;
+    font-size: 80px;
     border: none;
     outline: none;
     background-color: rgba(0,0,0,0);
@@ -40,7 +40,7 @@ form {
 
 .game_over {
     font-family: pacman,serif;
-    font-size: 8vw;
+    font-size: 100px;
 }
 
 .neon {
