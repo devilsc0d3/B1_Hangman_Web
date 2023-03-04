@@ -6,6 +6,12 @@
         <link rel="stylesheet" type="text/css" href="http://localhost:8080/static/CSS/style_hangman.css">
     </head>
 
+    <script>
+        function playAudio() {
+            var audio = new Audio("audio.mp3");
+            audio.play();
+        }
+    </script>
     <body>
         <p class="h1 neon">{{index .Set.CurrentLanguage 6}} {{.Set.Name}} </p>
         <p class="neon2"> {{index .Set.CurrentLanguage 7}} {{.Hangman.Attempts}} {{index .Set.CurrentLanguage 8}}</p>

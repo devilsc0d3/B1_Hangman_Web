@@ -1,4 +1,4 @@
-# Hangman Web V2.04
+# Hangman Web V2.05
 
 ---
 
@@ -77,6 +77,7 @@ If the word is guessed before the stick figure is fully drawn, the guessing play
 - A hangman (PacMan move step by step around the ghost)
 - Scoreboard sort !
 - Array of letter & word already entered
+- save txt
 
 ---
 
@@ -114,7 +115,6 @@ go run . words.txt
 
 **Update coming...**
 
-- Create a save
 - Page more responsive, adapt of mobile
 - Add sound
 

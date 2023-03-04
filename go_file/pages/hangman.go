@@ -32,6 +32,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 			SortingSelection(Bd.Scoreboard.Tab)
 			FixTop(Bd.Scoreboard.Tab)
 			HighScore()
+			write()
 			http.Redirect(w, r, "/win", http.StatusSeeOther)
 		}
 	}
@@ -56,6 +57,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 			SortingSelection(Bd.Scoreboard.Tab)
 			FixTop(Bd.Scoreboard.Tab)
 			HighScore()
+			write()
 			http.Redirect(w, r, "/win", 303)
 		} else if choice != Bd.Hangman.Word && len(choice) > 1 {
 			Bd.Hangman.Attempts -= 2
@@ -73,6 +75,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		SortingSelection(Bd.Scoreboard.Tab)
 		FixTop(Bd.Scoreboard.Tab)
 		HighScore()
+		write()
 		http.Redirect(w, r, "/win", http.StatusSeeOther)
 	}
 	if Bd.Hangman.Attempts <= 0 {
@@ -82,6 +85,7 @@ func Hangman(w http.ResponseWriter, r *http.Request) {
 		SortingSelection(Bd.Scoreboard.Tab)
 		FixTop(Bd.Scoreboard.Tab)
 		HighScore()
+		write()
 		http.Redirect(w, r, "/loser", http.StatusSeeOther)
 	}
 

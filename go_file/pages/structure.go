@@ -1,6 +1,10 @@
 package pages
 
-import "classic"
+import (
+	"classic"
+	"encoding/json"
+	"os"
+)
 
 type game struct {
 	Title    string
@@ -52,6 +56,24 @@ type base struct {
 }
 
 var Bd = base{}
+
+func Save() {
+	content, _ := os.ReadFile("../save.txt")
+	err1 := json.Unmarshal(content, &Bd)
+	if err1 != nil {
+		print(err1)
+		return
+	}
+}
+
+func write() {
+	b, _ := json.Marshal(Bd)
+	save, _ := os.Create("../save.txt")
+	_, err := save.Write(b)
+	if err != nil {
+		return
+	}
+}
 
 func Variable() {
 

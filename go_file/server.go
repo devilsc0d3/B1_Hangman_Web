@@ -21,6 +21,7 @@ func main() {
 
 func Server() {
 	pages.Variable()
+	pages.Save()
 	//pages.InitRankingBoard()
 
 	http.HandleFunc("/home", pages.Home)
